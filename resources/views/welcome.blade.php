@@ -134,8 +134,8 @@
   </div>
 </nav>
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
+    {{ csrf_field() }}
+</form>
   </header>
 
   <div class="landing-cont-logos text-center">

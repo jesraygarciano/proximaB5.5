@@ -25,7 +25,10 @@ Route::group(['middleware'=>'auth', 'prefix'=>'itp'], function(){
 
 		Route::get('profile',['as'=>'itp_applicant_profile', 'uses'=>'InternshipController@userItpProfile']);
 		Route::get('create/{id?}',['as'=>'itp_create','uses'=>'InternshipController@create']);
+		Route::get('add/{id?}',['as'=>'itp_add','uses'=>'InternshipController@add_batch']);
+
 		Route::post('save/application',['as'=>'save_application', 'uses'=> 'InternshipController@save_application']);
+		Route::post('addbatch/application',['as'=>'save_batches', 'uses'=> 'InternshipController@save_batches']);		
 		Route::post('update/application',['as'=>'update_application', 'uses'=> 'InternshipController@update_application']);
 
 		// json

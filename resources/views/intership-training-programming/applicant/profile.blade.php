@@ -196,15 +196,31 @@
                         <h3></h3>
                     </div>
                     <div id="app-batch-number">
-                        Batch 1
+                        Batch#
                     </div>
                     <div id="app-batch-border-left">
                     </div>
 
-                    <a href="{{ url('itp/applicant/edit').'/?student_id='.$applicant->id }}" class="edit-bttn">
-                        <i class="fa fa-2x fa-edit"></i>
-                    </a>
+                    {{-- <a href="{{ url('itp/applicant/edit').'/?student_id='.$applicant->id }}" class="edit-bttn">
+                    <a href="{{ route('itp_create').'/?student_id='.$applicant->id }}" class="edit-bttn">
 
+                    <a href="{{route('itp_create')}}/'+row['id']+'" title="edit" class="btn btn-primary btn-xs"> --}}
+
+                        <!-- <i class="fa fa-2x fa-edit"></i> -->
+                    <!-- </a> -->
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <div class="add-batch-itp" style="margin: 1rem; color: #0e729e">
+                        <a href="{{route('itp_add')}}">
+                            <h4>
+                                <i class="fa fa-plus-square-o"></i>
+                                    Batch
+                            </h4>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -225,10 +241,8 @@
 
         </div> <!--col-md-6-->
         <div class="col-lg-6 col-sm-6" id="schedulenskills">
-
-
             <div class="row">
-                <div class="col-sm-5 app-basic-info app-basic-info-2">
+                <div class="col-sm-12 col-md-12 app-basic-info app-basic-info-2">
                     <p class="app-objt-p">
                         {{  $applicant->school  }}
                     </p>
@@ -236,7 +250,7 @@
                         School
                     </div>
                 </div>
-                <div class="col-sm-5 app-basic-info app-basic-info-2">
+                <div class="col-sm-12 col-md-12 app-basic-info app-basic-info-2">
                     <p class="app-objt-p">
                         {{  $applicant->course  }}
                     </p>
@@ -345,10 +359,10 @@ $(document).ready(function(){
                 "orderable": false,
                 "render": function ( data, type, row ) {
                     return '<a href="{{route('itp_create')}}/'+row['id']+'" title="edit" class="btn btn-primary btn-xs">'
-                    +'<i class="fa fa-edit"></i>'
+                    +'Edit <i class="fa fa-edit"></i>'
                     +'</a> '
                     +'<a type="button" onclick="prep_del_batch('+row['id']+')" title="delete" class="btn btn-danger btn-xs">'
-                    +'<i class="fa fa-trash"></i>'
+                    +'Delete <i class="fa fa-trash"></i>'
                     +'</a>';
                 },
             }
