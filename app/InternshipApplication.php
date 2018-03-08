@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class InternshipApplication extends Model
 {
-    protected $fillable = ['user_id','objectives','school','course','preffered_training_date','batches'];
+    protected $fillable = ['user_id','objectives','school','course','training_batch_id'];
 
     //related to application
     public function user(){
