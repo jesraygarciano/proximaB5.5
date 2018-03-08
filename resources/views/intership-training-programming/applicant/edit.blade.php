@@ -95,12 +95,6 @@
 
                 <br />
 
-                {{--@if(empty($student->from_post)) --}}
-<!--                 <div class="ui form">
-                    <label>Preffered Training Date</label>
-                    <input style="font-size: 1.1em;" type="date" min="{{ date('Y-m-d') }}" name="preffered_training_date" value="{{ date('Y-m-d',strtotime($student->preffered_training_date)) }}">
-                </div> -->
-
                 <div class="ui form">
                         <label>I wan't to sign-up for batch:</label>
                     <select name="batch" class="ui dropdown">

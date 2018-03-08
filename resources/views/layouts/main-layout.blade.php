@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="{{ asset('css/media-query.css') }}">
     <link href="{{ asset('css/applicant-component.css') }}" rel="stylesheet">
     <link href="{{ asset('css/general-component.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/layout-component.css') }}" rel="stylesheet">
 
 
     <!-- Font-awesome -->
@@ -27,7 +26,6 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
@@ -48,6 +46,7 @@
 
 </head>
 <body>
+    @include('layouts.navbar')
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
@@ -75,13 +74,11 @@
     </div>
 
     <div class="main-footer" style="background: #1679a3; color:white;">
-            <div class="container">
-
         {{-- @if( Request::path()!= 'auth/login') --}}
             @include('layouts.footer')
         {{-- @endif --}}
-            </div>
     </div>
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
@@ -90,7 +87,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
 
     <!-- Bootstrap -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{{asset('semantic/out/semantic.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/for_semantic.js')}}"></script>
 

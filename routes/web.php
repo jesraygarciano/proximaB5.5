@@ -20,14 +20,21 @@ Route::get('/', 'HomeController@welcome')->name('home');
 
 
 Route::group(['middleware'=>'auth', 'prefix'=>'itp'], function(){
+
 	Route::group(['prefix'=>'applicant'], function(){
+
 		Route::get('profile',['as'=>'itp_applicant_profile', 'uses'=>'InternshipController@userItpProfile']);
+		Route::get('create/{id?}',['as'=>'itp_create','uses'=>'InternshipController@create']);
+		Route::post('save/application',['as'=>'save_application', 'uses'=> 'InternshipController@save_application']);
+		Route::post('update/application',['as'=>'update_application', 'uses'=> 'InternshipController@update_application']);
 
 		// json
 		Route::group(['prefix'=>'json'],function(){
-			Route::get('itp',['as'=>'json_get_itp_application', 'uses'=>'InternshipController@json_get_application_datatable']);			
+			Route::get('itp',['as'=>'json_get_itp_application', 'uses'=>'InternshipController@json_get_application_datatable']);
+			Route::post('delete',['as'=>'json_delete_itp_application', 'uses'=>'InternshipController@json_delete_application']);
 		});
 	});
+	
 });
 
 Auth::routes();

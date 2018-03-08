@@ -22,12 +22,12 @@
     user-select: none;
     background-image: none;
     border: 1px solid transparent;
-    border-radius: 4px;
+    border-radius: 4px;      
     }
   .btn-opposite {
       margin-left: 1.5rem;
       color: rgb(255, 255, 255);
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       font-weight: 600;
       text-transform: uppercase;
       font-family: Roboto, sans-serif;
@@ -36,18 +36,18 @@
       border-color: rgb(251, 197, 10);
       border-image: initial;
       background: rgba(255, 255, 255, 0.02);
-      padding: 1rem 2rem;
+      padding: .7rem 2rem;
       text-decoration: none;
   }
 .btn-frst {
     margin-left: 1.5rem;
     color: rgb(53, 53, 53);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 600;
     text-transform: uppercase;
     font-family: Roboto, sans-serif;
     background: rgb(251, 197, 10);
-    padding: 1rem 2rem;
+    padding: .7rem 2rem;
     text-decoration: none;
 }
 .btn-frst:hover{
@@ -57,7 +57,7 @@
 }
 .btn-opposite:hover{
     border: solid 2px white;
-    font-weight: 800;    
+    font-weight: 600;    
     margin-left: 1.5rem;
     background: rgba(255, 255, 255, .02);
     color: #ffffff;
@@ -67,8 +67,8 @@
     margin-left: 1.5rem;
     background: rgba(255, 255, 255, .02);
     color: #ffffff;
-    font-size: 1.5rem;
-    padding: 2rem 2rem;
+    font-size: 1.2rem;
+    padding: 1.5rem 2rem;
     text-decoration: none;
     font-weight: 800;
     text-transform: uppercase;
@@ -81,22 +81,61 @@
     background: rgba(255, 255, 255, .02);
     color: #ffffff;
 }
-
 </style>
 
 <div class="main-lp-container">
   <header class="v-header container-lp">
       <div class="fullscreen-video-wrap">
         <video src="{{ asset('img/typing.mp4') }}" autoplay="" loop="">
-      </video>
+        </video>
       </div>
       <div class="header-overlay"></div>
       <div class="header-content text-md-center">
-        <h1>Intern Training Program</h1>
+        <h1 class="header-content-h1">Intern Training Program</h1>
         <p>A training program for aspiring students, which aims to help students who are into software development to access high value jobs from the high-demand sector.</p>
         <a href="#" class="btn btn-frst">Find Out More</a>
         <a href="{{ url('itp/applicant/create') }}" class="btn btn-opposite">Register now!</a>
       </div>
+
+    
+      <nav role="navigation">
+  <div id="menuToggle">
+    <!--
+    A fake / hidden checkbox is used as click reciever,
+    so you can use the :checked selector on it.
+    -->
+    <input type="checkbox" />
+    
+    <!--
+    Some spans to act as a hamburger.
+    
+    They are acting like a real hamburger,
+    not that McDonalds stuff.
+    -->
+    <span></span>
+    <span></span>
+    <span></span>
+    
+    <!--
+    Too bad the menu has to be inside of the button
+    but hey, it's pure CSS magic.
+    -->
+    <ul id="menu">
+      <a href="#"><li>Home</li></a>
+      <a href="#"><li>Contact</li></a>
+      @if(!\Auth::check())
+      <a href="{{ url('itp/applicant/create') }}"><li>Register</li></a>
+      <a href="{{ url('login') }}"><li>Login</li></a>
+      @else
+      <a href="{{ route('itp_applicant_profile') }}"><li>IT Profile</li></a>
+      <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li>Logout</li></a>
+      @endif
+    </ul>
+  </div>
+</nav>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
   </header>
 
   <div class="landing-cont-logos text-center">
@@ -104,7 +143,7 @@
       <div class="col-md-6 nexseed-logos">
         <figure>
           <a href="http://nexseed.net/" target="_blank">
-            <img src="{{ asset('img/nexseed30.png')}}" class="nex-seedlogo" alt="Nexseed" style="padding-top: 5.5rem;">
+            <img src="{{ asset('img/nexseed30.png')}}" class="nex-seedlogo" alt="Nexseed" style="padding-top: 3.5rem;">
           </a>
         </figure>
       </div> 
@@ -245,7 +284,44 @@
                 </h4>
             </div>
 
-            <h3>Schedule of Training here!</h3>
+            <div class="row">
+              <div class="col-md-5" style="margin: 1rem 2rem;">
+                  <h3>Batch 1</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">Start of Classes : <strong>May 1, 2018</strong></li>
+                        <li class="list-group-item">Schedule : <br><strong>M-T-TH-F (9:00AM-4:00PM)</strong></li>
+                        <li class="list-group-item ">Registration Deadline : <strong>April 23,2018 </strong></li>
+                    </ul>
+              </div>
+
+              <div class="col-md-5" style="margin: 1rem 2rem;">
+                  <h3>Batch 2</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">Start of Classes : <strong>September 6,2018</strong></li>
+                        <li class="list-group-item">Schedule : <br><strong>M-T-TH-F (9:00AM-4:00PM)</strong></li>
+                        <li class="list-group-item ">Registration Deadline : <strong>August 26,2018 </strong></li>
+                    </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5" style="margin: 0 2rem;">
+                  <h3>Batch 3</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">Start of Classes : <strong>December 7,2018</strong></li>
+                        <li class="list-group-item">Schedule : <br><strong>M-T-TH-F (9:00AM-4:00PM)</strong></li>
+                        <li class="list-group-item ">Registration Deadline : <strong>November 25,2018 </strong></li>
+                    </ul>
+              </div>
+
+              <div class="col-md-5" style="margin: 0 2rem;">
+                  <h3>Batch 4</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">Start of Classes : <strong>Feb 14,2019</strong></li>
+                        <li class="list-group-item">Schedule : <br><strong>M-T-TH-F (9:00AM-4:00PM)</strong></li>
+                        <li class="list-group-item ">Registration Deadline : <strong>February 1,2019 </strong></li>
+                    </ul>
+              </div>
+            </div>
           </div>        
         </div>
       </div>

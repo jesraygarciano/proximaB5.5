@@ -1,7 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.main-layout')
 
-@section('content')
-
+@section('css')
 <style type="text/css">
     /* USER PROFILE PAGE */
  .card {
@@ -145,6 +144,9 @@
     height: 100px;
 }
 </style>
+@endsection
+
+@section('content')
 <div class="container">
     <div class="row">
         <div class="col-lg-6 col-sm-6">
@@ -304,15 +306,32 @@
                 <th>Name</th>
                 <th>School</th>
                 <th>Course</th>
-                <th>Preffered training date</th>
+                <th>Training Batch</th>
+                <th>Options</th>
             </tr>
         </thead>
     </table>
 </div> 
 
+<div class="ui mini modal" id="delete_application">
+    <div class="header">Delete Batch</div>
+    <div class="content">
+        <p>Are you sure you want to delete this batch?</p>
+    </div>
+    <div class="actions">
+        <div class="ui negative button">
+            No
+        </div>
+        <div class="ui delete positive right labeled icon button">
+            Yes
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+
 <script>
 $(document).ready(function(){
-    $('#applications-table').DataTable({
+    var table = $('#applications-table').DataTable({
         processing: true,
         serverSide: true,
         ajax: '{!! url('itp/applicant/json/itp') !!}',
@@ -320,9 +339,34 @@ $(document).ready(function(){
             { data: 'applicant_name', name: 'applicant_name', searchable:false, orderable:false},
             { data: 'school', name: 'school', },
             { data: 'course', name: 'course', },
-            { data: 'preffered_training_date', name: 'preffered_training_date', }
+            { data: 'batch_name', name: 'batch_name', },
+            {
+                searchable: false,
+                "orderable": false,
+                "render": function ( data, type, row ) {
+                    return '<a href="{{route('itp_create')}}/'+row['id']+'" title="edit" class="btn btn-primary btn-xs">'
+                    +'<i class="fa fa-edit"></i>'
+                    +'</a> '
+                    +'<a type="button" onclick="prep_del_batch('+row['id']+')" title="delete" class="btn btn-danger btn-xs">'
+                    +'<i class="fa fa-trash"></i>'
+                    +'</a>';
+                },
+            }
         ],
         order: [[ 1, 'asc' ]]
+    });
+
+    $('#delete_application .delete').click(function(){
+        $.ajax({
+            url:"{{route('json_delete_itp_application')}}",
+            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            type:"POST",
+            data:{id:$('#delete_application').data('id')},
+            success:function(data){
+                table.ajax.reload();
+            },
+            error:function(){}
+        });
     });
 
     $(".btn-pref .btn").click(function () {
@@ -332,6 +376,11 @@ $(document).ready(function(){
     });
 
 });
+
+function prep_del_batch(id){
+    $('#delete_application').modal('show');
+    $('#delete_application').data('id',id);
+}
 
 //         $(document).ready(function() {
 // $(".btn-pref .btn").click(function () {

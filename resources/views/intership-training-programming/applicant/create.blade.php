@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.main-layout')
 
 @section('content')
 
 <?php 
     $skills = return_resume_Skills();
-    $current_opening_skills = [];
+    $current_opening_skills = $student ? $student->skills()->pluck('resume_skills.id')->toArray() : [];
     $opening=[];
     $provinces=[];
     $countries=[];
@@ -59,27 +59,24 @@
             font-weight: bold;
             color: #962525;
         }
-
-
 </style>
-
-<div class="container" style="padding-top:20px;">
+<div class="container" style="padding-bottom:20px;">
     {!!Form::open(['route' => 'save_application', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'form-validate'])!!}
-        <input type="hidden" name="student_id" value="">
+        <input type="hidden" name="id" value="{{$student->id ?? '' }}">
         <div class="row">
             <div class="col-md-7">
                 <h4 class="page-header"><i class="fa fa-file-text" aria-hidden="true"></i> Basic Info</h4>
 
                 <div class="ui form">
                     <label>Objective for applying</label>
-                    <textarea type="text" name="objective">{{ $opening->details ?? old('details') }}</textarea>
+                    <textarea type="text" name="objective">{{ $student->objectives ?? old('objectives') }}</textarea>
                 </div>
 
                 <br />
 
                 <div class="ui form">
                     <label>School</label>
-                    <input type="text" name="school">
+                    <input type="text" name="school" value="{{ $student->school ?? old('school') }}">
                 </div>
 
                 <br />
@@ -88,30 +85,24 @@
                     <label>Course</label>
                     <select name="course" class="ui dropdown">
                         <option value="">Select</option>
-                        <option value="BSIT">BSIT</option>
-                        <option value="BSCS">BSCS</option>
-                        <option value="ACT">ACT</option>
+                        <option value="BSIT" {{$student ? ($student->course == 'BSIT' ? 'selected' : '') : ''}}>BSIT</option>
+                        <option value="BSCS" {{$student ? ($student->course == 'BSCS' ? 'selected' : '') : ''}}>BSCS</option>
+                        <option value="ACT" {{$student ? ($student->course == 'ACT' ? 'selected' : '') : ''}}>ACT</option>
                     </select>
                 </div>
 
                 <br />
 
-                 {{--@if(empty($opening->from_post)) --}}
-<!--                 <div class="ui form">
-                    <label>Preffered Training Date</label>
-                    <input style="font-size: 1.1em;" type="date" min="{{ date('Y-m-d') }}" name="preffered_training_date">
-                </div>
-               
- -->                <!-- <div class="ui form"> -->
                 <div class="ui form">
                         <label>I wan't to sign-up for batch:</label>
                     <select name="batch" class="ui dropdown">
                             <option value="">Select batch</option>
                             @foreach($batch as $batches)
-                                <option data-value="{{ $batches->name }}" value="{{ $batches->name }}">{{ $batches->name }}</option>
+                                <option data-value="{{ $batches->id ?? old('batches') }}" {{ $student ? ($student->training_batch_id == $batches->id ? 'selected' : '' ) : '' }} value="{{ $batches->id }}">{{ $batches->name }}</option>
                             @endforeach  
                     </select>
                 </div>
+                
 
                 <br />
                 <br />
@@ -379,9 +370,9 @@
                 course: {
                     required: true
                 },
-                preffered_training_date:{
+                batch : {
                     required: true
-                }
+                },
             },
             messages: {
                 objective: {
@@ -393,8 +384,8 @@
                 course: {
                   required: "Please input your school."
                 },
-                preffered_training_date: {
-                  required: "Please input your preffered training date."
+                batch: {
+                  required: "Please input your preffered batch."
                 }
            }       
         });
