@@ -158,17 +158,17 @@
   z-index:2;
 }
 
-.header-content h1{
+.header-content-h1{
     font-weight: 900;
-    font-size: 5rem;
+    font-size: 3rem;
     text-transform: uppercase;
     margin-bottom: 0;
-    font-family: Roboto, sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .header-content p{
     font-family: Raleway, sans-serif;
-    font-size: 2rem;
+    font-size: 1.3rem;
     display: block;
     padding: 1rem 0 2rem 0;
 }
@@ -183,52 +183,72 @@ header{
   overflow-x:hidden; 
 }
 
-.btn-frst{
+    .btn{
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;      
+    }
+  .btn-opposite {
+      margin-left: 1.5rem;
+      color: rgb(255, 255, 255);
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-family: Roboto, sans-serif;
+      border-width: 2px;
+      border-style: solid;
+      border-color: rgb(251, 197, 10);
+      border-image: initial;
+      background: rgba(255, 255, 255, 0.02);
+      padding: .7rem 2rem;
+      text-decoration: none;
+  }
+.btn-frst {
     margin-left: 1.5rem;
-    background: #fbc50a;
-    color: #353535;
-    font-size: 1.5rem;
-    padding: 1rem 2rem;
-    text-decoration: none;
-    font-weight: 800;
+    color: rgb(53, 53, 53);
+    font-size: 1.2rem;
+    font-weight: 600;
     text-transform: uppercase;
     font-family: Roboto, sans-serif;
+    background: rgb(251, 197, 10);
+    padding: .7rem 2rem;
+    text-decoration: none;
 }
-
 .btn-frst:hover{
     margin-left: 1.5rem;
     background: #fff;
     color: #0783c7;
 }
-
-.btn-opposite{
-    border: solid 2px #fbc50a;
-    margin-left: 1.5rem;
-    background: rgba(255, 255, 255, .02);
-    color: #ffffff;
-    font-size: 1.5rem;
-    padding: 1rem 2rem;
-    text-decoration: none;
-    font-weight: 800;
-    text-transform: uppercase;
-    font-family: Roboto, sans-serif;
-}
-
-
 .btn-opposite:hover{
     border: solid 2px white;
+    font-weight: 600;    
     margin-left: 1.5rem;
     background: rgba(255, 255, 255, .02);
     color: #ffffff;
 }
-
 .btn-reg-opposite{
     border: solid 2px #fbc50a;
     margin-left: 1.5rem;
     background: rgba(255, 255, 255, .02);
     color: #ffffff;
-    font-size: 1.5rem;
-    padding: 2rem 2rem;
+    font-size: 1.2rem;
+    padding: 1.5rem 2rem;
     text-decoration: none;
     font-weight: 800;
     text-transform: uppercase;
@@ -244,13 +264,13 @@ header{
 
 #register h2{
     margin-top: 3rem;
-    font-size: 3rem;
+    font-size: 2.3rem;
     font-family: Roboto,sans-serif;
     font-weight: 800;
     text-transform: uppercase;
 }
 #register p{
-    font-size: 1.7rem;
+    font-size: 1.4rem;
 }
 
 
@@ -327,7 +347,7 @@ header{
   max-width: 800px;
   height: 90px;
   margin:auto;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .nexseed-logos figure img{
@@ -375,12 +395,12 @@ header{
 }*/
 
 .container-crs-outline .panel .list-group .list-group-item{
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #80878a;
 }
 
 .container-crs-outline .panel .list-group .list-group-item i{
-  font-size: 2rem;
+  font-size: 1.3rem;
   color: #48b32f;
 }
 
@@ -444,7 +464,7 @@ header{
 .feature-box-style-1 .feature-title {
     /*color: #1e1e1e;*/
     color: #fbc50a;
-    font-size: 26px;
+    font-size: 23px;
     font-weight: 700;
     line-height: 26px;
     margin-bottom: 20px;
@@ -462,7 +482,7 @@ header{
     margin-bottom: 0;
     padding-left: 100px;
     line-height: 1.7;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     color: #e2e2e2;
 }
 
@@ -483,6 +503,8 @@ header{
   grid-gap: 5px;
 }
 
+
+
 /*Fade IN animation*/
 
 @keyframes fadeIn{
@@ -494,4 +516,132 @@ header{
 .fade-in{
   opacity: 0;
   animation: fadeIn 0.5s ease-in 1 forwards;
+}
+
+
+#menuToggle
+{
+  display: block;
+  position: absolute;
+  top: 77px;
+  left: 50px;
+  z-index: 5;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  
+  cursor: pointer;
+  
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+  
+  -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  
+  background: #cdcdcd;
+  border-radius: 3px;
+  
+  z-index: 1;
+  
+  transform-origin: 4px 0px;
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+/* 
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu
+{
+  position: absolute;
+  height: 149vw;
+  width: 300px;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+  
+  background: #061823;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+  
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ ul
+{
+  transform: none;
 }
