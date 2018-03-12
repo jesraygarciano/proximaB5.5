@@ -9,7 +9,6 @@ class InternshipApplication extends Model
 {
     protected $fillable = ['user_id','objectives','school','course','training_batch_id'];
 
-    //related to application
     public function user(){
     	return $this->belongsTo(User::class);
     }

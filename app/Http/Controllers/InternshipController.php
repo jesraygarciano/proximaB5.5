@@ -39,6 +39,17 @@ class InternshipController extends Controller
 
     }
 
+    public function add_batch(Request $requests){
+
+        $batch = TrainingBatch::all();
+
+        $student = $requests->id ? InternshipApplication::find($requests->id) : false;
+
+        return view('intership-training-programming.applicant.add_batch', compact('batch','student'));
+
+    }
+
+
     public function json_delete_application( Request $requests ){
         InternshipApplication::find($requests->id)->delete();
 
@@ -79,6 +90,10 @@ class InternshipController extends Controller
         }
         else
         {
+            if(\Auth::user()->intershipApplication()->where('training_batch_id',$requests->batch)->first()){
+                return 'you already applied for this batch!';
+            }
+
             $application = InternshipApplication::create([
                 'user_id'=>\Auth::user()->id,
                 'objectives'=>$requests->objective,
@@ -98,13 +113,43 @@ class InternshipController extends Controller
 
     }
 
+
+    public function save_batches(Request $requests){
+
+
+        $this->validate($requests,[
+            'batch' => 'required',
+        ]);
+
+        $application;   
+        if($requests->id){
+            $application = InternshipApplication::find($requests->id);
+            $application->update([
+                'training_batch_id'=>$requests->batch
+            ]);
+        }
+        else
+        {
+            $application = InternshipApplication::create([
+                'user_id'=>\Auth::user()->id,
+                'training_batch_id'=>$requests->batch
+            ]);
+        }
+
+        return redirect()->route('itp_applicant_profile');
+
+    }
+
+
+
+
     public function json_get_application_datatable(Request $requests){
         $ids = \Auth::user()->intershipApplication()->pluck('internship_applications.id');
 
         // return Datatables::of($companies)->make(true);
-        return Datatables::of(InternshipApplication::query()->leftJoin('users','users.id','=','internship_applications.user_id')
+        return Datatables::of(InternshipApplication::query()
             ->leftJoin('training_batches','training_batches.id','=','internship_applications.training_batch_id')
-            ->select(['internship_applications.id', \DB::raw('training_batches.name as batch_name'),\DB::raw('concat(users.f_name," ",users.l_name) as applicant_name'),'school','course'])->whereIn('internship_applications.id',$ids))
+            ->select(['internship_applications.id', \DB::raw('training_batches.name as batch_name'),'internship_applications.created_at','internship_applications.updated_at'])->whereIn('internship_applications.id',$ids))
         ->filterColumn('batch_name', function($query, $keyword) {
             $query->whereRaw('training_batches.name like', ["%{$keyword}%"]);
         })
