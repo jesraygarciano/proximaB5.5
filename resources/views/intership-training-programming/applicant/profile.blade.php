@@ -317,10 +317,9 @@
     <table class="table table-bordered" id="applications-table" style="width: 100%;">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>School</th>
-                <th>Course</th>
                 <th>Training Batch</th>
+                <th>Created</th>
+                <th>Updated</th>
                 <th>Options</th>
             </tr>
         </thead>
@@ -350,10 +349,9 @@ $(document).ready(function(){
         serverSide: true,
         ajax: '{!! url('itp/applicant/json/itp') !!}',
         columns: [
-            { data: 'applicant_name', name: 'applicant_name', searchable:false, orderable:false},
-            { data: 'school', name: 'school', },
-            { data: 'course', name: 'course', },
             { data: 'batch_name', name: 'batch_name', },
+            { data: 'created_at', name: 'created_at', },
+            { data: 'updated_at', name: 'updated_at', },
             {
                 searchable: false,
                 "orderable": false,

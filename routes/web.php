@@ -11,10 +11,6 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 // Route::get('/', 'HomeController@welcome');
 Route::get('/', 'HomeController@welcome')->name('home');
 

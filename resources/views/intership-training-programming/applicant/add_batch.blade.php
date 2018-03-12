@@ -73,10 +73,9 @@
                             <option value="">Select batch</option>
                             @foreach($batch as $batches)
                                 <option data-value="{{ $batches->id ?? old('batches') }}" {{ $student ? ($student->training_batch_id == $batches->id ? 'selected' : '' ) : '' }} value="{{ $batches->id }}">{{ $batches->name }}</option>
-                            @endforeach  
+                            @endforeach
                     </select>
                 </div>
-                
 
                 <br />
                 <br />

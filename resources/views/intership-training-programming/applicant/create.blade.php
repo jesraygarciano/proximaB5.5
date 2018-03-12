@@ -8,6 +8,7 @@
     $opening=[];
     $provinces=[];
     $countries=[];
+    $applied_batches = \Auth::user()->intershipApplication()->pluck('training_batch_id')->toArray();
 ?>
 
 <style type="text/css">
@@ -98,7 +99,11 @@
                     <select name="batch" class="ui dropdown">
                             <option value="">Select batch</option>
                             @foreach($batch as $batches)
+                            {{$batches->id}}
+                            {{json_encode($applied_batches)}}
+                                @if(!in_array($batches->id, $applied_batches) || ($student ? $student->training_batch_id == $batches->id : false))
                                 <option data-value="{{ $batches->id ?? old('batches') }}" {{ $student ? ($student->training_batch_id == $batches->id ? 'selected' : '' ) : '' }} value="{{ $batches->id }}">{{ $batches->name }}</option>
+                                @endif
                             @endforeach  
                     </select>
                 </div>

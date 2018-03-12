@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/media-query.css') }}">
     <link href="{{ asset('css/applicant-component.css') }}" rel="stylesheet">
     <link href="{{ asset('css/general-component.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/components/opening-component.css') }}" rel="stylesheet">
 
 
     <!-- Font-awesome -->
