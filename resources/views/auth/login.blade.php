@@ -59,6 +59,19 @@
                                     Forgot Your Password?
                                 </a>
                             </div>
+                            <div class="col-md-6 col-md-offset-4">
+                                <br>
+                                <a href="{{url('/redirect','facebook').(isset($_GET['re_url']) ? '?re_url='.$_GET['re_url'] : '')}}" style="display: block;">
+                                    <div class="input-group" style="border: 1px solid #cecece; width: 100%; padding: 5px; border-left: 6px solid #0b5390;">
+                                      <i class="fa fa-3x fa-facebook-square" style="color:#326087; vertical-align: middle;"></i> <b> Login Using Facebook</b>
+                                    </div>
+                                </a>
+                                <a href="{{url('/redirect','github').(isset($_GET['re_url']) ? '?re_url='.$_GET['re_url'] : '')}}" style="display: block; color: black;">
+                                    <div class="input-group" style="margin-top:5px; border: 1px solid #cecece; width: 100%; padding: 5px; border-left: 6px solid #5e5e5e;">
+                                      <i class="fa fa-3x fa-github-square" style="color:#000000; vertical-align: middle;"></i> <b> Login Using Github</b>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </form>
                 </div>

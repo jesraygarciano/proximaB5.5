@@ -8,16 +8,16 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Internship Training Program - Nexseed') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/landing-page.css') }}" rel="stylesheet">
     <link href="{{ asset('css/common.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/media-query.css') }}">
-    <link href="{{ asset('css/applicant-component.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/general-component.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/layout-component.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/components/applicant-component.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/components/general-component.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/components/layout-component.css') }}" rel="stylesheet">
 
 
     <!-- Font-awesome -->
