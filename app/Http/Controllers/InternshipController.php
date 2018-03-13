@@ -10,16 +10,6 @@ use App\TrainingBatch;
 class InternshipController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -31,11 +21,17 @@ class InternshipController extends Controller
 
     public function create(Request $requests){
 
-        $batch = TrainingBatch::all();
+        if(\Auth::check()){
+            $batch = TrainingBatch::all();
 
-        $student = $requests->id ? InternshipApplication::find($requests->id) : false;
+            $student = $requests->id ? InternshipApplication::find($requests->id) : false;
 
-        return view('intership-training-programming.applicant.create', compact('batch','student'));
+            return view('intership-training-programming.applicant.create', compact('batch','student'));
+        }
+        else
+        {
+            return redirect()->to('/login?re_url=itp_create');
+        }
 
     }
 
@@ -58,7 +54,7 @@ class InternshipController extends Controller
 
     public function userItpProfile(){
 
-        $applications = \Auth::user()->intershipApplication()->get();
+        $applications = \Auth::user()->intershipApplication()->limit(3)->get()->load('trainingBatch');
 
         return view('intership-training-programming.applicant.profile', compact('applications'));
     }
@@ -149,9 +145,22 @@ class InternshipController extends Controller
         // return Datatables::of($companies)->make(true);
         return Datatables::of(InternshipApplication::query()
             ->leftJoin('training_batches','training_batches.id','=','internship_applications.training_batch_id')
-            ->select(['internship_applications.id', \DB::raw('training_batches.name as batch_name'),'internship_applications.created_at','internship_applications.updated_at'])->whereIn('internship_applications.id',$ids))
+            ->select([
+                'internship_applications.id', 
+                \DB::raw('training_batches.name as batch_name'),
+                'internship_applications.created_at',
+                'training_batches.start_date',
+            ])->whereIn('internship_applications.id',$ids)
+            ->where('training_batches.id','>',0)
+        )
         ->filterColumn('batch_name', function($query, $keyword) {
             $query->whereRaw('training_batches.name like', ["%{$keyword}%"]);
+        })
+        ->editColumn('created_at', function($data) {
+            return date('M. d, Y h:i:sa',strtotime($data['created_at']));
+        })
+        ->editColumn('start_date', function($data) {
+            return date('M. d, Y',strtotime($data['start_date']));
         })
         ->make(true);
     }

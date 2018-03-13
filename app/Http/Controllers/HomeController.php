@@ -34,7 +34,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+        return redirect()->to(route('itp_create'));
     }
 
 }

@@ -9,6 +9,8 @@ class TrainingBatch extends Model
 {
 	protected $fillable = ['name', 'start_date', 'end_date', 'regitration_deadline', 'schedule', 'description', 'author_id'];
 
+	protected $appends = ['startdate'];
+
 
     public function user()
     {
@@ -17,5 +19,9 @@ class TrainingBatch extends Model
 
     public function internshipApplication(){
     	return $this->hasMany(InternshipApplication::class);
+    }
+
+    public function getStartdateAttribute(){
+    	return date('M. d, Y',strtotime($this->attributes['start_date']));
     }
 }

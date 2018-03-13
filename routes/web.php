@@ -15,12 +15,13 @@
 Route::get('/', 'HomeController@welcome')->name('home');
 
 
-Route::group(['middleware'=>'auth', 'prefix'=>'itp'], function(){
+Route::group(['prefix'=>'itp'], function(){
 
-	Route::group(['prefix'=>'applicant'], function(){
+	Route::get('itp/create/{id?}',['as'=>'itp_create','uses'=>'InternshipController@create']);
+
+	Route::group(['middleware'=>'auth', 'prefix'=>'applicant'], function(){
 
 		Route::get('profile',['as'=>'itp_applicant_profile', 'uses'=>'InternshipController@userItpProfile']);
-		Route::get('create/{id?}',['as'=>'itp_create','uses'=>'InternshipController@create']);
 		Route::get('add/{id?}',['as'=>'itp_add','uses'=>'InternshipController@add_batch']);
 
 		Route::post('save/application',['as'=>'save_application', 'uses'=> 'InternshipController@save_application']);
@@ -35,6 +36,12 @@ Route::group(['middleware'=>'auth', 'prefix'=>'itp'], function(){
 	});
 	
 });
+
+// Socialite
+Route::get('/redirect/{media}', 'SocialAuthController@redirect');
+Route::get('/facebook/callback', 'SocialAuthController@callbackFacebook');
+Route::get('/github/callback', 'SocialAuthController@callbackGithub');
+Route::post('/confirm/role', 'UserController@confirm_role');
 
 Auth::routes();
 
