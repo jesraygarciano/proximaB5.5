@@ -94,7 +94,7 @@
         <h1 class="header-content-h1">Intern Training Program</h1>
         <p>A training program for aspiring students, which aims to help students who are into software development to access high value jobs from the high-demand sector.</p>
         <a href="#" class="btn btn-frst">Find Out More</a>
-        <a href="{{ route('itp_create') }}" class="btn btn-opposite">Register now!</a>
+        <a href="{{ url('register') }}" class="btn btn-opposite">Register now!</a>
       </div>
 
     
@@ -383,7 +383,7 @@
           <br />
           <br />
           <!-- <a href="#" class="btn btn-lg btn-outline">Register</a> -->
-          <a href="{{ url('itp/applicant/create') }}" class="btn btn-reg-opposite">Register now!</a>
+          <a href="{{ url('register') }}" class="btn btn-reg-opposite">Register now!</a>
         </div>
       </section>
   </div>
