@@ -18,6 +18,7 @@
     <link href="{{ asset('css/components/applicant-component.css') }}" rel="stylesheet">
     <link href="{{ asset('css/components/general-component.css') }}" rel="stylesheet">
     <link href="{{ asset('css/components/opening-component.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/components/layout-component.css') }}" rel="stylesheet">
 
 
     <!-- Font-awesome -->

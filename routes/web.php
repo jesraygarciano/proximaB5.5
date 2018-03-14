@@ -37,6 +37,10 @@ Route::group(['prefix'=>'itp'], function(){
 	
 });
 
+Route::group(['prefix'=>'user', 'middleware'=>'auth'], function(){
+	Route::get('profile', ['as'=>'user_profile', 'uses'=>'UserController@profile']);
+});
+
 // Socialite
 Route::get('/redirect/{media}', 'SocialAuthController@redirect');
 Route::get('/facebook/callback', 'SocialAuthController@callbackFacebook');
