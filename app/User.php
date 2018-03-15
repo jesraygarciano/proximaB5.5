@@ -21,7 +21,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['f_name', 'l_name', 'm_name', 'email', 'password', 'birth_date', 'role', 'university', 'graduate_flag', 'program_of_study', 'field_of_study', 'gender', 'postal', 'address1', 'address2', 'city', 'country', 'phone_number', 'photo', 'objective', 'is_active','verify_token'];
+    protected $fillable = ['f_name', 'l_name', 'email', 'password', 'birth_date', 'role', 'university', 'graduate_flag', 'program_of_study', 'field_of_study', 'gender', 'postal', 'address1', 'address2', 'city', 'country', 'phone_number', 'photo', 'objective', 'is_active','verify_token'];
 
     protected $appends = ['name','photo'];
 
@@ -237,6 +237,10 @@ class User extends Authenticatable
     // {
     //     return $this->hasManyThrough('App\Resume', 'App\Opening');
     // }
+
+    public function resume(){
+        return $this->hasMany('App\Resume');
+    }
 
     public function requestMessage($data){
         if(!$this->contactExist($data->contact_id))
