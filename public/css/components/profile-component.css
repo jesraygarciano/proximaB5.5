@@ -159,3 +159,53 @@
     padding: 15px;
     padding-right: initial;
 }
+
+.unick-info-e{
+    position: relative;
+    padding:15px;
+    border-bottom:1px solid #e5e5e5;
+}
+
+.unick-info-e .options{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 15px;
+    display: none;
+}
+
+.unick-info-e:hover .options{
+    display: block;
+}
+
+.unick-info-e .options .edit{
+    color: blue;
+    cursor: pointer;
+}
+
+.unick-info-e .edit-panel{
+    display: none;
+}
+
+.editing .edit-panel{
+    display: block;
+}
+
+.editing .info-panel{
+    display: none;
+}
+
+.unick-info-e .info{
+    font-weight: bold;
+}
+
+.unick-info-e .lbl{
+    color: #90949c;
+}
+
+.profile-info-container .title{
+    color: #90949c;
+    font-weight: bold;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 5px 0;
+}
