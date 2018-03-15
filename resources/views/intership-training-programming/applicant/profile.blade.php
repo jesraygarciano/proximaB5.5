@@ -110,8 +110,6 @@
         width: 30px;
     }
 
-
-
     .app-basic-info{
 /*        margin: 2rem 2rem 0rem 2rem;
         padding: 3.5rem 0px 0 0;
@@ -150,49 +148,277 @@
     .app-basic-info-2{
         height: 100px;
     }
+
+    .bar-success {  background-color: #5cb85c;}
+    .bar-info {    background-color: #5bc0de;}
+    .bar-warning {    background-color: #f0ad4e;}
+    .bar-danger {  background-color: #d9534f;}
+
+
+
+/*Facebook cover photo and Profile*/
+
+.fb-profile-block {
+  margin: auto;
+  position: relative;
+  /*width: 850px;*/
+  width: 1170px;
+}
+.fb-link-img{
+    width: 100%;
+    height: auto;
+}
+.fb-profile-block-thumb{
+  display: block;
+  height: 315px;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+}
+.fb-profile-block-menu {
+  border: 1px solid #d3d6db;
+  border-radius: 0 0 3px 3px;
+}
+.profile-img a{
+    bottom: 15px;
+    box-shadow: none;
+    display: block;
+    left: 15px;
+    padding:1px;
+    position: absolute;
+    height: 160px;
+    width: 160px;
+    background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
+    z-index:9;
+}
+.profile-img img {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07);
+  height:158px;
+  padding: 5px;
+  width:158px;
+}
+.profile-name {
+  bottom: 60px;
+  left: 205px;
+  position: absolute;
+}
+.profile-name h2 {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 30px;
+  max-width: 275px;
+  position: relative;
+  text-transform: capitalize;
+}
+.fb-profile-block-menu{
+  height: 44px;
+  position: relative;
+  /*width:850px;*/
+  width: 1170px;
+  overflow:hidden;
+  }
+.block-menu {
+  clear: right;
+  padding-left: 205px;
+}
+.block-menu ul{
+    margin:0;
+    padding:0;
+    }
+.block-menu ul li{
+    display:inline-block;
+    }
+.block-menu ul li a {
+  border-right: 1px solid #e9eaed;
+  float: left;
+  font-size: 14px;
+  font-weight: bold;
+  height: 42px;
+  line-height: 3.0;
+  padding: 0 17px;
+  position: relative;
+  vertical-align: middle;
+  white-space: nowrap;
+  color:#4b4f56;
+  text-transform:capitalize;
+}
+.block-menu ul li:first-child a{
+      border-left: 1px solid #e9eaed;
+    }
+
+.second-column-tab, .first-column-tab{
+    background: #fff;
+    border: 1px solid #dddfe2;
+}
+
+.first-column-tab h3 i{
+    color: #4267b2;
+}
+
+.first-column-tab h3{
+    border-bottom: 1px solid #e9ebee;
+    padding: 1rem;    
+}
+
+.first-column-tab p{
+    padding: 0 1rem;
+}
+
+.resume-content{
+    padding-left: .6rem;
+}
+/*.i-icon-wrapper{
+    position: relative;
+    background: rgb(31, 89, 149);
+    border-radius: 12.5px;
+}
+.i-icon-wrapper i{
+    position: relative;
+    color: #fff;
+    font-size: 1rem!important;
+
+}*/
+.progress{
+    border-radius: 0!important
+}
 </style>
 @endsection
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-lg-5 col-sm-5">
-            <div class="card hovercard">
-                <div class="card-background">
-                    <img class="card-bkimg" alt="" src="https://avatars1.githubusercontent.com/u/17306535?s=400&u=823ef75959d37a5f740998f65e3293067191628a&v=4">
-                    <!-- http://lorempixel.com/850/280/people/9/ -->
+
+
+    <!-- Cover photo here -->
+    <div class="fb-profile-block">
+          <div class="fb-profile-block-thumb"><img class="fb-link-img" src="http://themeboxer.com/demo/snipp/coverpage.jpg" alt="" title=""></div>
+          <div class="profile-img"><a href="#"><img class="fb-link-img" src="{{ $resume->photo }}" alt="" title=""></a></div>
+          <div class="profile-name">
+            <h2>{{$resume->f_name}} {{$resume->m_name}} {{$resume->l_name}}</h2>
+          </div>
+          
+          <div class="fb-profile-block-menu">
+               <div class="block-menu" style="background: #fff">
+                    <ul class="nav nav-tabs" style="background: #fff">
+                       <li class="active"><a data-toggle="tab" href="#home">Resume</a></li>
+                       <li><a data-toggle="tab" href="#application1">Application</a></li>
+                    </ul>
+
+               </div>
+          </div>
+    </div>
+
+    <div class="tab-content">
+
+        <div class="tab-pane fade in active" id="home">
+            <br />
+            <div class="row">
+                <div class="col-lg-5 col-md-5">
+                    <div class="first-column-tab">
+
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">30% profile complete</div>
+                        </div>
+
+                        <h3>
+                            <i class="fa fa-globe"></i>
+                            Basic info
+                        </h3>
+                        
+                        <p>
+                            <span class="i-icon-wrapper">
+                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                            </span>
+                            <span class="resume-content">
+                                <a href="mailto:{{$resume->email}}" target="_blank">
+                                    {{$resume->email}}
+                                </a>
+                            </span>
+                        </p>
+                        <p>
+                            <span class="i-icon-wrapper">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                            </span>
+                            <span class="resume-content">
+                                {{$resume->phone_number}}
+                            </span>
+                        </p>
+                        <p>
+                            <span class="i-icon-wrapper">
+                                <i class="fa fa-birthday-cake"></i>
+                            </span>
+                            <span class="resume-content">
+                                {{$resume->birth_date}}
+                            </span>
+                        </p>
+
+                        <p>
+                            <span class="i-icon-wrapper">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            </span>
+                            <span class="resume-content">
+                                {{$resume->address1}}
+                                {{$resume->address2}}
+                                {{$resume->city}}
+                                {{$resume->country}}
+                                {{$resume->postal}}                                
+                            </span>
+                        </p>
+                        <p style="padding-bottom: 1rem;">
+                            <span class="i-icon-wrapper">
+                                <i class="fa fa-language"></i>
+                            </span>
+                            <span class="resume-content">
+                            {{$resume->spoken_language}}
+                            </span>
+
+                        </p>
+
+
+                    </div>
+
+
+                    <div class="first-column-tab" style="margin: 1rem 0;">
+                        <h3>
+                            <i class="fa fa-globe"></i>
+                            Intro
+                        </h3>
+                        
+                        <p style="padding: 1rem;">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit praesentium adipisci officiis molestiae, quod ullam fuga aliquid iure sapiente nihil.
+                        </p>
+
+                    </div>
                 </div>
-                <div class="useravatar">
-                    <img alt="" src="https://avatars1.githubusercontent.com/u/17306535?s=400&u=823ef75959d37a5f740998f65e3293067191628a&v=4">
+                @if(isset($application))
+                <div class="col-lg-7 col-sm-7">
+
+
+                    <div class="col-lg-7 col-md-7">
+                        <div class="second-column-tab">
+
+                            <div style="margin: 1rem;">
+                            <h3 style="margin-top: 1rem;">Skills</h3>
+                            <div class="row" id="skill_required">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="card-info"> 
-                    <span class="card-title">Pamela Anderson</span>
-                </div>
+                @endif
             </div>
-            <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-                <div class="btn-group" role="group">
-                    <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab">
-                        <!-- <span class="glyphicon glyphicon-star" aria-hidden="true"></span> -->
-                        <i class="fa fa-calendar"></i>
-                        <div class="hidden-xs">Schedule</div>
-                    </button>
-                </div>
-                <div class="btn-group" role="group">
-                    <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab">
-                        <!-- <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> -->
-                        <i class="fa fa-code"></i>
-
-                        <div class="hidden-xs">Skills</div>
-                    </button>
-                </div>
-            </div>
-
-
-          <div class="tab-content">
-            <div class="tab-pane fade in active" id="tab1">
-
-            <!-- <h3 class="page-header">Recent Applications</h3> -->
-            <h3></h3>
+        </div>
+        <div class="tab-pane fade" id="application1">
+            <br>
             <a href="{{route('itp_create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Application</a>
             <br>
             <br>
@@ -233,79 +459,24 @@
                     </div>
                 </div>
                 @endif
-            </div>    
-
-
             </div>
-
-            <div class="tab-pane fade in" id="tab2">
-
-                <h3 style="margin-top: 1rem;">Skills</h3>
-
-                <div class="row" id="skill_required">
-                    <div class="col-md-4">
-                    </div>
-                    <div class="col-md-4">
-                    </div>
-                    <div class="col-md-4">
-                    </div>
-                </div>
-
-
-            </div>
-
-          </div>
-
-        </div>
-        <div class="col-lg-7 col-sm-7">
-
-            <div class="row">
-                <div class="col-sm-5 col-md-5 app-basic-info app-basic-info-2">
-                    <p class="app-objt-p">
-                        {{  $application->school  }}
-                    </p>
-                    <div id="app-batch-number">
-                        School
-                    </div>
-                </div>
-                <div class="col-sm-5 col-md-5 app-basic-info app-basic-info-2">
-                    <p class="app-objt-p">
-                        {{  $application->course  }}
-                    </p>
-                    <div id="app-batch-number">
-                        Course
-                    </div>
-                </div>
-            </div>
-        
-            <div class="row">
-                <div class="col-sm-12 app-basic-info">
-                    <p class="app-objt-p">
-                        {{  $application->objectives  }}
-                    </p>
-                    <div id="app-batch-number">
-                        Objective for applying
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
-</div>
 
-<div class="container" style="padding-top:20px;">
-    <h5>Application History</h5>
-    <table class="table table-bordered" id="applications-table" style="width: 100%;">
-        <thead>
-            <tr>
-                <th>Training Batch</th>
-                <th>Training Start Date</th>
-                <th>Submitted Date</th>
-                <th>Options</th>
-            </tr>
-        </thead>
-    </table>
-</div> 
+    <div class="first-column-tab" style="padding:15px;">
+        <h5>Application History</h5>
+        <table class="table table-bordered" id="applications-table" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Training Batch</th>
+                    <th>Training Start Date</th>
+                    <th>Submitted Date</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
 
 <div class="ui mini modal" id="delete_application">
     <div class="header">Delete Batch</div>
@@ -374,6 +545,7 @@ function prep_del_batch(id){
     $('#delete_application').data('id',id);
 }
 
+@if(isset($application))
     $(function(){
         var skill_requirements = JSON.parse("{{json_encode($application->skills)}}".replace(/&quot;/g,'"'));
 
@@ -409,6 +581,26 @@ function prep_del_batch(id){
             skill_requirements.html('<div class="col-md-4" style="color:gray;">No skill requirements.</div>');
         }
     });
+@endif
+
+
+    // $(document).ready( function(){
+    //     window.percent = 0;
+    //     window.progressInterval = window.setInterval( function(){
+    //     if(window.percent < 100) {
+    //         window.percent++;
+    //         $('.progress').addClass('progress-striped').addClass('active');
+    //         $('.progress .progress-bar:first').removeClass().addClass('progress-bar')
+    //         .addClass ( (percent < 40) ? 'progress-bar-danger' : ((percent < 80) ? 'progress-bar-warning' : 'progress-bar-success' )) ;
+    //         $('.progress .progress-bar:first').width(window.percent+'%');
+    //         $('.progress .progress-bar:first').text(window.percent+'%');
+    //     } else {
+    //         window.clearInterval(window.progressInterval);
+    //         // jQuery('.progress').removeClass('progress-striped').removeClass('active');
+    //         //jQuery('.progress .progress-bar:first').text('Done!');
+    //     }
+    // }, 100 );
+    // });
 
 </script>
 

@@ -31,6 +31,11 @@
 
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('itp_applicant_profile') }}">IT Profile</a></li>
+                            @if(\Auth::user()->resume()->first())
+                            <li><a href="{{ route('user_profile') }}">See Resume</a></li>
+                            @else
+                            <li><a href="{{ route('resume_create') }}">Create Resume</a></li>
+                            @endif
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

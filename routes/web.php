@@ -39,6 +39,10 @@ Route::group(['prefix'=>'itp'], function(){
 
 Route::group(['prefix'=>'user', 'middleware'=>'auth'], function(){
 	Route::get('profile', ['as'=>'user_profile', 'uses'=>'UserController@profile']);
+	Route::get('resume/create', ['as'=>'resume_create', 'uses'=>'UserController@resume_create']);
+	Route::get('resume/edit/{id}', ['as'=>'resume_edit', 'uses'=>'UserController@resume_edit']);
+	Route::post('resume/save', ['as'=>'resume_save', 'uses'=>'UserController@resume_save']);
+	Route::post('resume/save/edit', ['as'=>'resume_save_edit', 'uses'=>'UserController@resume_save_edit']);
 });
 
 // Socialite
