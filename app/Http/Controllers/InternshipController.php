@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use yajra\Datatables\Datatables;
 use App\InternshipApplication;
 use App\TrainingBatch;
+use App\Resume_skill;
+use App\Libs\Common;
 
 class InternshipController extends Controller
 {
@@ -53,10 +55,22 @@ class InternshipController extends Controller
     }
 
     public function userItpProfile(){
+        $user = \Auth::user();
+        $skills = Resume_skill::all();
+        $resume = Common::get_master_resume();
+        $educations = $resume->educations()->get();
+        $experiences = $resume->experiences()->get();
+        $cr = $resume->character_references()->get();
+        if($resume){
+            $languages_ids = $resume->has_skill()->get()->pluck('id')->toArray();
+        }else{
+            $resume = new Resume;
+            $languages_ids = array();
+        }
 
         $applications = \Auth::user()->intershipApplication()->limit(3)->get()->load('trainingBatch');
 
-        return view('intership-training-programming.applicant.profile', compact('applications'));
+        return view('intership-training-programming.applicant.profile', compact('applications','user', 'skills', 'resume', 'languages_ids', 'educations', 'experiences', 'cr'));
     }
 
     public function save_application(Request $requests){
