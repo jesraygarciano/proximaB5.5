@@ -315,11 +315,10 @@ header{
   margin: 0.2rem 0 0 0;
 }
 .course-outline{
-  background: #fff;
-    max-width: 960px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin: auto;
+  max-width: 960px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
 }
 .container-crs-outline{
     margin: 4rem 0;

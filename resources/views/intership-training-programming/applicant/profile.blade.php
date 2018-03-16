@@ -111,13 +111,6 @@
     }
 
     .app-basic-info{
-/*        margin: 2rem 2rem 0rem 2rem;
-        padding: 3.5rem 0px 0 0;
-        background: #fff;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 3px 0 rgba(0,0,0,0.12)!important;
-        border: 1px solid #dddddd;
-        position: relative;
-*/
         margin: 1rem 0rem 0rem 1rem;
         padding: 3.5rem 0px 0 0;
         background: #fff;
@@ -252,6 +245,8 @@
 .second-column-tab, .first-column-tab{
     background: #fff;
     border: 1px solid #dddfe2;
+    box-shadow: 3px 0 #dedede;
+    position: relative;
 }
 
 .first-column-tab h3 i{
@@ -284,6 +279,14 @@
 .progress{
     border-radius: 0!important
 }
+
+#resume_update_btn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 0!important;
+}
+
 </style>
 @endsection
 
@@ -319,7 +322,7 @@
                     <div class="first-column-tab">
 
                         <div class="progress">
-                          <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">30% profile complete</div>
+                          <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">30% profile complete</div>
                         </div>
 
                         <h3>
@@ -375,46 +378,86 @@
                             </span>
 
                         </p>
-
-
                     </div>
 
 
-                    <div class="first-column-tab" style="margin: 1rem 0;">
-                        <h3>
-                            <i class="fa fa-globe"></i>
-                            Intro
-                        </h3>
-                        
-                        <p style="padding: 1rem;">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit praesentium adipisci officiis molestiae, quod ullam fuga aliquid iure sapiente nihil.
-                        </p>
 
-                    </div>
+
                 </div>
-                @if(isset($application))
+                {{-- @if(isset($application)) --}}
                 <div class="col-lg-7 col-sm-7">
 
-
-                    <div class="col-lg-7 col-md-7">
                         <div class="second-column-tab">
-
                             <div style="margin: 1rem;">
-                            <h3 style="margin-top: 1rem;">Skills</h3>
-                            <div class="row" id="skill_required">
-                                <div class="col-md-4">
+                                <h3 style="margin-top: 1rem;">Skills</h3>
+                                    <div class="row" id="skill_required">
+                                        <div class="col-md-4">
+                                        </div>
+                                        <div class="col-md-4">
+                                        </div>
+                                        <div class="col-md-4">
+                                        </div>
+                                    </div>
+
+                                <div id="resume_update_btn">
+                                    {!! link_to(route('resume_edit', $resume->id) , 'resume update', ['class' => 'btn btn-default']) !!}
                                 </div>
-                                <div class="col-md-4">
-                                </div>
-                                <div class="col-md-4">
-                                </div>
-                            </div>
+
                             </div>
 
                         </div>
-                    </div>
+
+                        <div class="second-column-tab" style="margin: 1rem 0;">
+                            <div style="margin: 1rem;">
+                                <h3>
+                                    Portfolio
+                                </h3>
+
+                                <p style="padding: 1rem;">
+                                    {{$resume->websites}}                                
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <div class="second-column-tab" style="margin: 1rem 0;">
+                            <div style="margin: 1rem;">
+                                <h3>
+                                    Summary of your skill/experience
+                                </h3>
+                            
+                                <p style="padding: 1rem;">
+                                    {{$resume->summary}}                                
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="second-column-tab" style="margin: 1rem 0;">
+                            <div style="margin: 1rem;">
+                                <h3>
+                                    Other Skills
+                                </h3>
+                                <p style="padding: 1rem;">
+                                    {{$resume->other_skills}}                                
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="second-column-tab" style="margin: 1rem 0;">
+                            <div style="margin: 1rem;">
+                                <h3>
+                                    Seminars Attended
+                                </h3>
+                            
+                                <p style="padding: 1rem;">
+                                    {{$resume->seminars_attended}}                                
+                                </p>
+                            </div>
+                        </div>
+
+
                 </div>
-                @endif
+                {{-- @endif --}}
             </div>
         </div>
         <div class="tab-pane fade" id="application1">
@@ -545,7 +588,7 @@ function prep_del_batch(id){
     $('#delete_application').data('id',id);
 }
 
-@if(isset($application))
+{{-- @if(isset($application)) --}}
     $(function(){
         var skill_requirements = JSON.parse("{{json_encode($application->skills)}}".replace(/&quot;/g,'"'));
 
@@ -581,7 +624,7 @@ function prep_del_batch(id){
             skill_requirements.html('<div class="col-md-4" style="color:gray;">No skill requirements.</div>');
         }
     });
-@endif
+{{-- @endif --}}
 
 
     // $(document).ready( function(){

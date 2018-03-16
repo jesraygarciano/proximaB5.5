@@ -352,13 +352,17 @@
                                     @endfor
 
                                     <div class="row">
-                                        <button type="button" id="add_ed" class="btn btn-primary pull-right">Add Educational Background</button>
+                                        <div class="col-md-12">
+                                            <button type="button" id="add_ed" class="btn btn-primary pull-right">Add Educational Background</button>
+                                        </div>
                                     </div>
 
                                     <hr>
 
                                     <div class="row">
-                                        <button type="button" class="btn btn-primary pull-right next-step">Save and continue</button>
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-primary pull-right next-step">Save and continue</button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane wizard-step" role="tabpanel" id="step2">
@@ -905,12 +909,15 @@
                                     {!! Form::hidden('is_active', 1) !!}
                                     {!! Form::hidden('is_master', 1) !!}
 
-                                    <p>This is step 3</p>
-                                    <ul class="list-inline pull-right">
-                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                        <!-- <li><button type="button" class="btn btn-default next-step">Skip</button></li> -->
-                                        <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
-                                    </ul>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <ul class="list-inline pull-right">
+                                                <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                                <!-- <li><button type="button" class="btn btn-default next-step">Skip</button></li> -->
+                                                <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="tab-pane wizard-step text-center" role="tabpanel" id="complete">
                                     <h3>Complete</h3>
@@ -923,7 +930,6 @@
                         </div>
                     </form>
                 </div>
-{{--                 </form> --}}
             </div>
         </div>
     </div>

@@ -371,13 +371,17 @@
                                     @endfor
 
                                     <div class="row">
-                                        <button type="button" id="add_ed" class="btn btn-primary pull-right">Add Educational Background</button>
+                                        <div class="col-md-12">
+                                            <button type="button" id="add_ed" class="btn btn-primary pull-right">Add Educational Background</button>
+                                        </div>
                                     </div>
 
                                     <hr>
 
                                     <div class="row">
-                                        <button type="button" class="btn btn-primary pull-right next-step">Save and continue</button>
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-primary pull-right next-step">Save and continue</button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -759,15 +763,19 @@
                                     @endfor
 
                                     <div class="row">
-                                        <button type="button" id="add_ex" class="btn btn-primary pull-right">Add Experience</button>
+                                        <div class="col-md-12">
+                                            <button type="button" id="add_ex" class="btn btn-primary pull-right">Add Experience</button>
+                                        </div>
                                     </div>
 
                                     <hr>
 
                                     <div class="row progress-buttons">
-                                        <div class="pull-right">
-                                            <button type="button" class="btn btn-default prev-step">Previous</button>
-                                            <button type="button" class="btn btn-primary next-step">Save and continue</button>
+                                        <div class="col-md-12">
+                                            <div class="pull-right">
+                                                <button type="button" class="btn btn-default prev-step">Previous</button>
+                                                <button type="button" class="btn btn-primary next-step">Save and continue</button>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -876,7 +884,9 @@
                                     @endfor
 
                                     <div class="row">
-                                        <button type="button" id="add_cr" class="btn btn-primary pull-right">Add Character References</button>
+                                        <div class="col-md-12">
+                                            <button type="button" id="add_cr" class="btn btn-primary pull-right">Add Character References</button>
+                                        </div>
                                     </div>
 
                                     <hr>
@@ -885,11 +895,15 @@
                                     {!! Form::hidden('is_active', 1) !!}
                                     {!! Form::hidden('is_master', 1) !!}
 
-                                    <ul class="list-inline pull-right">
-                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                        <!-- <li><button type="button" class="btn btn-default next-step">Skip</button></li> -->
-                                        <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
-                                    </ul>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <ul class="list-inline pull-right">
+                                                <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                                <!-- <li><button type="button" class="btn btn-default next-step">Skip</button></li> -->
+                                                <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="tab-pane wizard-step text-center" role="tabpanel" id="complete">
                                     <h3>Complete</h3>

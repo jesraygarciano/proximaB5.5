@@ -141,11 +141,68 @@
                             {{$batches->id}}
                             {{json_encode($applied_batches)}}
                                 @if(!in_array($batches->id, $applied_batches) || ($student ? $student->training_batch_id == $batches->id : false))
-                                <option data-value="{{ $batches->id ?? old('batches') }}" {{ $student ? ($student->training_batch_id == $batches->id ? 'selected' : '' ) : '' }} value="{{ $batches->id }}">{{ $batches->name }}</option>
+                                <option data-value="{{ $batches->id ?? old('batches') }}" data-data="{{json_encode($batches)}}" {{ $student ? ($student->training_batch_id == $batches->id ? 'selected' : '' ) : '' }} value="{{ $batches->id }}">{{ $batches->name }}</option>
                                 @endif
                             @endforeach  
                     </select>
                 </div>
+                <style type="text/css">
+                    .batch-info{
+                        background: white;
+                        border: 1px solid #dddfe2;
+                        border-radius: 0.28571429rem;
+                    }
+
+                    .batch-info .header{
+                        padding: 1rem;
+                        border-bottom: 1px solid #e9ebee;
+                    }
+
+                    .batch-info .content{
+                        padding: 1rem;
+                    }
+                </style>
+                <br>
+                <div class="batch-info" id="batch-display">
+                    <div class="header">Batch 2</div>
+                    <div class="content">
+                        <b> Training Date : </b> <span class="start_date">Mar. 08, 2018</span>
+                        <br>
+                        <b> Schedule : </b> <span class="schedule"></span>
+                        <br>
+                        <b> Registration Deadline : </b> <span class="regitration_deadline"></span>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    var data = $('[name=batch]').find('option:selected').data('data');
+                    if(data){
+                        $('#batch-display').show();
+                        $('#batch-display').find('.header').html(data.name);
+                        $('#batch-display').find('.start_date').html(data.startdate);
+                        $('#batch-display').find('.schedule').html(data.schedule);
+                        $('#batch-display').find('.regitration_deadline').html(data.regitrationdeadline);
+                    }
+                    else
+                    {
+                        $('#batch-display').hide();
+                    }
+                    $('[name=batch]').change(function(){
+                        var data = $(this).find('option:selected').data('data');
+                        if(data)
+                        {
+                            $('#batch-display').show();
+                            $('#batch-display').find('.header').html(data.name);
+                            $('#batch-display').find('.start_date').html(data.startdate);
+                            $('#batch-display').find('.schedule').html(data.schedule);
+                            $('#batch-display').find('.regitration_deadline').html(data.regitrationdeadline);
+                        }
+                        else
+                        {
+                            $('#batch-display').hide();
+                        }
+                    });
+                </script>
                 
 
                 <br />
