@@ -48,13 +48,20 @@ class InternshipController extends Controller
     }
 
 
-    public function json_delete_application( Request $requests ){
+    public function json_delete_application(Request $requests ){
         InternshipApplication::find($requests->id)->delete();
 
         return 'deleted';
     }
 
     public function userItpProfile(){
+        $applications = \Auth::user()->intershipApplication()->limit(3)->get()->load('trainingBatch');
+        $user = \Auth::user();
+
+        return view('intership-training-programming.applicant.profile', compact('applications','user'));
+    }
+
+    public function finuserItpProfile(){
         $user = \Auth::user();
         $skills = Resume_skill::all();
         $resume = Common::get_master_resume();
@@ -70,7 +77,7 @@ class InternshipController extends Controller
 
         $applications = \Auth::user()->intershipApplication()->limit(3)->get()->load('trainingBatch');
 
-        return view('intership-training-programming.applicant.profile', compact('applications','user', 'skills', 'resume', 'languages_ids', 'educations', 'experiences', 'cr'));
+        return view('intership-training-programming.applicant.finprofile', compact('applications','user', 'skills', 'resume', 'languages_ids', 'educations', 'experiences', 'cr'));
     }
 
     public function save_application(Request $requests){

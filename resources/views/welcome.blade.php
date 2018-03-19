@@ -285,42 +285,16 @@
             </div>
 
             <div class="row">
+              @foreach($trainingBatches as $batch)
               <div class="col-md-5" style="margin: 1rem 2rem;">
-                  <h3>Batch 1</h3>
-                    <ul class="list-group">
-                        <li class="list-group-item">Start of Classes : <strong>May 1, 2018</strong></li>
-                        <li class="list-group-item">Schedule : <br><strong>M-T-TH-F (9:00AM-4:00PM)</strong></li>
-                        <li class="list-group-item ">Registration Deadline : <strong>April 23,2018 </strong></li>
-                    </ul>
+                  <h3>{{$batch->name}}</h3>
+                  <ul class="list-group">
+                      <li class="list-group-item">Start of Classes : <strong>{{$batch->startdate}}</strong></li>
+                      <li class="list-group-item">Schedule : <br><strong>{{$batch->schedule}}</strong></li>
+                      <li class="list-group-item">Registration Deadline : <strong>{{$batch->regitrationdeadline}}</strong></li>
+                  </ul>
               </div>
-
-              <div class="col-md-5" style="margin: 1rem 2rem;">
-                  <h3>Batch 2</h3>
-                    <ul class="list-group">
-                        <li class="list-group-item">Start of Classes : <strong>September 6,2018</strong></li>
-                        <li class="list-group-item">Schedule : <br><strong>M-T-TH-F (9:00AM-4:00PM)</strong></li>
-                        <li class="list-group-item ">Registration Deadline : <strong>August 26,2018 </strong></li>
-                    </ul>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-5" style="margin: 0 2rem;">
-                  <h3>Batch 3</h3>
-                    <ul class="list-group">
-                        <li class="list-group-item">Start of Classes : <strong>December 7,2018</strong></li>
-                        <li class="list-group-item">Schedule : <br><strong>M-T-TH-F (9:00AM-4:00PM)</strong></li>
-                        <li class="list-group-item ">Registration Deadline : <strong>November 25,2018 </strong></li>
-                    </ul>
-              </div>
-
-              <div class="col-md-5" style="margin: 0 2rem;">
-                  <h3>Batch 4</h3>
-                    <ul class="list-group">
-                        <li class="list-group-item">Start of Classes : <strong>Feb 14,2019</strong></li>
-                        <li class="list-group-item">Schedule : <br><strong>M-T-TH-F (9:00AM-4:00PM)</strong></li>
-                        <li class="list-group-item ">Registration Deadline : <strong>February 1,2019 </strong></li>
-                    </ul>
-              </div>
+              @endforeach
             </div>
           </div>        
         </div>
@@ -335,7 +309,7 @@
                     <span style="padding-left: .5rem;">CURRICULUM</span>
                 </h4>
             </div>
-          <h4>
+          <h4 style="padding: 15px;">
             Our curriculum design is developed through a series of industry consultation. And through this, we are able to create a short course that will fill the high demand sector of the IT market.
           </h4>
           </div>

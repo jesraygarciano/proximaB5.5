@@ -137,11 +137,11 @@
                         <label>I wan't to sign-up for batch:</label>
                     <select name="batch" class="ui dropdown">
                             <option value="">Select batch</option>
-                            @foreach($batch as $batches)
-                            {{$batches->id}}
+                            @foreach($batches as $batch)
+                            {{$batch->id}}
                             {{json_encode($applied_batches)}}
-                                @if(!in_array($batches->id, $applied_batches) || ($student ? $student->training_batch_id == $batches->id : false))
-                                <option data-value="{{ $batches->id ?? old('batches') }}" data-data="{{json_encode($batches)}}" {{ $student ? ($student->training_batch_id == $batches->id ? 'selected' : '' ) : '' }} value="{{ $batches->id }}">{{ $batches->name }}</option>
+                                @if(!in_array($batch->id, $applied_batches) || ($student ? $student->training_batch_id == $batch->id : false))
+                                <option data-value="{{ $batch->id ?? old('batch') }}" data-data="{{json_encode($batch)}}" {{ $student ? ($student->training_batch_id == $batch->id ? 'selected' : '' ) : '' }} value="{{ $batch->id }}">{{ $batch->name }}</option>
                                 @endif
                             @endforeach  
                     </select>

@@ -189,7 +189,7 @@
     position: absolute;
     height: 160px;
     width: 160px;
-    background: rgba(210, 198, 198, 0.3) none repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
     z-index:9;
 }
 .profile-img img {
@@ -251,12 +251,10 @@
     }
 
 .second-column-tab, .first-column-tab{
-    margin-bottom: 1rem;
     background: #fff;
     border: 1px solid #dddfe2;
-    box-shadow: 2px 0 #dedede;
+    box-shadow: 3px 0 #dedede;
     position: relative;
-    padding-bottom: 1rem;
 }
 
 .first-column-tab h3 i{
@@ -306,9 +304,9 @@
     <!-- Cover photo here -->
     <div class="fb-profile-block">
           <div class="fb-profile-block-thumb"><img class="fb-link-img" src="{{asset('img/default-opening.jpg')}}" alt="" title=""></div>
-          <div class="profile-img"><a href="#"><img class="fb-link-img" src="http://santetotal.com/wp-content/uploads/2014/05/default-user.png" alt="" title=""></a></div>
+          <div class="profile-img"><a href="#"><img class="fb-link-img" src="{{ $resume->photo }}" alt="" title=""></a></div>
           <div class="profile-name">
-            <h2>{{$user->f_name}} {{$user->m_name}} {{$user->l_name}}</h2>
+            <h2>{{$resume->f_name}} {{$resume->m_name}} {{$resume->l_name}}</h2>
           </div>
           
           <div class="fb-profile-block-menu">
@@ -317,7 +315,6 @@
                        <li class="active"><a data-toggle="tab" href="#home">Resume</a></li>
                        <li><a data-toggle="tab" href="#application1">Application</a></li>
                     </ul>
-
                </div>
           </div>
     </div>
@@ -330,6 +327,10 @@
                 <div class="col-lg-5 col-md-5">
                     <div class="first-column-tab">
 
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">30% profile complete</div>
+                        </div>
+
                         <h3>
                             <i class="fa fa-globe"></i>
                             Basic info
@@ -338,17 +339,54 @@
                         <p>
                             <span class="i-icon-wrapper">
                                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                {{ $user->email}}
                             </span>
                             <span class="resume-content">
-
+                                <a href="mailto:{{$resume->email}}" target="_blank">
+                                    {{$resume->email}}
+                                </a>
                             </span>
+                        </p>
+                        <p>
+                            <span class="i-icon-wrapper">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                            </span>
+                            <span class="resume-content">
+                                {{$resume->phone_number}}
+                            </span>
+                        </p>
+                        <p>
+                            <span class="i-icon-wrapper">
+                                <i class="fa fa-birthday-cake"></i>
+                            </span>
+                            <span class="resume-content">
+                                {{$resume->birth_date}}
+                            </span>
+                        </p>
+
+                        <p>
+                            <span class="i-icon-wrapper">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            </span>
+                            <span class="resume-content">
+                                {{$resume->address1}}
+                                {{$resume->address2}}
+                                {{$resume->city}}
+                                {{$resume->country}}
+                                {{$resume->postal}}                                
+                            </span>
+                        </p>
+                        <p style="padding-bottom: 1rem;">
+                            <span class="i-icon-wrapper">
+                                <i class="fa fa-language"></i>
+                            </span>
+                            <span class="resume-content">
+                            {{$resume->spoken_language}}
+                            </span>
+
                         </p>
                     </div>
 
-                <div>
-                        <a href="{{route('resume_create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Update profile</a>
-                </div>
+
 
 
                 </div>
@@ -356,11 +394,6 @@
                 <div class="col-lg-7 col-sm-7">
 
                         <div class="second-column-tab">
-
-                        <div id="resume_update_btn">
-
-                        </div>
-
                             <div style="margin: 1rem;">
                                 <h3 style="margin-top: 1rem;">Skills</h3>
                                     <div class="row" id="skill_required">
@@ -373,9 +406,61 @@
                                     </div>
 
                                 <div id="resume_update_btn">
+                                    {!! link_to(route('resume_edit', $resume->id) , 'resume update', ['class' => 'btn btn-default']) !!}
                                 </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="second-column-tab" style="margin: 1rem 0;">
+                            <div style="margin: 1rem;">
+                                <h3>
+                                    Portfolio
+                                </h3>
+
+                                <p style="padding: 1rem;">
+                                    {{$resume->websites}}                                
+                                </p>
+
                             </div>
                         </div>
+
+                        <div class="second-column-tab" style="margin: 1rem 0;">
+                            <div style="margin: 1rem;">
+                                <h3>
+                                    Summary of your skill/experience
+                                </h3>
+                            
+                                <p style="padding: 1rem;">
+                                    {{$resume->summary}}                                
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="second-column-tab" style="margin: 1rem 0;">
+                            <div style="margin: 1rem;">
+                                <h3>
+                                    Other Skills
+                                </h3>
+                                <p style="padding: 1rem;">
+                                    {{$resume->other_skills}}                                
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="second-column-tab" style="margin: 1rem 0;">
+                            <div style="margin: 1rem;">
+                                <h3>
+                                    Seminars Attended
+                                </h3>
+                            
+                                <p style="padding: 1rem;">
+                                    {{$resume->seminars_attended}}                                
+                                </p>
+                            </div>
+                        </div>
+
 
                 </div>
                 {{-- @endif --}}
@@ -509,9 +594,9 @@ function prep_del_batch(id){
     $('#delete_application').data('id',id);
 }
 
-@if(\Auth::user()->resume()->first())
+{{-- @if(isset($application)) --}}
     $(function(){
-        var skill_requirements = JSON.parse("{{json_encode(\Auth::user()->resume()->first()->skills)}}".replace(/&quot;/g,'"'));
+        var skill_requirements = JSON.parse("{{json_encode($application->skills)}}".replace(/&quot;/g,'"'));
 
         var skills_container = $('#skill_required');
         skills_container.find('.col-md-4').html('');
@@ -545,7 +630,7 @@ function prep_del_batch(id){
             skill_requirements.html('<div class="col-md-4" style="color:gray;">No skill requirements.</div>');
         }
     });
-@endif
+{{-- @endif --}}
 
 
     // $(document).ready( function(){
