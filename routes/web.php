@@ -22,6 +22,8 @@ Route::group(['prefix'=>'itp'], function(){
 	Route::group(['middleware'=>'auth', 'prefix'=>'applicant'], function(){
 
 		Route::get('profile',['as'=>'itp_applicant_profile', 'uses'=>'InternshipController@userItpProfile']);
+		Route::get('finprofile',['as'=>'itp_applicant_finprofile', 'uses'=>'InternshipController@finuserItpProfile']);
+
 		Route::get('add/{id?}',['as'=>'itp_add','uses'=>'InternshipController@add_batch']);
 
 		Route::post('save/application',['as'=>'save_application', 'uses'=> 'InternshipController@save_application']);
@@ -34,7 +36,6 @@ Route::group(['prefix'=>'itp'], function(){
 			Route::post('delete',['as'=>'json_delete_itp_application', 'uses'=>'InternshipController@json_delete_application']);
 		});
 	});
-	
 });
 
 Route::group(['prefix'=>'user', 'middleware'=>'auth'], function(){

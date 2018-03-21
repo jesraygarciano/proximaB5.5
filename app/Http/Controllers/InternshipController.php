@@ -24,17 +24,16 @@ class InternshipController extends Controller
     public function create(Request $requests){
 
         if(\Auth::check()){
-            $batch = TrainingBatch::all();
+            $batches = TrainingBatch::isActive()->get();
 
             $student = $requests->id ? InternshipApplication::find($requests->id) : false;
 
-            return view('intership-training-programming.applicant.create', compact('batch','student'));
+            return view('intership-training-programming.applicant.create', compact('batches','student'));
         }
         else
         {
             return redirect()->to('/login?re_url=itp_create');
         }
-
     }
 
     public function add_batch(Request $requests){

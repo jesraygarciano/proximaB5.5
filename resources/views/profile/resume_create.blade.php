@@ -723,10 +723,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <ul class="list-inline pull-right">
-                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                        <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
-                                    </ul>
+                                    <div class="row">
+	                                    <div class="col-md-12">
+		                                    <ul class="list-inline pull-right">
+		                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+		                                        <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+		                                    </ul>
+		                                </div>
+		                            </div>
                                 </div>
                                 <div class="tab-pane wizard-step" role="tabpanel" id="step3">
                                     <h4 class="form-heading required-label">Objective</h4>

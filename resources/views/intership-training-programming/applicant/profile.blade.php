@@ -94,7 +94,6 @@
         position: relative;    
     }
 
-
     #batch-cont .edit-bttn{
         position: absolute;
         top: 10px;
@@ -154,7 +153,6 @@
     .bar-info {    background-color: #5bc0de;}
     .bar-warning {    background-color: #f0ad4e;}
     .bar-danger {  background-color: #d9534f;}
-
 
 
 /*Facebook cover photo and Profile*/
@@ -310,57 +308,47 @@
           <div class="profile-name">
             <h2>{{$user->f_name}} {{$user->m_name}} {{$user->l_name}}</h2>
           </div>
-          
           <div class="fb-profile-block-menu">
                <div class="block-menu" style="background: #fff">
                     <ul class="nav nav-tabs" style="background: #fff">
                        <li class="active"><a data-toggle="tab" href="#home">Resume</a></li>
                        <li><a data-toggle="tab" href="#application1">Application</a></li>
                     </ul>
-
                </div>
           </div>
     </div>
 
     <div class="tab-content">
-
         <div class="tab-pane fade in active" id="home">
             <br />
             <div class="row">
                 <div class="col-lg-5 col-md-5">
                     <div class="first-column-tab">
-
                         <h3>
                             <i class="fa fa-globe"></i>
                             Basic info
                         </h3>
-                        
                         <p>
                             <span class="i-icon-wrapper">
                                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
                                 {{ $user->email}}
                             </span>
                             <span class="resume-content">
-
                             </span>
                         </p>
                     </div>
-
                 <div>
                         <a href="{{route('resume_create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Update profile</a>
+                <br>
+                <br>
                 </div>
-
 
                 </div>
                 {{-- @if(isset($application)) --}}
                 <div class="col-lg-7 col-sm-7">
-
                         <div class="second-column-tab">
-
-                        <div id="resume_update_btn">
-
-                        </div>
-
+                            <div id="resume_update_btn">
+                            </div>
                             <div style="margin: 1rem;">
                                 <h3 style="margin-top: 1rem;">Skills</h3>
                                     <div class="row" id="skill_required">
@@ -371,12 +359,10 @@
                                         <div class="col-md-4">
                                         </div>
                                     </div>
-
                                 <div id="resume_update_btn">
                                 </div>
                             </div>
                         </div>
-
                 </div>
                 {{-- @endif --}}
             </div>
@@ -427,7 +413,7 @@
         </div>
     </div>
 
-    <div class="first-column-tab" style="padding:15px;">
+    <div class="first-column-tab" style="padding:15px;margin-top: 1rem;">
         <h5>Application History</h5>
         <table class="table table-bordered" id="applications-table" style="width: 100%;">
             <thead>
@@ -510,8 +496,12 @@ function prep_del_batch(id){
 }
 
 @if(\Auth::user()->resume()->first())
+{{-- @if(isset($application)) --}}
     $(function(){
+        {{-- 
         var skill_requirements = JSON.parse("{{json_encode(\Auth::user()->resume()->first()->skills)}}".replace(/&quot;/g,'"'));
+        --}}
+        var skill_requirements = JSON.parse("{{json_encode($application->skills)}}".replace(/&quot;/g,'"'));
 
         var skills_container = $('#skill_required');
         skills_container.find('.col-md-4').html('');
@@ -547,7 +537,6 @@ function prep_del_batch(id){
     });
 @endif
 
-
     // $(document).ready( function(){
     //     window.percent = 0;
     //     window.progressInterval = window.setInterval( function(){
@@ -568,4 +557,4 @@ function prep_del_batch(id){
 
 </script>
 
-@endsection    
+@endsection
