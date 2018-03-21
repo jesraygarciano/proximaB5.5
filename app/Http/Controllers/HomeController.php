@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mapper;
+use App\TrainingBatch;
 
 
 class HomeController extends Controller
@@ -29,7 +30,9 @@ class HomeController extends Controller
         // Mapper::map(10.318686,123.90317049999999);
         Mapper::map(10.318686,123.90317049999999,['zoom' => 19, 'markers' => ['title' => 'My Location', 'animation' => 'DROP'], 'clusters' => ['size' => 10, 'center' => true, 'zoom' => 30]]);
 
-        return view('welcome');
+        $trainingBatches = TrainingBatch::isActive()->limit(4)->get();
+
+        return view('welcome', compact('trainingBatches'));
     }
 
     public function index()

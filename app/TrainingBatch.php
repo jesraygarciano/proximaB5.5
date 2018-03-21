@@ -28,4 +28,8 @@ class TrainingBatch extends Model
     public function getRegitrationdeadlineAttribute(){
         return date('M. d, Y',strtotime($this->attributes['regitration_deadline']));
     }
+
+    public function scopeIsActive($query){
+        return $query->where('is_active', 1);
+    }
 }
