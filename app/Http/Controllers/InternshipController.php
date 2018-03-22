@@ -57,7 +57,13 @@ class InternshipController extends Controller
         $applications = \Auth::user()->intershipApplication()->limit(3)->get()->load('trainingBatch');
         $user = \Auth::user();
 
-        return view('intership-training-programming.applicant.profile', compact('applications','user'));
+        $resume = $user->resume()->first();
+        $skill_ids = $resume->skills()->pluck('resume_skill_id');
+
+        $skills = $resume->has_skill()->get();
+        
+        // dd($user);
+        return view('intership-training-programming.applicant.profile', compact('applications','user','resume','skills_ids','skills'));
     }
 
     public function finuserItpProfile(){
@@ -119,10 +125,12 @@ class InternshipController extends Controller
             ]);
         }
 
+        $resume = \Auth::user()->findFirstOrCreateResume();
+        $resume->has_skill()->detach();
+        $application->skills()->detach();
         foreach ($requests->skills as $skill) {
-            if (! $application->skills->contains($skill)) {
-                $application->skills()->attach($skill);
-            }
+            $application->skills()->attach($skill);
+            $resume->has_skill()->attach($skill);
         }
 
         return redirect()->route('itp_applicant_profile');

@@ -11,6 +11,7 @@ use App\Resume_skill;
 use App\Libs\Common;
 use App\Experience;
 use App\Education;
+use Validator;
 
 class UserController extends Controller
 {
@@ -214,5 +215,138 @@ class UserController extends Controller
         }
 
         return redirect(route('user_profile'))->with('success', 'Resume updated.');
+    }
+
+    public function edit_resume_basic(Request $request){
+        //
+        $validator = Validator::make($request->all(), [
+            'f_name' => 'required',
+            'l_name' => 'required',
+            'phone_number' => 'required',
+            'email' => 'email',
+            'birth_date' => 'required',
+            'photo' => 'required',
+            'address1' => 'required',
+            'address2' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'postal' => 'required',
+            'spoken_language' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return ['status'=>'failed', 'message'=>$validator->messages];
+        }
+
+        $resume = \Auth::user()->findFirstOrCreateResume();
+
+        $resume->update([
+            'f_name'=>$request->f_name,
+            'l_name'=>$request->l_name,
+            'm_name'=>$request->m_name,
+            'phone_number'=>$request->phone_number,
+            'email'=>$request->email,
+            'address1'=>$request->address1,
+            'address2'=>$request->address2,
+            'city'=>$request->city,
+            'country'=>$request->country,
+            'postal'=>$request->postal,
+            'gender'=>$request->gender,
+            'spoken_language'=>$request->spoken_language,
+            'photo'=>$request->photo,
+            'ed_university_1'=>$request->ed_university_1,
+            'ed_field_of_study_1'=>$request->ed_field_of_study_1,
+            'ed_program_of_study_1'=>$request->ed_program_of_study_1,
+            'ed_from_month_1'=>$request->ed_from_month_1,
+            'ed_from_year_1'=>$request->ed_from_year_1,
+            'ed_to_month_1'=>$request->ed_to_month_1,
+            'ed_to_year_1'=>$request->ed_to_year_1,
+        ]);
+
+        return ['status'=>'success'];
+    }
+
+    public function edit_resume_skills(Request $request){
+        // 
+        $resume = \Auth::user()->findFirstOrCreateResume();
+
+        $resume->has_skill()->detach();
+        $resume_skill_ids = $request->input('skills');
+        foreach($resume_skill_ids as $resume_skill_id){
+            $resume->has_skill()->attach($resume_skill_id);
+        }
+        return ['status'=>'success'];
+    }
+
+    public function edit_resume_meta(Request $request){
+        // 
+        $resume = \Auth::user()->findFirstOrCreateResume();
+
+        if($request->has('value') && $request->has('col')){
+            $resume->update([
+                $request->col=>$request->value
+            ]);
+            return ['status'=>'success'];
+        }
+    }
+
+    public function edit_resume_company_experience(Request $request){
+        // 
+        $validator = Validator::make($request->all(), [
+            'ex_company' => 'required',
+            'ex_position' => 'required',
+            'ex_from_month' => 'required',
+            'ex_from_year' => 'email',
+            'ex_to_month' => 'required',
+            'ex_to_year' => 'required',
+            'ex_explanation' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return ['status'=>'failed', 'message'=>$validator->messages];
+        }
+
+        $resume = \Auth::user()->findFirstOrCreateResume();
+
+        $request->update([
+            'ex_company'=>$request->ex_company,
+            'ex_position'=>$request->ex_position,
+            'ex_from_month'=>$request->ex_from_month,
+            'ex_from_year'=>$request->ex_from_year,
+            'ex_to_month'=>$request->ex_to_month,
+            'ex_to_year'=>$request->ex_to_year,
+            'ex_explanation'=>$request->ex_explanation,
+        ]);
+
+        return ['status'=>'success'];
+    }
+
+    public function create_educational_background(Request $request){
+        $education = Education::create([
+            'ed_university'=>$request->ed_university,
+            'ed_program_of_study'=>$request->ed_program_of_study,
+            'ed_field_of_study'=>$request->ed_field_of_study,
+            'ed_from_year'=>$request->ed_from_year,
+            'ed_from_month'=>$request->ed_from_month,
+            'ed_to_year'=>$request->ed_to_year,
+            'ed_to_month'=>$request->ed_to_month,
+            'resume_id'=>$request->resume_id,
+        ]);
+
+        return ['status'=>'success', 'education'=>$education];
+    }
+
+    public function j_e_r_p_educational_background(Request $request){
+        $education = Education::find($request->id)->update([
+            'ed_university'=>$request->ed_university,
+            'ed_program_of_study'=>$request->ed_program_of_study,
+            'ed_field_of_study'=>$request->ed_field_of_study,
+            'ed_from_year'=>$request->ed_from_year,
+            'ed_from_month'=>$request->ed_from_month,
+            'ed_to_year'=>$request->ed_to_year,
+            'ed_to_month'=>$request->ed_to_month,
+        ]);
+
+        return ['status'=>'success', 'education'=>$education];
     }
 }
