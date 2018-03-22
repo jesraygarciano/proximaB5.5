@@ -4,7 +4,8 @@
 
 <?php 
     $skills = return_resume_Skills();
-    $current_opening_skills = $student ? $student->skills()->pluck('resume_skills.id')->toArray() : [];
+    $resume = \Auth::user()->resume()->first();
+    $current_opening_skills = $student ? $student->skills()->pluck('resume_skills.id')->toArray() : ($resume ? $resume->skills()->pluck('resume_skills.id')->toArray() : []);
     $opening=[];
     $provinces=[];
     $countries=[];
@@ -39,65 +40,65 @@
                 box-shadow:  0px 0px 0px 0px #000;
     }
 
-        legend.scheduler-border {
-            font-size: 1em !important;
-            font-weight: bold !important;
-            text-align: left !important;
-            width:auto;
-            padding:0 10px;
-            border-bottom:none;
-        }
+    legend.scheduler-border {
+        font-size: 1em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        width:auto;
+        padding:0 10px;
+        border-bottom:none;
+    }
 
-        #opening_city{
-            padding: 1.1rem 1rem;
-        }
-        #postal-code-add{
-            padding: 1.1rem 1rem;
-        }
+    #opening_city{
+        padding: 1.1rem 1rem;
+    }
+    #postal-code-add{
+        padding: 1.1rem 1rem;
+    }
 
-        #expiredate{
-            font-size: 13px;
-            font-weight: bold;
-            color: #962525;
-        }
+    #expiredate{
+        font-size: 13px;
+        font-weight: bold;
+        color: #962525;
+    }
 
-        /*Accordion*/
-        .accordion {
-            background-color: #eee;
-            color: #444;
-            cursor: pointer;
-            padding: 18px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 15px;
-            transition: 0.4s;
-        }
+    /*Accordion*/
+    .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+    }
 
-        .active, .accordion:hover {
-            background-color: #ccc;
-        }
+    .active, .accordion:hover {
+        background-color: #ccc;
+    }
 
-        .accordion:after {
-            content: '\002B';
-            color: #777;
-            font-weight: bold;
-            float: right;
-            margin-left: 5px;
-        }
+    .accordion:after {
+        content: '\002B';
+        color: #777;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+    }
 
-        .active:after {
-            content: "\2212";
-        }
+    .active:after {
+        content: "\2212";
+    }
 
-        .panel {
-            padding: 0 18px;
-            background-color: white;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.2s ease-out;
-        }
+    .panel {
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
 
 </style>
 <div class="container" style="padding-bottom:20px;">

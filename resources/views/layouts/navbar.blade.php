@@ -24,7 +24,76 @@
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
                 @else
-                    <li class="dropdown">
+
+                    @if(\Auth::check())
+
+                    <li class="notification_li" id="notification_li">
+                        <a href="#" id="notificationLink">
+                            <i class="fa fa-bell"></i>
+                        </a>
+                        <div id="notification_count">
+                            1
+                        </div>
+                        <div id="notificationContainer">
+                            <div id="notificationTitle">Updates and notifications</div>
+                                <div id="notificationsBody" class="notifications">
+                                    <div class="noti-content">
+                                        {{--  <h4>Updates</h4>  --}}
+                                        <h5>Profile progress:</h5>
+                                        <div class="progress progress-navbar">
+                                            <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 60%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">60% profile complete</div>
+                                        </div>
+
+                                        <div>
+                                            <h5>Kindly fill-up the following categories:</h5>
+                                            <ul>
+                                                <li>Basic Info</li>
+                                                <li>Education</li>
+                                                <li>Accomplishments</li>
+                                                <li>Experiences</li>
+                                                <li>Summary of Skills</li>
+                                            </ul>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="notificationFooter"><a href="#">See All</a></div>
+                        </div>
+                    </li>                
+                    @endif
+                    
+                    <script>
+                        $(document).ready(function(){
+                                    // $("#notificationLink").click(function(){
+                                        $("#notificationLink").css({"color" : "red"});
+                                        $("#notificationContainer").fadeToggle(300);
+                                        $("#notification_count").fadeOut("slow");
+                                // return false;
+                                // });
+
+                                //Document Click hiding the popup 
+                                $(document).click(function(){
+                                    $("#notificationContainer").hide();
+                                    $("#notificationLink").css({"color" : "#777"});
+
+                                });
+
+                                //Popup on click
+                                $("#notificationContainer").click(function(){
+                                    return false;
+                                });
+
+                                $("#notificationLink").click(function(){
+                                    $("#notificationContainer").fadeToggle(300);
+                                    $("#notification_count").fadeOut("slow");
+                                    $("#notificationLink").css({"color" : "red"});
+
+                                return false;
+                                });
+                        });
+                    </script>
+
+                <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>

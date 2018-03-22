@@ -257,14 +257,15 @@
     padding-bottom: 1rem;
 }
 
-.first-column-tab h3 i{
+.first-column-tab h3 i, .second-column-tab h3 i {
     color: #4267b2;
 }
 
-.first-column-tab h3{
+.first-column-tab h3, .second-column-tab h3{
     border-bottom: 1px solid #e9ebee;
     padding: 1rem;    
 }
+
 
 .first-column-tab p{
     padding: 0 1rem;
@@ -273,6 +274,7 @@
 .resume-content{
     padding-left: .6rem;
 }
+
 /*.i-icon-wrapper{
     position: relative;
     background: rgb(31, 89, 149);
@@ -284,8 +286,14 @@
     font-size: 1rem!important;
 
 }*/
+
 .progress{
-    border-radius: 0!important
+    border-radius: 0!important;
+    border: 1px solid #bfbebe;
+    height: 30px;
+}
+.progress-bar{
+    padding-top: 4px;
 }
 
 #resume_update_btn{
@@ -294,7 +302,14 @@
     right: 0;
     border-radius: 0!important;
 }
-
+.pr-edit-btn{
+    font-size: 1.3rem;
+    color: #006195;
+    position: absolute;
+    top: 12px;
+    right: 22px;
+    cursor: pointer;
+}
 </style>
 @endsection
 
@@ -303,10 +318,22 @@
 
     <!-- Cover photo here -->
     <div class="fb-profile-block">
-          <div class="fb-profile-block-thumb"><img class="fb-link-img" src="{{asset('img/default-opening.jpg')}}" alt="" title=""></div>
-          <div class="profile-img"><a href="#"><img class="fb-link-img" src="http://santetotal.com/wp-content/uploads/2014/05/default-user.png" alt="" title=""></a></div>
+          <div class="fb-profile-block-thumb">
+              
+              <img class="fb-link-img" src="{{asset('img/default-opening.jpg')}}" alt="" title="">
+              
+          </div>
+            <div class="profile-img">
+              <a href="#">
+                    @if(!empty($resume->photo))
+                        <img class="fb-link-img" src="{{$resume->photo}}" alt="{{$resume->f_name}}" title="{{$resume->f_name}}" />
+                    @else
+                        <img class="fb-link-img" src="http://santetotal.com/wp-content/uploads/2014/05/default-user.png" alt="" title="">
+                    @endif
+              </a>
+            </div>
           <div class="profile-name">
-            <h2>{{$user->f_name}} {{$user->m_name}} {{$user->l_name}}</h2>
+            <h2>{{$resume->f_name}} {{$resume->m_name}} {{$resume->l_name}}</h2>
           </div>
           <div class="fb-profile-block-menu">
                <div class="block-menu" style="background: #fff">
@@ -319,39 +346,114 @@
     </div>
 
     <div class="tab-content">
+
         <div class="tab-pane fade in active" id="home">
             <br />
             <div class="row">
                 <div class="col-lg-5 col-md-5">
                     <div class="first-column-tab">
+
                         <h3>
                             <i class="fa fa-globe"></i>
                             Basic info
                         </h3>
+
+                        <span class="pr-edit-btn" id="basic-info">
+                                <i class="fa fa-edit"></i>
+                        </span>
+                        
                         <p>
                             <span class="i-icon-wrapper">
                                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                {{ $user->email}}
                             </span>
                             <span class="resume-content">
+                                <a href="mailto:{{$resume->email}}" target="_blank">
+                                    {{$resume->email}}
+                                </a>
+                            </span>
+                        </p>
+                        <p>
+                            <span class="i-icon-wrapper">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                            </span>
+                            <span class="resume-content">
+                                {{$resume->phone_number}}
+                            </span>
+                        </p>
+                        <p>
+                            <span class="i-icon-wrapper">
+                                <i class="fa fa-birthday-cake"></i>
+                            </span>
+                            <span class="resume-content">
+                                {{$resume->birth_date}}
+                            </span>
+                        </p>
+
+                        <p>
+                            <span class="i-icon-wrapper">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            </span>
+                            <span class="resume-content">
+                                {{$resume->address1}}
+                                {{$resume->address2}}
+                                {{$resume->city}}
+                                {{$resume->country}}
+                                {{$resume->postal}}
+                            </span>
+                        </p>
+                        <p style="padding-bottom: 1rem;">
+                            <span class="i-icon-wrapper">
+                                <i class="fa fa-language"></i>
+                            </span>
+                            <span class="resume-content">
+                                {{$resume->spoken_language}}
                             </span>
                         </p>
                     </div>
-                <div>
-                        <a href="{{route('resume_create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Update profile</a>
-                <br>
-                <br>
-                </div>
+
+                    <div class="first-column-tab">
+                        <h3>
+                        <i class="fa fa-graduation-cap"></i>
+                            Education
+                        </h3>
+
+                        <span class="pr-edit-btn" id="basic-info">
+                                <i class="fa fa-edit"></i>
+                        </span>
+
+                        {{--  <div class="crop-control" style="height: 100%;" data-width="1200" data-height="400" data-dim="true">
+                                <div class="image-container-cover" style="height: 100%;">
+                                    @if(!empty($company->background_photo))
+                                        <img style="width: 100%;" src="/storage/{{ $company->background_photo }}" alt="{{ $company->company_name}} Cover photo" />
+                                    @else
+                                        <img style="width: 100%;" src="{{ asset('img/default-opening.jpg') }}" class="bg-img">
+                                    @endif
+    
+                                    <label for="background_photo" class="input-trigger hover-div">
+                                        <p>
+                                            <i class="fa fa-file-image-o fa-5x" aria-hidden="true"></i>
+                                            <br>
+                                            Upload Cover photo
+                                        </p>
+                                    </label>
+                                </div>
+                                <div class="input-container">
+                                    <input type="file" id="background_photo" name="background_photo" accept="image/*" />
+                                </div>
+                            </div>  --}}
+
+                    </div>
 
                 </div>
                 {{-- @if(isset($application)) --}}
                 <div class="col-lg-7 col-sm-7">
+
                         <div class="second-column-tab">
-                            <div id="resume_update_btn">
-                            </div>
-                            <div style="margin: 1rem;">
-                                <h3 style="margin-top: 1rem;">Skills</h3>
-                                    <div class="row" id="skill_required">
+                                <h3>
+                                    <i class="fa fa-asterisk"></i>
+                                    Featured Skills
+                                </h3>
+                                    <div class="row" id="skill_required" style="margin: .5rem;">
                                         <div class="col-md-4">
                                         </div>
                                         <div class="col-md-4">
@@ -359,10 +461,76 @@
                                         <div class="col-md-4">
                                         </div>
                                     </div>
-                                <div id="resume_update_btn">
-                                </div>
+
+                                <span class="pr-edit-btn" id="skills-info">
+                                        <i class="fa fa-plus"></i>
+                                </span>
+
+                        </div>
+
+                        <div class="second-column-tab">
+
+                                <h3>
+                                    <i class="fa fa-trophy"></i>
+                                    Experiences
+                                </h3>
+
+                                <span class="pr-edit-btn" id="basic-info">
+                                        <i class="fa fa-edit"></i>
+                                </span>
+
+                        </div>
+
+                        <div class="second-column-tab">
+
+                                <h3>
+                                    <i class="fa fa-trophy"></i>
+                                    Accomplishments
+                                </h3>
+
+                                <span class="pr-edit-btn" id="basic-info">
+                                        <i class="fa fa-edit"></i>
+                                </span>
+
+                        </div>
+
+
+                        <div class="second-column-tab" style="margin: 1rem 0;">
+                            <div style="margin: 1rem;">
+                                <h3>
+                                    Summary of your skill/experience
+                                </h3>
+                            
+                                <p style="padding: 1rem;">
+                                    {{$resume->summary}}                                
+                                </p>
                             </div>
                         </div>
+
+                        <div class="second-column-tab" style="margin: 1rem 0;">
+                            <div style="margin: 1rem;">
+                                <h3>
+                                    Other Skills
+                                </h3>
+                                <p style="padding: 1rem;">
+                                    {{$resume->other_skills}}                                
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="second-column-tab" style="margin: 1rem 0;">
+                            <div style="margin: 1rem;">
+                                <h3>
+                                    Seminars Attended
+                                </h3>
+                            
+                                <p style="padding: 1rem;">
+                                    {{$resume->seminars_attended}}                                
+                                </p>
+                            </div>
+                        </div>
+
+
                 </div>
                 {{-- @endif --}}
             </div>
@@ -495,13 +663,80 @@ function prep_del_batch(id){
     $('#delete_application').data('id',id);
 }
 
+{{--  Sweet Alert  --}}
+
+    $('#basic-info').click(function(){
+        swal.setDefaults({
+        input: 'text',
+        confirmButtonText: 'Next &rarr;',
+        showCancelButton: true,
+        progressSteps: ['1', '2', '3']
+        })
+
+        var steps = [
+        {
+            title: 'Basic info',
+            text: 'Kindly fill-up following informations'
+        },
+        'Email address',
+        'Location'
+        ]
+
+        swal.queue(steps).then((result) => {
+        swal.resetDefaults()
+
+        if (result.value) {
+            swal({
+            title: 'All done!',
+            html:
+                'Your answers: <pre>' +
+                JSON.stringify(result.value) +
+                '</pre>',
+            confirmButtonText: 'Lovely!'
+            })
+        }
+        })
+    });
+
+    $('#skills-info').click(function(){
+        swal.setDefaults({
+        input: 'text',
+        confirmButtonText: 'Next &rarr;',
+        showCancelButton: true,
+        progressSteps: ['1', '2', '3']
+        })
+
+        var steps = [
+        {
+            title: 'Question 1',
+            text: 'Chaining swal2 modals is easy'
+        },
+        'Question 2',
+        'Question 3'
+        ]
+
+        swal.queue(steps).then((result) => {
+        swal.resetDefaults()
+
+        if (result.value) {
+            swal({
+            title: 'All done!',
+            html:
+                'Your answers: <pre>' +
+                JSON.stringify(result.value) +
+                '</pre>',
+            confirmButtonText: 'Lovely!'
+            })
+        }
+        })
+    });
+
+
+{{--  End Sweet alert  --}}
+
 @if(\Auth::user()->resume()->first())
-{{-- @if(isset($application)) --}}
     $(function(){
-        {{-- 
         var skill_requirements = JSON.parse("{{json_encode(\Auth::user()->resume()->first()->skills)}}".replace(/&quot;/g,'"'));
-        --}}
-        var skill_requirements = JSON.parse("{{json_encode($application->skills)}}".replace(/&quot;/g,'"'));
 
         var skills_container = $('#skill_required');
         skills_container.find('.col-md-4').html('');
