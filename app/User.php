@@ -282,6 +282,22 @@ class User extends Authenticatable
         return $this->hasMany('App\Contact','contact_id')->where('status','requesting');
     }
 
+    public function findFirstOrCreateResume(){
+        $resume = $this->resume()->first();
+
+        if($resume){
+            return $resume;
+        }
+        else{
+            return \App\Resume::create([
+                'user_id'=>$this->attributes['id'],
+                'f_name'=>$this->attributes['f_name'],
+                'l_name'=>$this->attributes['l_name'],
+                'is_active'=>1,
+            ]);
+        }
+    }
+
 
     // scopes
     public function scopeSearchKey($query,$keyword){
