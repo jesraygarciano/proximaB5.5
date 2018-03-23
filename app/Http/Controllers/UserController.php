@@ -225,17 +225,17 @@ class UserController extends Controller
             'phone_number' => 'required',
             'email' => 'email',
             'birth_date' => 'required',
-            'photo' => 'required',
+            // 'photo' => 'required',
             'address1' => 'required',
-            'address2' => 'required',
-            'city' => 'required',
-            'country' => 'required',
-            'postal' => 'required',
+            // 'address2' => 'required',
+            // 'city' => 'required',
+            // 'country' => 'required',
+            // 'postal' => 'required',
             'spoken_language' => 'required',
         ]);
 
         if($validator->fails()){
-            return ['status'=>'failed', 'message'=>$validator->messages];
+            return ['status'=>'failed', 'message'=>$validator->messages()];
         }
 
         $resume = \Auth::user()->findFirstOrCreateResume();
@@ -247,20 +247,14 @@ class UserController extends Controller
             'phone_number'=>$request->phone_number,
             'email'=>$request->email,
             'address1'=>$request->address1,
-            'address2'=>$request->address2,
-            'city'=>$request->city,
-            'country'=>$request->country,
-            'postal'=>$request->postal,
-            'gender'=>$request->gender,
+            'birth_date'=>$request->birth_date,
+            // 'address2'=>$request->address2,
+            // 'city'=>$request->city,
+            // 'country'=>$request->country,
+            // 'postal'=>$request->postal,
+            // 'gender'=>$request->gender,
             'spoken_language'=>$request->spoken_language,
-            'photo'=>$request->photo,
-            'ed_university_1'=>$request->ed_university_1,
-            'ed_field_of_study_1'=>$request->ed_field_of_study_1,
-            'ed_program_of_study_1'=>$request->ed_program_of_study_1,
-            'ed_from_month_1'=>$request->ed_from_month_1,
-            'ed_from_year_1'=>$request->ed_from_year_1,
-            'ed_to_month_1'=>$request->ed_to_month_1,
-            'ed_to_year_1'=>$request->ed_to_year_1,
+            // 'photo'=>$request->photo,
         ]);
 
         return ['status'=>'success'];

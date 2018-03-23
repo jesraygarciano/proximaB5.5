@@ -91,9 +91,9 @@ a:hover{
   border-bottom: none;
   padding-top: 2px;
 }
-.tabs-left {
-  /*border-right: 1px solid #ddd;*/
-}
+/* .tabs-left {
+  border-right: 1px solid #ddd;
+} */
 .tabs-right {
   border-left: 1px solid #ddd;
 }
@@ -241,6 +241,7 @@ padding:10px;
     background-position: center center;
     background-size: cover;
     -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
     display: inline-block;
     border-radius: 4px;
 }
@@ -275,8 +276,8 @@ padding:10px;
   text-decoration: none;
   color: #fff;
 }
-.label-warning + .tooltip > .tooltip-arrow {
-}
+/* .label-warning + .tooltip > .tooltip-arrow {
+} */
 /*Opening programming tooltip tags*/
 
 /**/
@@ -461,7 +462,6 @@ padding:10px;
     text-align: center;
     font-size: 33px;
 }
-
 .round-tab-company i{
     color:#1377a1;
 }
@@ -479,6 +479,7 @@ padding:10px;
       background-color: #fff;
       border: 1px solid rgba(100, 100, 100, .4);
       -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
       overflow: visible;
       position: absolute;
       /* top: 30px; */
@@ -543,10 +544,50 @@ padding:10px;
 } */
 
 .noti-content{
-
   margin: 1rem;
-
 }
+
+.noti-flex{
+  background-image: url('../img/brain-icon.png');
+  background-position: right 1px center;  
+  border: 1px solid #ada1a1;
+  height: 5rem;
+  margin: .5rem .5rem .5rem 1rem;
+  position: relative;
+  transition-duration: 0.3s;  
+}
+.noti-flex:hover{
+  border: 1px solid #00598e;
+  height: 5rem;
+  margin: .5rem .5rem .5rem 1rem;
+  position: relative;
+  cursor: pointer;
+  color:  #00598e;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  /* -webkit-transition: width 1.5s, height 1.5s; Safari */
+  /* transition: width 1.5s, height 2s; */
+}
+
+.noti-flex:hover span i {
+  color:  #00598e;
+}
+
+.noti-flex-sp{
+position: absolute;
+bottom: 16px;
+font-weight: 700;
+}
+
+.noti-flex-icon{
+  position: absolute;
+  top: 6px;
+  right: 4px;
+  font-size: 2.1rem;
+  color: #757575;
+}
+
 /*pagination*/
 /*.custom-pagenation,*/
 /*.custom-pagenation *,
