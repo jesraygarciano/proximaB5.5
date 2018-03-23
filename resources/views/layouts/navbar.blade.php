@@ -46,14 +46,40 @@
 
                                         <div>
                                             <h5>Kindly fill-up the following categories:</h5>
-                                            <ul>
-                                                <li>Basic Info</li>
-                                                <li>Education</li>
-                                                <li>Accomplishments</li>
-                                                <li>Experiences</li>
-                                                <li>Summary of Skills</li>
-                                            </ul>
-                                            
+
+                                            <div >
+                                                <div class="row">
+                                                    <div class="col-sm-5 noti-flex">
+                                                        <span class="noti-flex-sp">
+                                                            Basic info
+                                                        </span>
+                                                        <span class="noti-flex-icon">
+                                                                <i class="fa fa-globe"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-sm-5 noti-flex">
+                                                        <span class="noti-flex-sp">
+                                                            Education
+                                                        </span>
+                                                        <span class="noti-flex-icon">
+                                                            <i class="fa fa-graduation-cap"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-5 noti-flex">
+
+                                                        <span class="noti-flex-sp">
+                                                            Expertise
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-sm-5 noti-flex">
+                                                        <span class="noti-flex-sp">
+                                                            Accomplishments
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -91,6 +117,39 @@
                                 return false;
                                 });
                         });
+
+                            $('.noti-flex').click(function(){
+                                swal.setDefaults({
+                                input: 'text',
+                                confirmButtonText: 'Next &rarr;',
+                                showCancelButton: true,
+                                progressSteps: ['1', '2', '3']
+                                })
+
+                                var steps = [
+                                {
+                                    title: 'Basic info',
+                                    text: 'Kindly fill-up following informations'
+                                },
+                                'Email address',
+                                'Location'
+                                ]
+
+                                swal.queue(steps).then((result) => {
+                                swal.resetDefaults()
+
+                                if (result.value) {
+                                    swal({
+                                    title: 'All done!',
+                                    html:
+                                        'Your answers: <pre>' +
+                                        JSON.stringify(result.value) +
+                                        '</pre>',
+                                    confirmButtonText: 'Lovely!'
+                                    })
+                                }
+                                })
+                            });                        
                     </script>
 
                 <li class="dropdown">

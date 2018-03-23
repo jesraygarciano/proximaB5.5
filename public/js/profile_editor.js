@@ -5,15 +5,16 @@
 	$.fn.profileEditor = function(options){
 		var settings = $.extend({}, options);
 		var currentSubmitFunction;
+		this.current_panel;
 
 		$this = this;
 
-		this.setAttendance = function(){
-			$this.find('.edit-button').click(function(){
-				var handler = settings.editHandlers[$(this).prop('eventEdit')];
-
+		this.setEvents = function(){
+			$this.find('.pr-edit-btn').click(function(){
+				var handler = settings.editHandlers[$(this).attr('id')];
+				$this.current_panel = $(this).attr('id');
 				if(handler){
-					handler();
+					handler($this);
 				}
 				else{
 					$this.prepUpdate(this);
@@ -26,7 +27,15 @@
 			var targetModal = $(elm).prop('edit-target');
 			$(targetModal).modal('show');
 			$(targetModal).find('.submit').unbind();
-			$(targetModal).find('.submit').click(settings.submitHandlers[$(elm).prop('eventSubmit')]);
+			$(targetModal).find('.submit').click(settings.submitHandlers[$(elm).attr('id')]);
 		}
+
+		$this.setEvents();
 	}
 })(jQuery)
+
+function fillInfos(selector,data){
+	$.each(data, function(index, val){
+		selector.find('.'+index).html(val);
+	});
+}

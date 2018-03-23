@@ -155,160 +155,163 @@
     .bar-danger {  background-color: #d9534f;}
 
 
-/*Facebook cover photo and Profile*/
+    /*Facebook cover photo and Profile*/
 
-.fb-profile-block {
-  margin: auto;
-  position: relative;
-  /*width: 850px;*/
-  width: 1170px;
-}
-.fb-link-img{
-    width: 100%;
-    height: auto;
-}
-.fb-profile-block-thumb{
-  display: block;
-  height: 315px;
-  overflow: hidden;
-  position: relative;
-  text-decoration: none;
-}
-.fb-profile-block-menu {
-  border: 1px solid #d3d6db;
-  border-radius: 0 0 3px 3px;
-}
-.profile-img a{
-    bottom: 15px;
-    box-shadow: none;
+    .fb-profile-block {
+    margin: auto;
+    position: relative;
+    /*width: 850px;*/
+    width: 1170px;
+    }
+    .fb-link-img{
+        width: 100%;
+        height: auto;
+    }
+    .fb-profile-block-thumb{
     display: block;
-    left: 15px;
-    padding:1px;
+    height: 315px;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    }
+    .fb-profile-block-menu {
+    border: 1px solid #d3d6db;
+    border-radius: 0 0 3px 3px;
+    }
+    .profile-img a{
+        bottom: 15px;
+        box-shadow: none;
+        display: block;
+        left: 15px;
+        padding:1px;
+        position: absolute;
+        height: 160px;
+        width: 160px;
+        background: rgba(210, 198, 198, 0.3) none repeat scroll 0 0;
+        z-index:9;
+    }
+    .profile-img img {
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07);
+    height:158px;
+    padding: 5px;
+    width:158px;
+    }
+    .profile-name {
+    bottom: 60px;
+    left: 205px;
     position: absolute;
-    height: 160px;
-    width: 160px;
-    background: rgba(210, 198, 198, 0.3) none repeat scroll 0 0;
-    z-index:9;
-}
-.profile-img img {
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07);
-  height:158px;
-  padding: 5px;
-  width:158px;
-}
-.profile-name {
-  bottom: 60px;
-  left: 205px;
-  position: absolute;
-}
-.profile-name h2 {
-  color: #fff;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 30px;
-  max-width: 275px;
-  position: relative;
-  text-transform: capitalize;
-}
-.fb-profile-block-menu{
-  height: 44px;
-  position: relative;
-  /*width:850px;*/
-  width: 1170px;
-  overflow:hidden;
-  }
-.block-menu {
-  clear: right;
-  padding-left: 205px;
-}
-.block-menu ul{
-    margin:0;
-    padding:0;
     }
-.block-menu ul li{
-    display:inline-block;
-    }
-.block-menu ul li a {
-  border-right: 1px solid #e9eaed;
-  float: left;
-  font-size: 14px;
-  font-weight: bold;
-  height: 42px;
-  line-height: 3.0;
-  padding: 0 17px;
-  position: relative;
-  vertical-align: middle;
-  white-space: nowrap;
-  color:#4b4f56;
-  text-transform:capitalize;
-}
-.block-menu ul li:first-child a{
-      border-left: 1px solid #e9eaed;
-    }
-
-.second-column-tab, .first-column-tab{
-    margin-bottom: 1rem;
-    background: #fff;
-    border: 1px solid #dddfe2;
-    box-shadow: 2px 0 #dedede;
-    position: relative;
-    padding-bottom: 1rem;
-}
-
-.first-column-tab h3 i, .second-column-tab h3 i {
-    color: #4267b2;
-}
-
-.first-column-tab h3, .second-column-tab h3{
-    border-bottom: 1px solid #e9ebee;
-    padding: 1rem;    
-}
-
-
-.first-column-tab p{
-    padding: 0 1rem;
-}
-
-.resume-content{
-    padding-left: .6rem;
-}
-
-/*.i-icon-wrapper{
-    position: relative;
-    background: rgb(31, 89, 149);
-    border-radius: 12.5px;
-}
-.i-icon-wrapper i{
-    position: relative;
+    .profile-name h2 {
     color: #fff;
-    font-size: 1rem!important;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 30px;
+    max-width: 275px;
+    position: relative;
+    text-transform: capitalize;
+    }
+    .fb-profile-block-menu{
+    height: 44px;
+    position: relative;
+    /*width:850px;*/
+    width: 1170px;
+    overflow:hidden;
+    }
+    .block-menu {
+    clear: right;
+    padding-left: 205px;
+    }
+    .block-menu ul{
+        margin:0;
+        padding:0;
+        }
+    .block-menu ul li{
+        display:inline-block;
+        }
+    .block-menu ul li a {
+    border-right: 1px solid #e9eaed;
+    float: left;
+    font-size: 14px;
+    font-weight: bold;
+    height: 42px;
+    line-height: 3.0;
+    padding: 0 17px;
+    position: relative;
+    vertical-align: middle;
+    white-space: nowrap;
+    color:#4b4f56;
+    text-transform:capitalize;
+    }
+    .block-menu ul li:first-child a{
+        border-left: 1px solid #e9eaed;
+        }
 
-}*/
+    .second-column-tab, .first-column-tab{
+        margin-bottom: 1rem;
+        background: #fff;
+        border: 1px solid #dddfe2;
+        box-shadow: 2px 0 #dedede;
+        position: relative;
+        padding-bottom: 1rem;
+    }
 
-.progress{
-    border-radius: 0!important;
-    border: 1px solid #bfbebe;
-    height: 30px;
-}
-.progress-bar{
-    padding-top: 4px;
-}
+    .first-column-tab h3 i, .second-column-tab h3 i {
+        color: #4267b2;
+    }
 
-#resume_update_btn{
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-radius: 0!important;
-}
-.pr-edit-btn{
-    font-size: 1.3rem;
-    color: #006195;
-    position: absolute;
-    top: 12px;
-    right: 22px;
-    cursor: pointer;
+    .first-column-tab h3, .second-column-tab h3{
+        border-bottom: 1px solid #e9ebee;
+        padding: 1rem;    
+    }
+
+
+
+    .first-column-tab p{
+        padding: 0 1rem;
+    }
+
+    .resume-content{
+        padding-left: .6rem;
+    }
+    .i-icon-wrapper{
+        /* position: relative;
+        background: rgb(31, 89, 149);
+        border-radius: 12.5px; */
+    }
+    .i-icon-wrapper i{
+        /* position: relative; */
+        color: #4267b2;
+        /* font-size: 1rem!important; */
+
+    }
+    .progress{
+        border-radius: 0!important;
+        border: 1px solid #bfbebe;
+        height: 30px;    
+    }
+    .progress-bar{
+        padding-top: 4px;
+    }
+
+    #resume_update_btn{
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-radius: 0!important;
+    }
+    .pr-edit-btn{
+        font-size: 1.3rem;
+        color: #187aa4;
+        position: absolute;
+        top: 12px;
+        right: 22px;
+        cursor: pointer;
+    }
+    .swal-wide{
+    width:850px !important;
+
 }
 </style>
 @endsection
@@ -367,7 +370,7 @@
                                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
                             </span>
                             <span class="resume-content">
-                                <a href="mailto:{{$resume->email}}" target="_blank">
+                                <a href="mailto:{{$resume->email}}" class="email" target="_blank">
                                     {{$resume->email}}
                                 </a>
                             </span>
@@ -376,7 +379,7 @@
                             <span class="i-icon-wrapper">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
                             </span>
-                            <span class="resume-content">
+                            <span class="resume-content phone_number">
                                 {{$resume->phone_number}}
                             </span>
                         </p>
@@ -384,8 +387,8 @@
                             <span class="i-icon-wrapper">
                                 <i class="fa fa-birthday-cake"></i>
                             </span>
-                            <span class="resume-content">
-                                {{$resume->birth_date}}
+                            <span class="resume-content birthdate">
+                                {{$resume->birthdate}}
                             </span>
                         </p>
 
@@ -393,7 +396,7 @@
                             <span class="i-icon-wrapper">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                             </span>
-                            <span class="resume-content">
+                            <span class="resume-content address1">
                                 {{$resume->address1}}
                                 {{$resume->address2}}
                                 {{$resume->city}}
@@ -405,7 +408,7 @@
                             <span class="i-icon-wrapper">
                                 <i class="fa fa-language"></i>
                             </span>
-                            <span class="resume-content">
+                            <span class="resume-content spoken_language">
                                 {{$resume->spoken_language}}
                             </span>
                         </p>
@@ -447,7 +450,6 @@
                 </div>
                 {{-- @if(isset($application)) --}}
                 <div class="col-lg-7 col-sm-7">
-
                         <div class="second-column-tab">
                                 <h3>
                                     <i class="fa fa-asterisk"></i>
@@ -461,11 +463,9 @@
                                         <div class="col-md-4">
                                         </div>
                                     </div>
-
                                 <span class="pr-edit-btn" id="skills-info">
                                         <i class="fa fa-plus"></i>
                                 </span>
-
                         </div>
 
                         <div class="second-column-tab">
@@ -482,23 +482,39 @@
                         </div>
 
                         <div class="second-column-tab">
-
                                 <h3>
                                     <i class="fa fa-trophy"></i>
                                     Accomplishments
                                 </h3>
-
-                                <span class="pr-edit-btn" id="basic-info">
+                                <span class="pr-edit-btn" id="accomplishments">
                                         <i class="fa fa-edit"></i>
                                 </span>
-
                         </div>
 
+                        <div class="second-column-tab">
+                            <h3>
+                                <i class="fa fa-briefcase"></i>
+                                Awards/Certificate
+                            </h3>
+                            <span class="pr-edit-btn" id="portfolio">
+                                    <i class="fa fa-edit"></i>
+                            </span>
+                        </div>
+
+                        <div class="second-column-tab">
+                            <h3>
+                                <i class="fa fa-briefcase"></i>
+                                Portfolio
+                            </h3>
+                            <span class="pr-edit-btn" id="portfolio">
+                                    <i class="fa fa-edit"></i>
+                            </span>
+                        </div>
 
                         <div class="second-column-tab" style="margin: 1rem 0;">
                             <div style="margin: 1rem;">
                                 <h3>
-                                    Summary of your skill/experience
+                                   Objective
                                 </h3>
                             
                                 <p style="padding: 1rem;">
@@ -520,6 +536,7 @@
 
                         <div class="second-column-tab" style="margin: 1rem 0;">
                             <div style="margin: 1rem;">
+
                                 <h3>
                                     Seminars Attended
                                 </h3>
@@ -527,14 +544,15 @@
                                 <p style="padding: 1rem;">
                                     {{$resume->seminars_attended}}                                
                                 </p>
+                                
                             </div>
                         </div>
-
 
                 </div>
                 {{-- @endif --}}
             </div>
         </div>
+
         <div class="tab-pane fade" id="application1">
             <br>
             <a href="{{route('itp_create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Application</a>
@@ -614,6 +632,117 @@
 
 <script>
 $(document).ready(function(){
+    var editor = $('#home').profileEditor({
+        'editHandlers':{
+            'basic-info':function(obj){
+                swal(
+                    'Update?',
+                    'Click OK',
+                    'question').then((result) => {
+                        if(result.value)
+                        {
+                            swal.setDefaults({
+                                input: 'text',
+                                confirmButtonText: 'Next &rarr;',
+                                showCancelButton: true,
+                                progressSteps: ['1', '2', '3', '4', '5', '6', '7', '8'],
+                                customClass: 'swal-wide',
+                            })
+
+                            var steps = [
+                                {
+                                    title: 'First Name',
+                                    preConfirm: swalRequired,
+                                },
+                                {
+                                    
+                                    title: 'Middle Name',
+                                },
+                                {
+                                    title: 'Last Name',
+                                    preConfirm: swalRequired,
+                                },
+                                {
+                                    title: 'Email',
+                                    input: 'email',
+                                },
+                                {
+                                    title: 'Phone Number',
+                                    preConfirm: swalRequired,
+                                    onOpen: function() {
+                                        $('.swal2-modal .swal2-input').prop('type','number').css('max-width','initial');
+                                    },
+                                },
+                                {
+                                    title: 'Birthdate',
+                                    className: "red-bg",
+                                    preConfirm: swalRequired,
+                                    onOpen: function() {
+                                        $('.swal2-modal .swal2-input').prop('type','date');
+                                    },
+                                },
+                                {
+                                    title: 'Address',
+                                    preConfirm: swalRequired,
+                                },
+                                {
+                                    title: 'Spoken Languages',
+                                    showLoaderOnConfirm: true,
+                                    preConfirm: swalRequired,
+                                    allowOutsideClick: () => !swal.isLoading(),
+                                    preConfirm: swalRequired,
+                                },
+                            ]
+
+                            swal.queue(steps).then((result) => {
+                            swal.resetDefaults()
+
+                            if (result.value) {
+                                var data = {
+                                    f_name:result.value[0],
+                                    m_name:result.value[1],
+                                    l_name:result.value[2],
+                                    email:result.value[3],
+                                    phone_number:result.value[4],
+                                    birth_date:result.value[5],
+                                    address1:result.value[6],
+                                    spoken_language:result.value[7],
+                                    _method: "PATCH"
+                                };
+                                swal({
+                                    title: 'Saving',
+                                    text: 'Please wait...',
+                                    onOpen: () => {
+                                        swal.showLoading()
+                                    },
+                                    allowOutsideClick: () => !swal.isLoading()
+                                })
+                                $.ajax({
+                                    url:"{{route('j_e_r_p_basic')}}",
+                                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                    type: 'PATCH',
+                                    data:data,
+                                    success:function(_data){
+                                        // 
+                                        console.log(obj.current_panel)
+                                        fillInfos($('#'+obj.current_panel).closest('.first-column-tab'),data)
+                                        swal({
+                                            title: 'All done!',
+                                            html:
+                                                '',
+                                            confirmButtonText: 'Ok'
+                                        })
+                                    }
+                                });
+                            }
+                            })
+                        }
+                });
+            }
+        },
+        'submitHandlers':{}
+    });
+
     var table = $('#applications-table').DataTable({
         processing: true,
         serverSide: true,
@@ -656,6 +785,16 @@ $(document).ready(function(){
         // $(".tab").addClass("active"); // instead of this do the below 
         $(this).removeClass("btn-default").addClass("btn-primary");   
     });
+
+    function swalRequired(inputValue){
+        return new Promise((resolve) => {
+            if (inputValue === false) return false;
+            if (inputValue === "") {
+                swal.showValidationError("You need to write something!");
+            }
+            resolve()
+        })
+    }
 });
 
 function prep_del_batch(id){
@@ -664,39 +803,6 @@ function prep_del_batch(id){
 }
 
 {{--  Sweet Alert  --}}
-
-    $('#basic-info').click(function(){
-        swal.setDefaults({
-        input: 'text',
-        confirmButtonText: 'Next &rarr;',
-        showCancelButton: true,
-        progressSteps: ['1', '2', '3']
-        })
-
-        var steps = [
-        {
-            title: 'Basic info',
-            text: 'Kindly fill-up following informations'
-        },
-        'Email address',
-        'Location'
-        ]
-
-        swal.queue(steps).then((result) => {
-        swal.resetDefaults()
-
-        if (result.value) {
-            swal({
-            title: 'All done!',
-            html:
-                'Your answers: <pre>' +
-                JSON.stringify(result.value) +
-                '</pre>',
-            confirmButtonText: 'Lovely!'
-            })
-        }
-        })
-    });
 
     $('#skills-info').click(function(){
         swal.setDefaults({
@@ -732,6 +838,22 @@ function prep_del_batch(id){
     });
 
 
+// {{--  Accomplishments  --}}
+$('#accomplishments').click(function(){
+
+const {value: text} = await swal({
+  input: 'textarea',
+  inputPlaceholder: 'Type your message here',
+  showCancelButton: true
+})
+
+if (text) {
+  swal(text)
+}
+
+});
+
+
 {{--  End Sweet alert  --}}
 
 @if(\Auth::user()->resume()->first())
@@ -757,8 +879,8 @@ function prep_del_batch(id){
             {
                 skills_container.find('.col-md-4').eq(x).append(
                     '<div class="job-card">'
-                    +'    <div class="header ellipsis '+lang+'">'+skill_requirements[i].language+'</div>'
-                    +'    <div class="body"><div class="ellipsis">'+skill_requirements[i].category+'</div> </div>'
+                    +'    <div class="header ellipsis '+lang+'">'+skill_requirements[i].language+' </div>'
+                    +'    <div class="body"><div class="ellipsis">'+skill_requirements[i].category+'</div></div>'
                     +'</div>'
                 );
                 language_added.push(lang)
@@ -792,4 +914,8 @@ function prep_del_batch(id){
 
 </script>
 
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/profile_editor.js') }}"></script>
 @endsection
