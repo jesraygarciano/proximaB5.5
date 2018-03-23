@@ -70,20 +70,44 @@
                                                     <div class="col-sm-5 noti-flex">
 
                                                         <span class="noti-flex-sp">
-                                                            Expertise
+                                                            Experiences
                                                         </span>
                                                     </div>
                                                     <div class="col-sm-5 noti-flex">
-                                                        <span class="noti-flex-sp">
-                                                            Accomplishments
-                                                        </span>
+                                                            <span class="noti-flex-sp">
+                                                                Awards/ Certificate
+                                                            </span>
                                                     </div>
+                                                    <div class="col-sm-5 noti-flex">
+                                                            <span class="noti-flex-sp">
+                                                                Portfolio
+                                                            </span>
+                                                    </div>
+                                                    <div class="col-sm-5 noti-flex">
+                                                            <span class="noti-flex-sp">
+                                                                Objective
+                                                            </span>
+                                                    </div>
+                                                    <div class="col-sm-5 noti-flex">
+                                                            <span class="noti-flex-sp">
+                                                                Other Skills
+                                                            </span>
+                                                    </div>
+                                                    <div class="col-sm-5 noti-flex">
+                                                            <span class="noti-flex-sp">
+                                                                Seminars Attended
+                                                            </span>
+                                                    </div>                                                    
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="notificationFooter"><a href="#">See All</a></div>
+                                @if(\Auth::user()->resume()->first())
+                                <div id="notificationFooter"><a href="{{ route('user_profile') }}">See All</a></div>
+                                @else
+                                <div id="notificationFooter"><a href="{{ route('resume_create') }}">See All</a></div>
+                                @endif
                         </div>
                     </li>                
                     @endif

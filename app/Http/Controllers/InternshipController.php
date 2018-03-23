@@ -132,14 +132,11 @@ class InternshipController extends Controller
             $application->skills()->attach($skill);
             $resume->has_skill()->attach($skill);
         }
-
         return redirect()->route('itp_applicant_profile');
-
     }
 
 
     public function save_batches(Request $requests){
-
 
         $this->validate($requests,[
             'batch' => 'required',

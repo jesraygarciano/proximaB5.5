@@ -244,9 +244,10 @@
     color:#4b4f56;
     text-transform:capitalize;
     }
+
     .block-menu ul li:first-child a{
         border-left: 1px solid #e9eaed;
-        }
+    }
 
     .second-column-tab, .first-column-tab{
         margin-bottom: 1rem;
@@ -259,14 +260,13 @@
 
     .first-column-tab h3 i, .second-column-tab h3 i {
         color: #4267b2;
+        margin: 0 .5rem 0px 0;
     }
 
     .first-column-tab h3, .second-column-tab h3{
         border-bottom: 1px solid #e9ebee;
-        padding: 1rem;    
+        padding: 1rem;
     }
-
-
 
     .first-column-tab p{
         padding: 0 1rem;
@@ -322,9 +322,7 @@
     <!-- Cover photo here -->
     <div class="fb-profile-block">
           <div class="fb-profile-block-thumb">
-              
               <img class="fb-link-img" src="{{asset('img/default-opening.jpg')}}" alt="" title="">
-              
           </div>
             <div class="profile-img">
               <a href="#">
@@ -349,7 +347,6 @@
     </div>
 
     <div class="tab-content">
-
         <div class="tab-pane fade in active" id="home">
             <br />
             <div class="row">
@@ -420,39 +417,18 @@
                             Education
                         </h3>
 
-                        <span class="pr-edit-btn" id="basic-info">
+                        <span class="pr-edit-btn" id="education">
                                 <i class="fa fa-edit"></i>
                         </span>
-
-                        {{--  <div class="crop-control" style="height: 100%;" data-width="1200" data-height="400" data-dim="true">
-                                <div class="image-container-cover" style="height: 100%;">
-                                    @if(!empty($company->background_photo))
-                                        <img style="width: 100%;" src="/storage/{{ $company->background_photo }}" alt="{{ $company->company_name}} Cover photo" />
-                                    @else
-                                        <img style="width: 100%;" src="{{ asset('img/default-opening.jpg') }}" class="bg-img">
-                                    @endif
-    
-                                    <label for="background_photo" class="input-trigger hover-div">
-                                        <p>
-                                            <i class="fa fa-file-image-o fa-5x" aria-hidden="true"></i>
-                                            <br>
-                                            Upload Cover photo
-                                        </p>
-                                    </label>
-                                </div>
-                                <div class="input-container">
-                                    <input type="file" id="background_photo" name="background_photo" accept="image/*" />
-                                </div>
-                            </div>  --}}
 
                     </div>
 
                 </div>
                 {{-- @if(isset($application)) --}}
-                <div class="col-lg-7 col-sm-7">
+                <div class="col-lg-7 col-md-7">
                         <div class="second-column-tab">
                                 <h3>
-                                    <i class="fa fa-asterisk"></i>
+                                    <i class="fa fa-code"></i>
                                     Featured Skills
                                 </h3>
                                     <div class="row" id="skill_required" style="margin: .5rem;">
@@ -471,29 +447,19 @@
                         <div class="second-column-tab">
 
                                 <h3>
-                                    <i class="fa fa-trophy"></i>
+                                    <i class="fa fa-star"></i>
                                     Experiences
                                 </h3>
 
-                                <span class="pr-edit-btn" id="basic-info">
+                                <span class="pr-edit-btn" id="experiences">
                                         <i class="fa fa-edit"></i>
                                 </span>
 
-                        </div>
-
-                        <div class="second-column-tab">
-                                <h3>
-                                    <i class="fa fa-trophy"></i>
-                                    Accomplishments
-                                </h3>
-                                <span class="pr-edit-btn" id="accomplishments">
-                                        <i class="fa fa-edit"></i>
-                                </span>
                         </div>
 
                         <div class="second-column-tab">
                             <h3>
-                                <i class="fa fa-briefcase"></i>
+                                <i class="fa fa-trophy"></i>
                                 Awards/Certificate
                             </h3>
                             <span class="pr-edit-btn" id="portfolio">
@@ -511,36 +477,45 @@
                             </span>
                         </div>
 
-                        <div class="second-column-tab" style="margin: 1rem 0;">
-                            <div style="margin: 1rem;">
+                        <div class="second-column-tab">
+                            <div>
                                 <h3>
+                                    <i class="fa fa-address-card"></i>                                    
                                    Objective
                                 </h3>
-                            
+                                <span class="pr-edit-btn" id="portfolio">
+                                        <i class="fa fa-edit"></i>
+                                </span>                            
                                 <p style="padding: 1rem;">
                                     {{$resume->summary}}                                
                                 </p>
                             </div>
                         </div>
 
-                        <div class="second-column-tab" style="margin: 1rem 0;">
-                            <div style="margin: 1rem;">
+                        <div class="second-column-tab">
+                            <div>
                                 <h3>
+                                    <i class="fa fa-asterisk"></i>
                                     Other Skills
                                 </h3>
+                                <span class="pr-edit-btn" id="portfolio">
+                                        <i class="fa fa-edit"></i>
+                                </span>                                
                                 <p style="padding: 1rem;">
                                     {{$resume->other_skills}}                                
                                 </p>
                             </div>
                         </div>
 
-                        <div class="second-column-tab" style="margin: 1rem 0;">
-                            <div style="margin: 1rem;">
-
+                        <div class="second-column-tab">
+                            <div>
                                 <h3>
+                                    <i class="fa fa-plus-circle"></i>
                                     Seminars Attended
                                 </h3>
-                            
+                                <span class="pr-edit-btn" id="portfolio">
+                                        <i class="fa fa-edit"></i>
+                                </span>                            
                                 <p style="padding: 1rem;">
                                     {{$resume->seminars_attended}}                                
                                 </p>
@@ -850,15 +825,18 @@ const {value: text} = await swal({
 if (text) {
   swal(text)
 }
-
 });
 
 
 {{--  End Sweet alert  --}}
 
 @if(\Auth::user()->resume()->first())
+{{-- @if(isset($application)) --}}
     $(function(){
         var skill_requirements = JSON.parse("{{json_encode(\Auth::user()->resume()->first()->skills)}}".replace(/&quot;/g,'"'));
+        {{-- 
+        var skill_requirements = JSON.parse("{{json_encode($application->skills)}}".replace(/&quot;/g,'"'));
+        --}}
 
         var skills_container = $('#skill_required');
         skills_container.find('.col-md-4').html('');
@@ -879,8 +857,8 @@ if (text) {
             {
                 skills_container.find('.col-md-4').eq(x).append(
                     '<div class="job-card">'
-                    +'    <div class="header ellipsis '+lang+'">'+skill_requirements[i].language+' </div>'
-                    +'    <div class="body"><div class="ellipsis">'+skill_requirements[i].category+'</div></div>'
+                    +'    <div class="header ellipsis '+lang+'">'+skill_requirements[i].language+'</div>'
+                    +'    <div class="body"><div class="ellipsis">'+skill_requirements[i].category+'</div> </div>'
                     +'</div>'
                 );
                 language_added.push(lang)
@@ -893,24 +871,6 @@ if (text) {
         }
     });
 @endif
-
-    // $(document).ready( function(){
-    //     window.percent = 0;
-    //     window.progressInterval = window.setInterval( function(){
-    //     if(window.percent < 100) {
-    //         window.percent++;
-    //         $('.progress').addClass('progress-striped').addClass('active');
-    //         $('.progress .progress-bar:first').removeClass().addClass('progress-bar')
-    //         .addClass ( (percent < 40) ? 'progress-bar-danger' : ((percent < 80) ? 'progress-bar-warning' : 'progress-bar-success' )) ;
-    //         $('.progress .progress-bar:first').width(window.percent+'%');
-    //         $('.progress .progress-bar:first').text(window.percent+'%');
-    //     } else {
-    //         window.clearInterval(window.progressInterval);
-    //         // jQuery('.progress').removeClass('progress-striped').removeClass('active');
-    //         //jQuery('.progress .progress-bar:first').text('Done!');
-    //     }
-    // }, 100 );
-    // });
 
 </script>
 

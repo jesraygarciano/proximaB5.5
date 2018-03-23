@@ -22,7 +22,7 @@
     user-select: none;
     background-image: none;
     border: 1px solid transparent;
-    border-radius: 4px;      
+    border-radius: 4px;
     }
   .btn-opposite {
       margin-left: 1.5rem;
@@ -363,6 +363,7 @@
   </div>
 </div>
 <script>
+
   const [current, imgs] = [document.querySelector('#current'), document.querySelectorAll('.lp-imgs img')];
   const opacity = 0.4;
 

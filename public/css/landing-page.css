@@ -442,7 +442,8 @@ header{
     background-image: linear-gradient(90deg, #2ecc71, #f1c40f);
 */    border: 1px solid #fff;
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr='#2ecc71', endColorstr='#f1c40f')";
-}
+    filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr='#2ecc71', endColorstr='#f1c40f')";
+  }
 
 .feature-box-style-1 .feature-icon i {
     width: 66px;
@@ -614,7 +615,7 @@ header{
 #menu
 {
   position: absolute;
-  height: 149vh;
+  height: 150vh;
   width: 300px;
   margin: -100px 0 0 -50px;
   padding: 50px;
