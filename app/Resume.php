@@ -8,6 +8,7 @@ class Resume extends Model
 {
     protected $fillable = ['f_name', 'm_name', 'l_name', 'email', 'objective', 'nationality', 'birth_date', 'marital_status', 'spoken_language', 'experience', 'university', 'graduate_flag', 'program_of_study', 'field_of_study', 'gender', 'postal', 'address1', 'address2', 'city', 'country', 'phone_number', 'photo', 'is_master', 'is_active', 'user_id','spoken_language', 'religion', 'summary', 'other_skills', 'websites', 'seminars_attended', 'awards', 'job_title'];
 
+    protected $appends = ['birthdate'];
     // $resume_skill_ids should be array
     public function register_skill($resume_skill_ids)
     {
@@ -43,6 +44,10 @@ class Resume extends Model
     public function companies_that_scout_users()
     {
         return $this->belongsToMany('App\Company', 'scouts', 'user_id', 'company_id')->withTimestamps();
+    }
+
+    public function getBirthdateAttribute(){
+        return date('M. d, Y',strtotime($this->attributes['birth_date']));
     }
 
     public function educations()

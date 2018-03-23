@@ -23,7 +23,7 @@ class User extends Authenticatable
      */
     protected $fillable = ['f_name', 'l_name', 'email', 'password', 'birth_date', 'role', 'university', 'graduate_flag', 'program_of_study', 'field_of_study', 'gender', 'postal', 'address1', 'address2', 'city', 'country', 'phone_number', 'photo', 'objective', 'is_active','verify_token'];
 
-    protected $appends = ['name','photo'];
+    protected $appends = ['name','photo','birthdate'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -110,6 +110,10 @@ class User extends Authenticatable
         $name = $this->attributes['f_name'].' '.$this->attributes['l_name'];
 
         return trim($name,' ') != '' ? $name : 'Unknown';
+    }
+
+    public function getBirthdateAttribute(){
+        return date('M. d, Y h:i:sa',strtotime($this->attributes['birth_date']));
     }
 
     public function getPhotoAttribute(){
