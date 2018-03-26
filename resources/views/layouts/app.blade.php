@@ -14,6 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/landing-page.css') }}" rel="stylesheet">
     <link href="{{ asset('css/common.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/animate.css') }}" rel="stylesheet">    
     <link rel="stylesheet" href="{{ asset('css/media-query.css') }}">
     <link href="{{ asset('css/components/applicant-component.css') }}" rel="stylesheet">
     <link href="{{ asset('css/components/general-component.css') }}" rel="stylesheet">

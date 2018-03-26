@@ -49,53 +49,51 @@
 
                                             <div >
                                                 <div class="row">
-                                                    <div class="col-sm-5 noti-flex">
+                                                    <div class="col-sm-5 noti-flex" id="basic-info-noti">
                                                         <span class="noti-flex-sp">
                                                             Basic info
                                                         </span>
-                                                        <span class="noti-flex-icon">
+
+                                                        {{--  <span class="noti-flex-icon">
                                                                 <i class="fa fa-globe"></i>
-                                                        </span>
+                                                        </span>  --}}
+
                                                     </div>
-                                                    <div class="col-sm-5 noti-flex">
+                                                    <div class="col-sm-5 noti-flex" id="education-noti">
                                                         <span class="noti-flex-sp">
                                                             Education
-                                                        </span>
-                                                        <span class="noti-flex-icon">
-                                                            <i class="fa fa-graduation-cap"></i>
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-5 noti-flex">
-
+                                                    <div class="col-sm-5 noti-flex" id="experiences-noti">
                                                         <span class="noti-flex-sp">
                                                             Experiences
                                                         </span>
                                                     </div>
-                                                    <div class="col-sm-5 noti-flex">
+                                                    <div class="col-sm-5 noti-flex" id="awards-noti">
                                                             <span class="noti-flex-sp">
-                                                                Awards/ Certificate
+                                                                Awards..
                                                             </span>
                                                     </div>
-                                                    <div class="col-sm-5 noti-flex">
+                                                    <div class="col-sm-5 noti-flex" id="portfolio-noti">
                                                             <span class="noti-flex-sp">
                                                                 Portfolio
                                                             </span>
                                                     </div>
-                                                    <div class="col-sm-5 noti-flex">
+                                                    <div class="col-sm-5 noti-flex" id="objective-noti">
                                                             <span class="noti-flex-sp">
                                                                 Objective
                                                             </span>
                                                     </div>
-                                                    <div class="col-sm-5 noti-flex">
+                                                    <div class="col-sm-5 noti-flex" id="otherskills-noti">
                                                             <span class="noti-flex-sp">
                                                                 Other Skills
                                                             </span>
                                                     </div>
-                                                    <div class="col-sm-5 noti-flex">
+                                                    <div class="col-sm-5 noti-flex" id="seminars-noti">
                                                             <span class="noti-flex-sp">
-                                                                Seminars Attended
+                                                                Seminars
                                                             </span>
                                                     </div>                                                    
                                                 </div>
@@ -109,7 +107,7 @@
                                 <div id="notificationFooter"><a href="{{ route('resume_create') }}">See All</a></div>
                                 @endif
                         </div>
-                    </li>                
+                    </li>
                     @endif
                     
                     <script>

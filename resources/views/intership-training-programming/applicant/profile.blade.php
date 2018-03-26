@@ -309,10 +309,26 @@
         right: 22px;
         cursor: pointer;
     }
+    .second-column-tab .pr-edit-btn, .first-column-tab .pr-edit-btn{
+        font-size: 1.3rem;
+        color: #187aa4;
+        position: absolute;
+        top: 12px;
+        right: 22px;
+        width: 0px;
+        overflow: hidden;
+        display: block;
+        transition: 200ms ease all;        
+        cursor: pointer;
+    }
+    .second-column-tab:hover .pr-edit-btn, .first-column-tab:hover .pr-edit-btn{
+        opacity: 1;
+        width: 30px;
+    }
+
     .swal-wide{
     width:850px !important;
-
-}
+    }
 </style>
 @endsection
 
@@ -347,17 +363,17 @@
     </div>
 
     <div class="tab-content">
+
         <div class="tab-pane fade in active" id="home">
             <br />
+
             <div class="row">
                 <div class="col-lg-5 col-md-5">
                     <div class="first-column-tab">
-
                         <h3>
                             <i class="fa fa-globe"></i>
                             Basic info
                         </h3>
-
                         <span class="pr-edit-btn" id="basic-info">
                                 <i class="fa fa-edit"></i>
                         </span>
@@ -423,6 +439,19 @@
 
                     </div>
 
+                    @if(!empty($resume->summary))
+
+                        <h5>Profile progress:</h5>
+                        <div class="progress progress-navbar">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 60%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">60% profile complete</div>
+                        </div>
+
+                    @else
+
+
+
+                    @endif
+                                        
                 </div>
                 {{-- @if(isset($application)) --}}
                 <div class="col-lg-7 col-md-7">
@@ -455,6 +484,9 @@
                                         <i class="fa fa-edit"></i>
                                 </span>
 
+                                <p style="padding: 1rem;">
+                                    {{ $resume->summary }}
+                                </p>
                         </div>
 
                         <div class="second-column-tab">
@@ -462,9 +494,12 @@
                                 <i class="fa fa-trophy"></i>
                                 Awards/Certificate
                             </h3>
-                            <span class="pr-edit-btn" id="portfolio">
+                            <span class="pr-edit-btn" id="awards-cert">
                                     <i class="fa fa-edit"></i>
                             </span>
+                            <p style="padding: 1rem;">
+                                {{ $resume->awards }}
+                            </p>
                         </div>
 
                         <div class="second-column-tab">
@@ -475,15 +510,18 @@
                             <span class="pr-edit-btn" id="portfolio">
                                     <i class="fa fa-edit"></i>
                             </span>
+                            <p style="padding: 1rem;">
+                                {{ $resume->websites }}
+                            </p>
                         </div>
 
                         <div class="second-column-tab">
                             <div>
                                 <h3>
                                     <i class="fa fa-address-card"></i>                                    
-                                   Objective
+                                    Objective
                                 </h3>
-                                <span class="pr-edit-btn" id="portfolio">
+                                <span class="pr-edit-btn" id="objective">
                                         <i class="fa fa-edit"></i>
                                 </span>                            
                                 <p style="padding: 1rem;">
@@ -498,7 +536,7 @@
                                     <i class="fa fa-asterisk"></i>
                                     Other Skills
                                 </h3>
-                                <span class="pr-edit-btn" id="portfolio">
+                                <span class="pr-edit-btn" id="other-skills">
                                         <i class="fa fa-edit"></i>
                                 </span>                                
                                 <p style="padding: 1rem;">
@@ -513,16 +551,14 @@
                                     <i class="fa fa-plus-circle"></i>
                                     Seminars Attended
                                 </h3>
-                                <span class="pr-edit-btn" id="portfolio">
+                                <span class="pr-edit-btn" id="seminars">
                                         <i class="fa fa-edit"></i>
                                 </span>                            
                                 <p style="padding: 1rem;">
                                     {{$resume->seminars_attended}}                                
                                 </p>
-                                
                             </div>
                         </div>
-
                 </div>
                 {{-- @endif --}}
             </div>
