@@ -35,7 +35,7 @@ class UserController extends Controller
     public function resume_edit(Request $requests){
         $user = \Auth::user();
         $skills = Resume_skill::all();
-        $resume = Common::get_master_resume();
+        $resume = $user->findFirstOrCreateResume();
         $educations = $resume->educations()->get();
         $experiences = $resume->experiences()->get();
         $cr = $resume->character_references()->get();
@@ -205,6 +205,9 @@ class UserController extends Controller
         }
 
         // $resume->photo = $fileNameToStore;
+        $education = new Education;
+        $education->resume_id = $resume->id;
+        $education->fill($input)->save();
 
         $resume->fill($input)->save();
 
@@ -264,11 +267,14 @@ class UserController extends Controller
         // 
         $resume = \Auth::user()->findFirstOrCreateResume();
 
-        $resume->has_skill()->detach();
+        $resume_skills = Resume_skill::where('language',$request->language)->pluck('id');
+
+        $resume->has_skill()->whereIn('resume_skill_id',$resume_skills)->detach();
         $resume_skill_ids = $request->input('skills');
-        foreach($resume_skill_ids as $resume_skill_id){
+        foreach($request->skills as $resume_skill_id){
             $resume->has_skill()->attach($resume_skill_id);
         }
+
         return ['status'=>'success'];
     }
 
@@ -339,8 +345,42 @@ class UserController extends Controller
             'ed_from_month'=>$request->ed_from_month,
             'ed_to_year'=>$request->ed_to_year,
             'ed_to_month'=>$request->ed_to_month,
+            'resume_id'=>$request->resume_id,
         ]);
 
         return ['status'=>'success', 'education'=>$education];
+    }
+
+    public function j_c_r_p_educational_background(Request $request){
+        $education = Education::create([
+            'ed_university'=>$request->ed_university,
+            'ed_program_of_study'=>$request->ed_program_of_study,
+            'ed_field_of_study'=>$request->ed_field_of_study,
+            'ed_from_year'=>$request->ed_from_year,
+            'ed_from_month'=>$request->ed_from_month,
+            'ed_to_year'=>$request->ed_to_year,
+            'ed_to_month'=>$request->ed_to_month,
+            'resume_id'=>$request->resume_id,
+        ]);
+
+        return ['status'=>'success', 'education'=>$education];
+    }
+
+    public function returResume(Request $request){
+        $resume = \Auth::user()->findFirstOrCreateResume();
+        return $resume;
+    }
+
+    public function returResumeEducation(Request $request){
+        return Education::findOrFail($request->id);
+    }
+
+    public function getLanguageCategorySkills(Request $request){
+        $resume_skills = Resume_skill::where('language',$request->language)->get();
+        $user_skills = \DB::table('joining_resume_skills')->where('resume_id',$request->resume_id)
+        ->select('resume_skill_id')
+        ->get();
+
+        return ['resume_skills'=>$resume_skills, 'user_skills'=>$user_skills];
     }
 }

@@ -38,7 +38,9 @@ Route::group(['prefix'=>'itp'], function(){
 			Route::group(['prefix'=>'resume/parts'], function(){
 				Route::group(['prefix'=>'get'], function(){
 					// ... get resume parts routes
-					Route::get('group_info',['as'=>'j_g_r_group_info', 'uses'=>'UserController@returResumeGroupInfo']);
+					Route::get('all',['as'=>'json_get_resume', 'uses'=>'UserController@returResume']);
+					Route::get('education',['as'=>'j_g_r_education', 'uses'=>'UserController@returResumeEducation']);
+					Route::get('skill/categories',['as'=>'j_g_skills_categories', 'uses'=>'UserController@getLanguageCategorySkills']);
 				});
 				Route::group(['prefix'=>'edit'], function(){
 					Route::patch('basic',['as'=>'j_e_r_p_basic', 'uses'=>'UserController@edit_resume_basic']);

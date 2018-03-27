@@ -363,10 +363,8 @@
     </div>
 
     <div class="tab-content">
-
         <div class="tab-pane fade in active" id="home">
             <br />
-
             <div class="row">
                 <div class="col-lg-5 col-md-5">
                     <div class="first-column-tab">
@@ -388,6 +386,7 @@
                                 </a>
                             </span>
                         </p>
+
                         <p>
                             <span class="i-icon-wrapper">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
@@ -400,8 +399,8 @@
                             <span class="i-icon-wrapper">
                                 <i class="fa fa-birthday-cake"></i>
                             </span>
-                            <span class="resume-content birthdate">
-                                {{$resume->birthdate}}
+                            <span class="resume-content formated_birthdate">
+                                {{$resume->formated_birthdate}}
                             </span>
                         </p>
 
@@ -433,25 +432,35 @@
                             Education
                         </h3>
 
-                        <span class="pr-edit-btn" id="education">
-                                <i class="fa fa-edit"></i>
+                        <span class="pr-edit-btn" id="add-education">
+                                <i class="fa fa-plus"></i>
                         </span>
 
+                        <ul class="list-group list-group-flush" id="educational-backgrounds">
+                            @foreach($resume->educations as $education)
+                            <li class="list-group-item">
+                                <span id="education-{{$education->id}}">{{$education->ed_university}}</span>
+                                <div class="pull-right pr-edit-btn" id="edit-education" data-id="{{$education->id}}" style="cursor:pointer;">
+                                    <i class="fa fa-edit"></i>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
                     </div>
 
-                    @if(!empty($resume->summary))
-
-                        <h5>Profile progress:</h5>
+                    <h5>Profile progress:</h5>
+                    @if(empty($resume->f_name))
                         <div class="progress progress-navbar">
-                            <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 60%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">60% profile complete</div>
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">30% profile complete</div>
                         </div>
-
+                    @elseif(!empty($resume->f_name) && !empty($resume->summary))
+                        <div class="progress progress-navbar">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">40% profile complete</div>
+                        </div>
                     @else
-
-
-
+                        <h1>Bago mahuli ang lahat</h1>
                     @endif
-                                        
+
                 </div>
                 {{-- @if(isset($application)) --}}
                 <div class="col-lg-7 col-md-7">
@@ -468,18 +477,16 @@
                                         <div class="col-md-4">
                                         </div>
                                     </div>
-                                <span class="pr-edit-btn" id="skills-info">
+                                <span class="pr-edit-btn" id="add-skill">
                                         <i class="fa fa-plus"></i>
                                 </span>
                         </div>
 
                         <div class="second-column-tab">
-
                                 <h3>
                                     <i class="fa fa-star"></i>
                                     Experiences
                                 </h3>
-
                                 <span class="pr-edit-btn" id="experiences">
                                         <i class="fa fa-edit"></i>
                                 </span>
@@ -505,7 +512,7 @@
                         <div class="second-column-tab">
                             <h3>
                                 <i class="fa fa-briefcase"></i>
-                                Portfolio
+                                Portfolio Websites
                             </h3>
                             <span class="pr-edit-btn" id="portfolio">
                                     <i class="fa fa-edit"></i>
@@ -646,8 +653,138 @@ $(document).ready(function(){
     var editor = $('#home').profileEditor({
         'editHandlers':{
             'basic-info':function(obj){
+                swal({
+                    title: 'Loading Info',
+                    text: 'Please wait...',
+                    onOpen: () => {
+                        swal.showLoading()
+                    },
+                    allowOutsideClick: () => !swal.isLoading()
+                })
+                $.ajax({
+                    'url':"{{route('json_get_resume')}}",
+                    type:'GET',
+                    data:{},
+                    success:function(resume){
+                        // 
+                        obj.resume = resume;
+                        swal(
+                            'Update Basic Info?',
+                            'Click OK',
+                            'question').then((result) => {
+                                if(result.value)
+                                {
+                                    swal.setDefaults({
+                                        input: 'text',
+                                        confirmButtonText: 'Next &rarr;',
+                                        showCancelButton: true,
+                                        progressSteps: ['1', '2', '3', '4', '5', '6', '7', '8'],
+                                        customClass: 'swal-wide',
+                                    })
+
+                                    var steps = [
+                                        {
+                                            title: 'First Name',
+                                            preConfirm: swalRequired,
+                                            inputValue: obj.resume.f_name,
+                                        },
+                                        {
+                                            
+                                            title: 'Middle Name',
+                                            inputValue: obj.resume.m_name,
+                                        },
+                                        {
+                                            title: 'Last Name',
+                                            preConfirm: swalRequired,
+                                            inputValue: obj.resume.l_name,
+                                        },
+                                        {
+                                            title: 'Email',
+                                            input: 'email',
+                                            inputValue: obj.resume.email,
+                                        },
+                                        {
+                                            title: 'Phone Number',
+                                            preConfirm: swalRequired,
+                                            inputValue: obj.resume.phone_number,
+                                            onOpen: function() {
+                                                $('.swal2-modal .swal2-input').prop('type','number').css('max-width','initial');
+                                            },
+                                        },
+                                        {
+                                            title: 'Birthdate',
+                                            className: "red-bg",
+                                            inputValue: obj.resume.birth_date.split(' ')[0],
+                                            preConfirm: swalRequired,
+                                            onOpen: function() {
+                                                $('.swal2-modal .swal2-input').prop('type','date');
+                                            },
+                                        },
+                                        {
+                                            title: 'Address',
+                                            preConfirm: swalRequired,
+                                            inputValue: obj.resume.address1,
+                                        },
+                                        {
+                                            title: 'Spoken Languages',
+                                            showLoaderOnConfirm: true,
+                                            inputValue: obj.resume.spoken_language,
+                                            preConfirm: swalRequired,
+                                            allowOutsideClick: () => !swal.isLoading(),
+                                            preConfirm: swalRequired,
+                                        },
+                                    ]
+
+                                    swal.queue(steps).then((result) => {
+                                    swal.resetDefaults()
+
+                                    if (result.value) {
+                                        var data = {
+                                            f_name:result.value[0],
+                                            m_name:result.value[1],
+                                            l_name:result.value[2],
+                                            email:result.value[3],
+                                            phone_number:result.value[4],
+                                            birth_date:result.value[5],
+                                            address1:result.value[6],
+                                            spoken_language:result.value[7],
+                                            _method: "PATCH"
+                                        };
+                                        swal({
+                                            title: 'Saving',
+                                            text: 'Please wait...',
+                                            onOpen: () => {
+                                                swal.showLoading()
+                                            },
+                                            allowOutsideClick: () => !swal.isLoading()
+                                        })
+                                        $.ajax({
+                                            url:"{{route('j_e_r_p_basic')}}",
+                                            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                            type: 'PATCH',
+                                            data:data,
+                                            success:function(_data){
+                                                // 
+                                                console.log(obj.current_panel)
+                                                fillInfos($('#'+obj.current_panel).closest('.first-column-tab'),data)
+                                                swal({
+                                                    title: 'All done!',
+                                                    html:
+                                                        '',
+                                                    confirmButtonText: 'Ok'
+                                                })
+                                            }
+                                        });
+                                    }
+                                    })
+                                }
+                        });
+                    }
+                });
+            },
+            'add-education':function(obj){
                 swal(
-                    'Update?',
+                    'Add Education Background?',
                     'Click OK',
                     'question').then((result) => {
                         if(result.value)
@@ -656,52 +793,66 @@ $(document).ready(function(){
                                 input: 'text',
                                 confirmButtonText: 'Next &rarr;',
                                 showCancelButton: true,
-                                progressSteps: ['1', '2', '3', '4', '5', '6', '7', '8'],
+                                progressSteps: ['1', '2', '3', '4', '5', '6', '7'],
                                 customClass: 'swal-wide',
                             })
 
                             var steps = [
                                 {
-                                    title: 'First Name',
+                                    title: 'University',
                                     preConfirm: swalRequired,
                                 },
                                 {
                                     
-                                    title: 'Middle Name',
+                                    title: 'Field of study',
                                 },
                                 {
-                                    title: 'Last Name',
+                                    title: 'Program of study',
                                     preConfirm: swalRequired,
                                 },
                                 {
-                                    title: 'Email',
-                                    input: 'email',
-                                },
-                                {
-                                    title: 'Phone Number',
-                                    preConfirm: swalRequired,
-                                    onOpen: function() {
-                                        $('.swal2-modal .swal2-input').prop('type','number').css('max-width','initial');
+                                    title: 'Montn',
+                                    text: 'Month you started studying',
+                                    input: 'select',
+                                    inputOptions: {
+                                        @foreach(month_array() as $key => $value)
+                                        '{{$key}}':'{{$value}}',
+                                        @endforeach
                                     },
+                                    preConfirm: swalRequired
                                 },
                                 {
-                                    title: 'Birthdate',
-                                    className: "red-bg",
-                                    preConfirm: swalRequired,
-                                    onOpen: function() {
-                                        $('.swal2-modal .swal2-input').prop('type','date');
+                                    title: 'Year',
+                                    text: 'Year you started studying',
+                                    input: 'select',
+                                    inputOptions: {
+                                        @foreach(year_array() as $key => $value)
+                                        '{{$key}}':'{{$value}}',
+                                        @endforeach
                                     },
+                                    preConfirm: swalRequired
                                 },
                                 {
-                                    title: 'Address',
-                                    preConfirm: swalRequired,
+                                    title: 'Montn',
+                                    text: 'Month you it ended',
+                                    input: 'select',
+                                    inputOptions: {
+                                        @foreach(month_array() as $key => $value)
+                                        '{{$key}}':'{{$value}}',
+                                        @endforeach
+                                    },
+                                    preConfirm: swalRequired
                                 },
                                 {
-                                    title: 'Spoken Languages',
-                                    showLoaderOnConfirm: true,
-                                    preConfirm: swalRequired,
-                                    allowOutsideClick: () => !swal.isLoading(),
-                                    preConfirm: swalRequired,
+                                    title: 'Year',
+                                    text: 'Year you it ended',
+                                    input: 'select',
+                                    inputOptions: {
+                                        @foreach(year_array() as $key => $value)
+                                        '{{$key}}':'{{$value}}',
+                                        @endforeach
+                                    },
+                                    preConfirm: swalRequired
                                 },
                             ]
 
@@ -710,14 +861,14 @@ $(document).ready(function(){
 
                             if (result.value) {
                                 var data = {
-                                    f_name:result.value[0],
-                                    m_name:result.value[1],
-                                    l_name:result.value[2],
-                                    email:result.value[3],
-                                    phone_number:result.value[4],
-                                    birth_date:result.value[5],
-                                    address1:result.value[6],
-                                    spoken_language:result.value[7],
+                                    ed_university:result.value[0],
+                                    ed_program_of_study:result.value[1],
+                                    ed_field_of_study:result.value[2],
+                                    ed_from_month:result.value[3],
+                                    ed_from_year:result.value[4],
+                                    ed_to_month:result.value[5],
+                                    ed_to_year:result.value[6],
+                                    resume_id:{{$resume->id}},
                                     _method: "PATCH"
                                 };
                                 swal({
@@ -729,14 +880,13 @@ $(document).ready(function(){
                                     allowOutsideClick: () => !swal.isLoading()
                                 })
                                 $.ajax({
-                                    url:"{{route('j_e_r_p_basic')}}",
+                                    url:"{{route('j_c_r_p_educational_background')}}",
                                     headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
                                     type: 'PATCH',
                                     data:data,
                                     success:function(_data){
                                         // 
-                                        console.log(obj.current_panel)
-                                        fillInfos($('#'+obj.current_panel).closest('.first-column-tab'),data)
+                                        addEducationalBackground(_data.education);
                                         swal({
                                             title: 'All done!',
                                             html:
@@ -748,6 +898,257 @@ $(document).ready(function(){
                             }
                             })
                         }
+                });
+            },
+            'edit-education':function(obj){
+                swal({
+                    title: 'Loading Info',
+                    text: 'Please wait...',
+                    onOpen: () => {
+                        swal.showLoading()
+                    },
+                    allowOutsideClick: () => !swal.isLoading()
+                })
+                $.ajax({
+                    'url':"{{route('j_g_r_education')}}",
+                    type:"GET",
+                    data:{id:obj.id},
+                    success:function(_data){
+                        swal(
+                            'Edit Education Background?',
+                            'Click OK',
+                            'question').then((result) => {
+                                if(result.value)
+                                {
+                                    swal.setDefaults({
+                                        input: 'text',
+                                        confirmButtonText: 'Next &rarr;',
+                                        showCancelButton: true,
+                                        progressSteps: ['1', '2', '3', '4', '5', '6', '7'],
+                                        customClass: 'swal-wide',
+                                    })
+
+                                    var steps = [
+                                        {
+                                            title: 'University',
+                                            preConfirm: swalRequired,
+                                            inputValue: _data.ed_university,
+                                        },
+                                        {
+                                            
+                                            title: 'Field of study',
+                                            inputValue: _data.ed_field_of_study,
+                                            preConfirm: swalRequired,
+                                        },
+                                        {
+                                            title: 'Program of study',
+                                            preConfirm: swalRequired,
+                                            inputValue: _data.ed_program_of_study,
+                                        },
+                                        {
+                                            title: 'Montn',
+                                            text: 'Month you started studying',
+                                            input: 'select',
+                                            inputValue: _data.ed_from_month,
+                                            inputOptions: {
+                                                @foreach(month_array() as $key => $value)
+                                                '{{$key}}':'{{$value}}',
+                                                @endforeach
+                                            },
+                                            preConfirm: swalRequired
+                                        },
+                                        {
+                                            title: 'Year',
+                                            text: 'Year you started studying',
+                                            input: 'select',
+                                            inputValue: _data.ed_from_year,
+                                            inputOptions: {
+                                                @foreach(year_array() as $key => $value)
+                                                '{{$key}}':'{{$value}}',
+                                                @endforeach
+                                            },
+                                            preConfirm: swalRequired
+                                        },
+                                        {
+                                            title: 'Montn',
+                                            text: 'Month you it ended',
+                                            input: 'select',
+                                            inputValue: _data.ed_to_month,
+                                            inputOptions: {
+                                                @foreach(month_array() as $key => $value)
+                                                '{{$key}}':'{{$value}}',
+                                                @endforeach
+                                            },
+                                            preConfirm: swalRequired
+                                        },
+                                        {
+                                            title: 'Year',
+                                            text: 'Year you it ended',
+                                            input: 'select',
+                                            inputValue: _data.ed_to_year,
+                                            inputOptions: {
+                                                @foreach(year_array() as $key => $value)
+                                                '{{$key}}':'{{$value}}',
+                                                @endforeach
+                                            },
+                                            preConfirm: swalRequired
+                                        },
+                                    ]
+
+                                    swal.queue(steps).then((result) => {
+                                    swal.resetDefaults()
+
+                                    if (result.value) {
+                                        var __data = {
+                                            id:_data.id,
+                                            ed_university:result.value[0],
+                                            ed_program_of_study:result.value[1],
+                                            ed_field_of_study:result.value[2],
+                                            ed_from_month:result.value[3],
+                                            ed_from_year:result.value[4],
+                                            ed_to_month:result.value[5],
+                                            ed_to_year:result.value[6],
+                                            resume_id:{{$resume->id}},
+                                            _method: "PATCH"
+                                        };
+                                        swal({
+                                            title: 'Saving',
+                                            text: 'Please wait...',
+                                            onOpen: () => {
+                                                swal.showLoading()
+                                            },
+                                            allowOutsideClick: () => !swal.isLoading()
+                                        })
+                                        $.ajax({
+                                            url:"{{route('j_e_r_p_educational_background')}}",
+                                            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                            type: 'PATCH',
+                                            data:__data,
+                                            success:function(data){
+                                                // 
+                                                console.log(obj.current_panel)
+                                                console.log($('#education-'+_data.id));
+                                                $('#education-'+_data.id).html(__data.ed_university);
+                                                swal({
+                                                    title: 'All done!',
+                                                    html:
+                                                        '',
+                                                    confirmButtonText: 'Ok'
+                                                })
+                                            }
+                                        });
+                                    }
+                                    })
+                                }
+                        });
+                    }
+                });
+            },
+            'add-skill':function(obj){
+                swal({
+                    title: 'Select Language/Technology',
+                    html:'<select id="swal-language-select" class="ui fluid normal dropdown">'
+                        +'            <option value="">Select</option>'
+                        +'            <option value="PHP">PHP</option>'
+                        +'            <option value="Ruby">Ruby</option>'
+                        +'            <option value="Java">Java</option>'
+                        +'            <option value="C++">C++</option>'
+                        +'            <option value="Python">Python</option>'
+                        +'            <option value="Swift">Swift</option>'
+                        +'            <option value="Go">Go</option>'
+                        +'            <option value="C#">C#</option>'
+                        +'            <option value="Javascript">Javascript</option>'
+                        +'            <option value="Node.js">Node.js</option>'
+                        +'            <option value="versioncontrol">version control</option>'
+                        +'            <option value="CSSframework">CSS framework</option>'
+                        +'            <option value="CSSpreprocessors/postprocessors">CSS preprocessors/postprocessors</option>'
+                        +'            <option value="Cloudhosting">Cloud hosting</option>'
+                        +'            <option value="Mobileappprogramming">Mobile app programming</option>'
+                        +'            <option value="Database">Database</option>'
+                        +'            <option value="otherlanguages">Other Languages</option>'
+                        +'            <option value="othertools">Other tools</option>'
+                        +'</select>',
+                    preConfirm: function () {
+                        return [
+                        $('#swal-language-select').val(),
+                        ]
+                    },
+                    onOpen:()=>{
+                        // 
+                        $('.swal2-modal .dropdown').dropdown();
+                    }
+                }).then((result) => {
+                    if(result.value)
+                    {
+                        swal({
+                            title: 'Saving',
+                            text: 'Please wait...',
+                            onOpen: () => {
+                                swal.showLoading()
+                            },
+                            allowOutsideClick: () => !swal.isLoading()
+                        })
+                        $.ajax({
+                            url:"{{route('j_g_skills_categories')}}",
+                            type: 'GET',
+                            data:{resume_id:{{$resume->id}}, language:result.value[0]},
+                            success:function(_data){
+                                // 
+                                console.log(_data)
+                                var html = '<select id="swal-category-select" class="ui fluid normal dropdown multi-select" multiple>'
+                                    + '<option value="">Select</option>';
+                                for(var x in _data.resume_skills){
+                                    var selected = '';
+                                    $.grep(_data.user_skills, function(v,i){
+                                        if(v.resume_skill_id == _data.resume_skills[x].id)
+                                        selected = 'selected';
+                                    });
+
+                                    html += '<option '+selected+' value="'+_data.resume_skills[x].category+'">'+_data.resume_skills[x].category+'</option>';
+                                }
+                                swal({
+                                    title: 'Select Language/Technology',
+                                    html:html,
+                                    preConfirm: function () {
+                                        return [
+                                        $('#swal-category-select').val(),
+                                        ]
+                                    },
+                                    onOpen:()=>{
+                                        // 
+                                        $('.swal2-modal .dropdown').dropdown();
+                                    }
+                                }).then(result=>{
+                                    console.log(result);
+                                    swal({
+                                        title: 'Saving',
+                                        text: 'Please wait...',
+                                        onOpen: () => {
+                                            swal.showLoading()
+                                        },
+                                        allowOutsideClick: () => !swal.isLoading()
+                                    })
+
+                                    $.ajax({
+                                        url:"{{route('j_e_r_p_skills')}}",
+                                        headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                        type: 'PATCH',
+                                        data:{skills:result.value[0]},
+                                        success:function(_data){
+                                            // 
+                                            console.log(_data)
+                                            swal({
+                                                title: 'All done!',
+                                                html:
+                                                    '',
+                                                confirmButtonText: 'Ok'
+                                            })
+                                        }
+                                    });
+                                });
+                            }
+                        });
+                    }
                 });
             }
         },
@@ -806,6 +1207,16 @@ $(document).ready(function(){
             resolve()
         })
     }
+
+    function addEducationalBackground(data){
+        var html = '<li class="list-group-item">'
+                    +'    <span id="education-'+data.id+'>'+data.ed_university+'</span>'
+                    +'    <div class="pull-right pr-edit-btn" id="edit-education" data-id="'+data.id+'" style="cursor:pointer;">'
+                    +'        <i class="fa fa-edit"></i>'
+                    +'    </div>'
+                    +'</li>'
+        $('#educational-backgrounds').append(html);
+    }
 });
 
 function prep_del_batch(id){
@@ -852,11 +1263,11 @@ function prep_del_batch(id){
 // {{--  Accomplishments  --}}
 $('#accomplishments').click(function(){
 
-const {value: text} = await swal({
-  input: 'textarea',
-  inputPlaceholder: 'Type your message here',
-  showCancelButton: true
-})
+// const {value: text} = await swal({
+//   input: 'textarea',
+//   inputPlaceholder: 'Type your message here',
+//   showCancelButton: true
+// })
 
 if (text) {
   swal(text)
