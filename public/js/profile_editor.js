@@ -6,11 +6,13 @@
 		var settings = $.extend({}, options);
 		var currentSubmitFunction;
 		this.current_panel;
+		this.id;
 
 		$this = this;
 
 		this.setEvents = function(){
 			$this.find('.pr-edit-btn').click(function(){
+				$this.id = $(this).data('id');
 				var handler = settings.editHandlers[$(this).attr('id')];
 				$this.current_panel = $(this).attr('id');
 				if(handler){

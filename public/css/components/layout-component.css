@@ -102,3 +102,13 @@
   -webkit-animation: bounce 2s infinite;
   animation: bounce 2s infinite;
 }
+
+.list-group{
+  margin-top:-15px;
+}
+
+.list-group-flush .list-group-item{
+  border-right: 0;
+  border-left: 0;
+  border-radius: 0!important;
+}
