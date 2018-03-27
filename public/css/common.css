@@ -543,6 +543,71 @@ padding:10px;
   margin: 1rem;
 } */
 
+#basic-info-noti{
+  background-image: url('../img/basic-info-icon.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: left 6.5em top 7px;
+}
+
+#education-noti{
+  background-image: url('../img/education-icon.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 56%;
+  background-position: left 6.7em top 11px;
+}
+
+#experiences-noti{
+  background-image: url('../img/exprience-noti.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 45%;
+  background-position: left 6.7em top 11px;
+}
+
+#awards-noti{
+  background-image: url('../img/awards-noti.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 51%;
+  background-position: left 6em top 17px;
+}
+
+#portfolio-noti{
+  background-image: url('../img/porfolio-noti.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 51%;
+  background-position: left 6.8em top 12px;
+}
+
+#objective-noti{
+  background-image: url('../img/objective-noti.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 51%;
+  background-position: left 6em top 15px;
+}
+
+#otherskills-noti{
+  background-image: url('../img/other-skill-noti.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 40%;
+  background-position: left 6.8em top 20px;
+}
+
+#seminars-noti{
+  background-image: url('../img/seminar-noti.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 61%;
+  background-position: left 5.3em top 9px;
+}
+
+
 .noti-content{
   margin: 1rem;
 }
