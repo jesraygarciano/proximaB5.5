@@ -161,7 +161,7 @@
     margin: auto;
     position: relative;
     /*width: 850px;*/
-    width: 1170px;
+    /* width: 1170px; */
     }
     .fb-link-img{
         width: 100%;
@@ -169,7 +169,8 @@
     }
     .fb-profile-block-thumb{
     display: block;
-    height: 315px;
+    /* height: 315px; */
+    width:100%;
     overflow: hidden;
     position: relative;
     text-decoration: none;
@@ -216,7 +217,7 @@
     height: 44px;
     position: relative;
     /*width:850px;*/
-    width: 1170px;
+    /* width: 1170px; */
     overflow:hidden;
     }
     .block-menu {
@@ -363,8 +364,10 @@
     </div>
 
     <div class="tab-content">
+
         <div class="tab-pane fade in active" id="home">
             <br />
+
             <div class="row">
                 <div class="col-lg-5 col-md-5">
                     <div class="first-column-tab">
@@ -435,7 +438,7 @@
                         <span class="pr-edit-btn" id="add-education">
                                 <i class="fa fa-plus"></i>
                         </span>
-
+                        
                         <ul class="list-group list-group-flush" id="educational-backgrounds">
                             @foreach($resume->educations as $education)
                             <li class="list-group-item">
@@ -446,10 +449,11 @@
                             </li>
                             @endforeach
                         </ul>
+
                     </div>
 
                     <h5>Profile progress:</h5>
-                    @if(empty($resume->f_name))
+                    @if(!empty($resume->f_name))
                         <div class="progress progress-navbar">
                             <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">30% profile complete</div>
                         </div>
@@ -483,17 +487,26 @@
                         </div>
 
                         <div class="second-column-tab">
+
                                 <h3>
                                     <i class="fa fa-star"></i>
                                     Experiences
                                 </h3>
-                                <span class="pr-edit-btn" id="experiences">
-                                        <i class="fa fa-edit"></i>
+
+                                <span class="pr-edit-btn" id="add-experiences">
+                                        <i class="fa fa-plus"></i>
                                 </span>
 
-                                <p style="padding: 1rem;">
-                                    {{ $resume->summary }}
-                                </p>
+                                <ul class="list-group list-group-flush" id="work-experiences">
+                                    @foreach($resume->experiences as $experience)
+                                    <li class="list-group-item">
+                                        <span id="experience-{{$experience->id}}">{{$experience->ex_company}}</span>
+                                        <div class="pull-right pr-edit-btn" id="edit-experience" data-id="{{$experience->id}}" style="cursor:pointer;">
+                                            <i class="fa fa-edit"></i>
+                                        </div>
+                                    </li>
+                                    @endforeach
+                                </ul>
                         </div>
 
                         <div class="second-column-tab">
@@ -501,10 +514,10 @@
                                 <i class="fa fa-trophy"></i>
                                 Awards/Certificate
                             </h3>
-                            <span class="pr-edit-btn" id="awards-cert">
+                            <span class="pr-edit-btn" id="edit-awards-cert">
                                     <i class="fa fa-edit"></i>
                             </span>
-                            <p style="padding: 1rem;">
+                            <p style="padding: 1rem;" id="awards-cert">
                                 {{ $resume->awards }}
                             </p>
                         </div>
@@ -514,10 +527,10 @@
                                 <i class="fa fa-briefcase"></i>
                                 Portfolio Websites
                             </h3>
-                            <span class="pr-edit-btn" id="portfolio">
+                            <span class="pr-edit-btn" id="edit-portfolio">
                                     <i class="fa fa-edit"></i>
                             </span>
-                            <p style="padding: 1rem;">
+                            <p style="padding: 1rem;" id="portfolio">
                                 {{ $resume->websites }}
                             </p>
                         </div>
@@ -528,11 +541,11 @@
                                     <i class="fa fa-address-card"></i>                                    
                                     Objective
                                 </h3>
-                                <span class="pr-edit-btn" id="objective">
+                                <span class="pr-edit-btn" id="edit-objective">
                                         <i class="fa fa-edit"></i>
                                 </span>                            
-                                <p style="padding: 1rem;">
-                                    {{$resume->summary}}                                
+                                <p style="padding: 1rem;" id="objective">
+                                    {{$resume->objective}}                                
                                 </p>
                             </div>
                         </div>
@@ -543,10 +556,10 @@
                                     <i class="fa fa-asterisk"></i>
                                     Other Skills
                                 </h3>
-                                <span class="pr-edit-btn" id="other-skills">
+                                <span class="pr-edit-btn" id="edit-other_skills">
                                         <i class="fa fa-edit"></i>
                                 </span>                                
-                                <p style="padding: 1rem;">
+                                <p style="padding: 1rem;" id="other_skills">
                                     {{$resume->other_skills}}                                
                                 </p>
                             </div>
@@ -558,10 +571,10 @@
                                     <i class="fa fa-plus-circle"></i>
                                     Seminars Attended
                                 </h3>
-                                <span class="pr-edit-btn" id="seminars">
+                                <span class="pr-edit-btn" id="edit-seminars_attended">
                                         <i class="fa fa-edit"></i>
                                 </span>                            
-                                <p style="padding: 1rem;">
+                                <p style="padding: 1rem;" id="seminars_attended">
                                     {{$resume->seminars_attended}}                                
                                 </p>
                             </div>
@@ -805,6 +818,7 @@ $(document).ready(function(){
                                 {
                                     
                                     title: 'Field of study',
+                                    preConfirm: swalRequired,
                                 },
                                 {
                                     title: 'Program of study',
@@ -834,7 +848,7 @@ $(document).ready(function(){
                                 },
                                 {
                                     title: 'Montn',
-                                    text: 'Month you it ended',
+                                    text: 'Month ended',
                                     input: 'select',
                                     inputOptions: {
                                         @foreach(month_array() as $key => $value)
@@ -845,7 +859,7 @@ $(document).ready(function(){
                                 },
                                 {
                                     title: 'Year',
-                                    text: 'Year you it ended',
+                                    text: 'Year ended',
                                     input: 'select',
                                     inputOptions: {
                                         @foreach(year_array() as $key => $value)
@@ -887,6 +901,7 @@ $(document).ready(function(){
                                     success:function(_data){
                                         // 
                                         addEducationalBackground(_data.education);
+                                        obj.setEditButtonEdit($('#educational-backgrounds .list-group-item:last-child').find('.pr-edit-btn'))
                                         swal({
                                             title: 'All done!',
                                             html:
@@ -946,7 +961,7 @@ $(document).ready(function(){
                                             inputValue: _data.ed_program_of_study,
                                         },
                                         {
-                                            title: 'Montn',
+                                            title: 'Month',
                                             text: 'Month you started studying',
                                             input: 'select',
                                             inputValue: _data.ed_from_month,
@@ -970,8 +985,8 @@ $(document).ready(function(){
                                             preConfirm: swalRequired
                                         },
                                         {
-                                            title: 'Montn',
-                                            text: 'Month you it ended',
+                                            title: 'Month',
+                                            text: 'Month ended',
                                             input: 'select',
                                             inputValue: _data.ed_to_month,
                                             inputOptions: {
@@ -983,7 +998,7 @@ $(document).ready(function(){
                                         },
                                         {
                                             title: 'Year',
-                                            text: 'Year you it ended',
+                                            text: 'Year ended',
                                             input: 'select',
                                             inputValue: _data.ed_to_year,
                                             inputOptions: {
@@ -1069,6 +1084,12 @@ $(document).ready(function(){
                         +'            <option value="othertools">Other tools</option>'
                         +'</select>',
                     preConfirm: function () {
+                        
+                        if(!$('#swal-language-select').val())
+                        {
+                            swal.showValidationError("Please select Language/Technology!");
+                        }
+
                         return [
                         $('#swal-language-select').val(),
                         ]
@@ -1088,10 +1109,13 @@ $(document).ready(function(){
                             },
                             allowOutsideClick: () => !swal.isLoading()
                         })
+
+                        var language = result.value[0];
+                        
                         $.ajax({
                             url:"{{route('j_g_skills_categories')}}",
                             type: 'GET',
-                            data:{resume_id:{{$resume->id}}, language:result.value[0]},
+                            data:{resume_id:{{$resume->id}}, language:language},
                             success:function(_data){
                                 // 
                                 console.log(_data)
@@ -1104,12 +1128,13 @@ $(document).ready(function(){
                                         selected = 'selected';
                                     });
 
-                                    html += '<option '+selected+' value="'+_data.resume_skills[x].category+'">'+_data.resume_skills[x].category+'</option>';
+                                    html += '<option '+selected+' value="'+_data.resume_skills[x].id+'">'+_data.resume_skills[x].category+'</option>';
                                 }
                                 swal({
                                     title: 'Select Language/Technology',
                                     html:html,
                                     preConfirm: function () {
+
                                         return [
                                         $('#swal-category-select').val(),
                                         ]
@@ -1119,38 +1144,598 @@ $(document).ready(function(){
                                         $('.swal2-modal .dropdown').dropdown();
                                     }
                                 }).then(result=>{
-                                    console.log(result);
-                                    swal({
-                                        title: 'Saving',
-                                        text: 'Please wait...',
-                                        onOpen: () => {
-                                            swal.showLoading()
-                                        },
-                                        allowOutsideClick: () => !swal.isLoading()
-                                    })
+                                    if(result.value)
+                                    {
+                                        swal({
+                                            title: 'Saving',
+                                            text: 'Please wait...',
+                                            onOpen: () => {
+                                                swal.showLoading()
+                                            },
+                                            allowOutsideClick: () => !swal.isLoading()
+                                        })
 
-                                    $.ajax({
-                                        url:"{{route('j_e_r_p_skills')}}",
-                                        headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-                                        type: 'PATCH',
-                                        data:{skills:result.value[0]},
-                                        success:function(_data){
-                                            // 
-                                            console.log(_data)
-                                            swal({
-                                                title: 'All done!',
-                                                html:
-                                                    '',
-                                                confirmButtonText: 'Ok'
-                                            })
-                                        }
-                                    });
+                                        $.ajax({
+                                            url:"{{route('j_e_r_p_skills')}}",
+                                            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                            type: 'PATCH',
+                                            data:{skills:result.value[0], language:language},
+                                            success:function(_data){
+                                                // 
+                                                console.log(_data)
+                                                swal({
+                                                    title: 'All done!',
+                                                    html:
+                                                        '',
+                                                    confirmButtonText: 'Ok'
+                                                }).then(()=>{
+                                                    updateResumeSkillsPanel(language,_data.skills);
+                                                });
+                                            }
+                                        });
+                                    }
                                 });
                             }
                         });
                     }
                 });
-            }
+            },
+            'add-experiences':function(obj){
+                swal(
+                    'Wanna Add Work Experience?',
+                    'Click OK',
+                    'question').then((result) => {
+                        if(result.value)
+                        {
+                            swal.setDefaults({
+                                input: 'text',
+                                confirmButtonText: 'Next &rarr;',
+                                showCancelButton: true,
+                                progressSteps: ['1', '2', '3', '4', '5', '6', '7'],
+                                customClass: 'swal-wide',
+                            });
+
+                            var steps = [
+                                {
+                                    title: 'Company',
+                                    preConfirm: swalRequired,
+                                },
+                                {
+                                    
+                                    title: 'Position',
+                                    preConfirm: swalRequired,
+                                },
+                                {
+                                    title: 'Responsibilities',
+                                    preConfirm: swalRequired,
+                                    input: 'textarea',
+                                },
+                                {
+                                    title: 'Month',
+                                    text: 'Month you started',
+                                    input: 'select',
+                                    inputOptions: {
+                                        @foreach(month_array() as $key => $value)
+                                        '{{$key}}':'{{$value}}',
+                                        @endforeach
+                                    },
+                                    preConfirm: swalRequired
+                                },
+                                {
+                                    title: 'Year',
+                                    text: 'Year you started',
+                                    input: 'select',
+                                    inputOptions: {
+                                        @foreach(year_array() as $key => $value)
+                                        '{{$key}}':'{{$value}}',
+                                        @endforeach
+                                    },
+                                    preConfirm: swalRequired
+                                },
+                                {
+                                    title: 'Month',
+                                    text: 'Month it ended',
+                                    input: 'select',
+                                    inputOptions: {
+                                        @foreach(month_array() as $key => $value)
+                                        '{{$key}}':'{{$value}}',
+                                        @endforeach
+                                    },
+                                    preConfirm: swalRequired
+                                },
+                                {
+                                    title: 'Year',
+                                    text: 'Year it ended',
+                                    input: 'select',
+                                    inputOptions: {
+                                        @foreach(year_array() as $key => $value)
+                                        '{{$key}}':'{{$value}}',
+                                        @endforeach
+                                    },
+                                    preConfirm: swalRequired
+                                },
+                            ]
+
+                            swal.queue(steps).then((result) => {
+                            swal.resetDefaults()
+
+                            if (result.value) {
+                                var __data = {
+                                    ex_company:result.value[0],
+                                    ex_postion:result.value[1],
+                                    ex_explanation:result.value[2],
+                                    ex_from_month:result.value[3],
+                                    ex_from_year:result.value[4],
+                                    ex_to_month:result.value[5],
+                                    ex_to_year:result.value[6],
+                                    resume_id:{{$resume->id}},
+                                    _method: "PATCH"
+                                };
+                                swal({
+                                    title: 'Saving',
+                                    text: 'Please wait...',
+                                    onOpen: () => {
+                                        swal.showLoading()
+                                    },
+                                    allowOutsideClick: () => !swal.isLoading()
+                                })
+                                $.ajax({
+                                    url:"{{route('j_c_r_p_experience')}}",
+                                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                    type: 'PATCH',
+                                    data:__data,
+                                    success:function(data){
+                                        // 
+                                        console.log(data)
+                                        addWorkExperience(data.experience);
+                                        obj.setEditButtonEdit($('#work-experiences .list-group-item:last-child').find('.pr-edit-btn'))
+                                        swal({
+                                            title: 'All done!',
+                                            html:
+                                                '',
+                                            confirmButtonText: 'Ok'
+                                        })
+                                    }
+                                });
+                            }
+                        })
+                    }
+                });
+            },
+            'edit-experience':function(obj){
+                swal({
+                    title: 'Loading Info',
+                    text: 'Please wait...',
+                    onOpen: () => {
+                        swal.showLoading()
+                    },
+                    allowOutsideClick: () => !swal.isLoading()
+                })
+
+                $.ajax({
+                    'url':"{{route('j_g_experience')}}",
+                    type:"GET",
+                    data:{id:obj.id},
+                    success:function(experience){
+                        swal(
+                            'Wanna Update Work Experience?',
+                            'Click OK',
+                            'question').then((result) => {
+                                if(result.value)
+                                {
+                                    swal.setDefaults({
+                                        input: 'text',
+                                        confirmButtonText: 'Next &rarr;',
+                                        showCancelButton: true,
+                                        progressSteps: ['1', '2', '3', '4', '5', '6', '7'],
+                                        customClass: 'swal-wide',
+                                    });
+
+                                    var steps = [
+                                        {
+                                            title: 'Company',
+                                            preConfirm: swalRequired,
+                                            inputValue: experience.ex_company,
+                                        },
+                                        {
+                                            
+                                            title: 'Position',
+                                            preConfirm: swalRequired,
+                                            inputValue: experience.ex_postion,
+                                        },
+                                        {
+                                            title: 'Responsibilities',
+                                            preConfirm: swalRequired,
+                                            input: 'textarea',
+                                            inputValue: experience.ex_explanation,
+                                        },
+                                        {
+                                            title: 'Month',
+                                            text: 'Month you started',
+                                            input: 'select',
+                                            inputValue: experience.ex_from_month,
+                                            inputOptions: {
+                                                @foreach(month_array() as $key => $value)
+                                                '{{$key}}':'{{$value}}',
+                                                @endforeach
+                                            },
+                                            preConfirm: swalRequired
+                                        },
+                                        {
+                                            title: 'Year',
+                                            text: 'Year you started',
+                                            input: 'select',
+                                            inputValue: experience.ex_from_year,
+                                            inputOptions: {
+                                                @foreach(year_array() as $key => $value)
+                                                '{{$key}}':'{{$value}}',
+                                                @endforeach
+                                            },
+                                            preConfirm: swalRequired
+                                        },
+                                        {
+                                            title: 'Month',
+                                            text: 'Month it ended',
+                                            input: 'select',
+                                            inputValue: experience.ex_to_month,
+                                            inputOptions: {
+                                                @foreach(month_array() as $key => $value)
+                                                '{{$key}}':'{{$value}}',
+                                                @endforeach
+                                            },
+                                            preConfirm: swalRequired
+                                        },
+                                        {
+                                            title: 'Year',
+                                            text: 'Year it ended',
+                                            input: 'select',
+                                            inputValue: experience.ex_to_year,
+                                            inputOptions: {
+                                                @foreach(year_array() as $key => $value)
+                                                '{{$key}}':'{{$value}}',
+                                                @endforeach
+                                            },
+                                            preConfirm: swalRequired
+                                        },
+                                    ]
+
+                                    swal.queue(steps).then((result) => {
+                                    swal.resetDefaults()
+
+                                    if (result.value) {
+                                        var __data = {
+                                            id:experience.id,
+                                            ex_company:result.value[0],
+                                            ex_postion:result.value[1],
+                                            ex_explanation:result.value[2],
+                                            ex_from_month:result.value[3],
+                                            ex_from_year:result.value[4],
+                                            ex_to_month:result.value[5],
+                                            ex_to_year:result.value[6],
+                                            resume_id:{{$resume->id}},
+                                            _method: "PATCH"
+                                        };
+                                        swal({
+                                            title: 'Saving',
+                                            text: 'Please wait...',
+                                            onOpen: () => {
+                                                swal.showLoading()
+                                            },
+                                            allowOutsideClick: () => !swal.isLoading()
+                                        })
+                                        $.ajax({
+                                            url:"{{route('j_e_r_p_company_experiences')}}",
+                                            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                            type: 'PATCH',
+                                            data:__data,
+                                            success:function(data){
+                                                // 
+                                                $('#experience-'+data.experience.id).html(data.experience.ex_company);
+                                                swal({
+                                                    title: 'All done!',
+                                                    html:
+                                                        '',
+                                                    confirmButtonText: 'Ok'
+                                                })
+                                            }
+                                        });
+                                    }
+                                })
+                            }
+                        });
+                    }
+                });
+            },
+            'edit-awards-cert':function(obj){
+                swal({
+                    title: 'Loading Info',
+                    text: 'Please wait...',
+                    onOpen: () => {
+                        swal.showLoading()
+                    },
+                    allowOutsideClick: () => !swal.isLoading()
+                })
+
+                $.ajax({
+                    'url':"{{route('j_g_award_certificate')}}",
+                    type:"GET",
+                    data:{id:obj.id},
+                    success:function(resume){
+                        // 
+                        swal({
+                            input:'textarea',
+                            title: 'Award/Certificate',
+                            text:'Fill up',
+                            preConfirm: swalRequired,
+                            inputValue: resume.awards,
+                        }).then((result)=>{
+                            if(result.value){
+                                swal({
+                                    title: 'Saving',
+                                    text: 'Please wait...',
+                                    onOpen: () => {
+                                        swal.showLoading()
+                                    },
+                                    allowOutsideClick: () => !swal.isLoading()
+                                })
+                                console.log(result.value)
+                                $.ajax({
+                                    url:"{{route('j_e_r_p_meta')}}",
+                                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                    type: 'PATCH',
+                                    data:{
+                                        col:'awards',
+                                        value:result.value
+                                    },
+                                    success:function(data){
+                                        console.log(data)
+                                        swal({
+                                            title: 'All done!',
+                                            html:
+                                                '',
+                                            confirmButtonText: 'Ok'
+                                        }).then(()=>{
+                                            $('#awards-cert').html(data.resume.awards);
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            },
+            'edit-portfolio':function(obj){
+                swal({
+                    title: 'Loading Info',
+                    text: 'Please wait...',
+                    onOpen: () => {
+                        swal.showLoading()
+                    },
+                    allowOutsideClick: () => !swal.isLoading()
+                })
+
+                $.ajax({
+                    'url':"{{route('json_get_resume')}}",
+                    type:"GET",
+                    data:{id:obj.id},
+                    success:function(resume){
+                        // 
+                        swal({
+                            input:'textarea',
+                            title: 'Portfolio Websites',
+                            text:'Fill up',
+                            preConfirm: swalRequired,
+                            inputValue: resume.websites,
+                        }).then((result)=>{
+                            if(result.value){
+                                swal({
+                                    title: 'Saving',
+                                    text: 'Please wait...',
+                                    onOpen: () => {
+                                        swal.showLoading()
+                                    },
+                                    allowOutsideClick: () => !swal.isLoading()
+                                })
+                                console.log(result.value)
+                                $.ajax({
+                                    url:"{{route('j_e_r_p_meta')}}",
+                                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                    type: 'PATCH',
+                                    data:{
+                                        col:'websites',
+                                        value:result.value
+                                    },
+                                    success:function(data){
+                                        console.log(data)
+                                        swal({
+                                            title: 'All done!',
+                                            html:
+                                                '',
+                                            confirmButtonText: 'Ok'
+                                        }).then(()=>{
+                                            $('#portfolio').html(data.resume.websites);
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            },
+            'edit-objective':function(obj){
+                swal({
+                    title: 'Loading Info',
+                    text: 'Please wait...',
+                    onOpen: () => {
+                        swal.showLoading()
+                    },
+                    allowOutsideClick: () => !swal.isLoading()
+                })
+
+                $.ajax({
+                    'url':"{{route('json_get_resume')}}",
+                    type:"GET",
+                    data:{id:obj.id},
+                    success:function(resume){
+                        // 
+                        swal({
+                            input:'textarea',
+                            title: 'Objective',
+                            text:'Fill up',
+                            preConfirm: swalRequired,
+                            inputValue: resume.objective,
+                        }).then((result)=>{
+                            if(result.value){
+                                swal({
+                                    title: 'Saving',
+                                    text: 'Please wait...',
+                                    onOpen: () => {
+                                        swal.showLoading()
+                                    },
+                                    allowOutsideClick: () => !swal.isLoading()
+                                })
+                                console.log(result.value)
+                                $.ajax({
+                                    url:"{{route('j_e_r_p_meta')}}",
+                                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                    type: 'PATCH',
+                                    data:{
+                                        col:'objective',
+                                        value:result.value
+                                    },
+                                    success:function(data){
+                                        console.log(data)
+                                        swal({
+                                            title: 'All done!',
+                                            html:
+                                                '',
+                                            confirmButtonText: 'Ok'
+                                        }).then(()=>{
+                                            $('#objective').html(data.resume.objective);
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            },
+            'edit-other_skills':function(obj){
+                swal({
+                    title: 'Loading Info',
+                    text: 'Please wait...',
+                    onOpen: () => {
+                        swal.showLoading()
+                    },
+                    allowOutsideClick: () => !swal.isLoading()
+                })
+
+                $.ajax({
+                    'url':"{{route('json_get_resume')}}",
+                    type:"GET",
+                    data:{id:obj.id},
+                    success:function(resume){
+                        // 
+                        swal({
+                            input:'textarea',
+                            title: 'Other Skills',
+                            text:'Fill up',
+                            preConfirm: swalRequired,
+                            inputValue: resume.other_skills,
+                        }).then((result)=>{
+                            if(result.value){
+                                swal({
+                                    title: 'Saving',
+                                    text: 'Please wait...',
+                                    onOpen: () => {
+                                        swal.showLoading()
+                                    },
+                                    allowOutsideClick: () => !swal.isLoading()
+                                })
+                                console.log(result.value)
+                                $.ajax({
+                                    url:"{{route('j_e_r_p_meta')}}",
+                                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                    type: 'PATCH',
+                                    data:{
+                                        col:'other_skills',
+                                        value:result.value
+                                    },
+                                    success:function(data){
+                                        console.log(data)
+                                        swal({
+                                            title: 'All done!',
+                                            html:
+                                                '',
+                                            confirmButtonText: 'Ok'
+                                        }).then(()=>{
+                                            $('#other_skills').html(data.resume.other_skills);
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            },
+            'edit-seminars_attended':function(obj){
+                swal({
+                    title: 'Loading Info',
+                    text: 'Please wait...',
+                    onOpen: () => {
+                        swal.showLoading()
+                    },
+                    allowOutsideClick: () => !swal.isLoading()
+                })
+
+                $.ajax({
+                    'url':"{{route('json_get_resume')}}",
+                    type:"GET",
+                    data:{id:obj.id},
+                    success:function(resume){
+                        // 
+                        swal({
+                            input:'textarea',
+                            title: 'Seminars Attended',
+                            text:'Fill up',
+                            preConfirm: swalRequired,
+                            inputValue: resume.seminars_attended,
+                        }).then((result)=>{
+                            if(result.value){
+                                swal({
+                                    title: 'Saving',
+                                    text: 'Please wait...',
+                                    onOpen: () => {
+                                        swal.showLoading()
+                                    },
+                                    allowOutsideClick: () => !swal.isLoading()
+                                })
+                                console.log(result.value)
+                                $.ajax({
+                                    url:"{{route('j_e_r_p_meta')}}",
+                                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                    type: 'PATCH',
+                                    data:{
+                                        col:'seminars_attended',
+                                        value:result.value
+                                    },
+                                    success:function(data){
+                                        console.log(data)
+                                        swal({
+                                            title: 'All done!',
+                                            html:
+                                                '',
+                                            confirmButtonText: 'Ok'
+                                        }).then(()=>{
+                                            $('#seminars_attended').html(data.resume.seminars_attended);
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            },
         },
         'submitHandlers':{}
     });
@@ -1208,15 +1793,89 @@ $(document).ready(function(){
         })
     }
 
+    function updateResumeSkillsPanel(language, skills){
+        var skills_container = $('#skill_required');
+
+        // 
+        var lang = language.toLowerCase() == 'c++' ? 'cplus2' : (language.toLowerCase() == "c#" ? 'csharp' : (language.toLowerCase() == 'node.js' ? 'node-js' : language.toLowerCase()) );
+        console.log(skills.length)
+
+        if(skills.length){
+            skills_container.find('.'+lang).closest('.job-card').find('.body').html('');
+            
+            for(var i = 0; i < skills.length; i++){
+
+                var card = skills_container.find('.'+lang).closest('.job-card');
+                if(card.length){
+                    card.find('.body').append('<div class="ellipsis">'+skills[i].category+'</div>');
+                }
+                else
+                {
+                    var x = 0;
+                    var n = 0;
+                    skills_container.find('.col-md-4').each(function(){
+                        var _n = $(this).find('.job-card').length;
+                        if(x > 2){
+                            x = 0;
+                        }
+                        
+                        if(x > 0)
+                        {
+                            if(n > _n){
+                                return false;
+                            }
+                            else{
+                                if(x == 2)
+                                {
+                                    x = 0;
+                                    return false;
+                                }
+
+                                n = _n;
+                            }
+                        }
+                        else{
+                            n = _n
+                        }
+
+                        x++;
+                    });
+
+                    skills_container.find('.col-md-4').eq(x).append(
+                        '<div class="job-card">'
+                        +'    <div class="header ellipsis '+lang+'">'+skills[i].language+'</div>'
+                        +'    <div class="body"><div class="ellipsis">'+skills[i].category+'</div> </div>'
+                        +'</div>'
+                    );
+                }
+            }
+        }
+        else{
+            skills_container.find('.'+lang).closest('.job-card').remove();
+        }
+    }
+
     function addEducationalBackground(data){
         var html = '<li class="list-group-item">'
-                    +'    <span id="education-'+data.id+'>'+data.ed_university+'</span>'
+                    +'    <span id="education-'+data.id+'">'+data.ed_university+'</span>'
                     +'    <div class="pull-right pr-edit-btn" id="edit-education" data-id="'+data.id+'" style="cursor:pointer;">'
                     +'        <i class="fa fa-edit"></i>'
                     +'    </div>'
                     +'</li>'
         $('#educational-backgrounds').append(html);
     }
+
+    function addWorkExperience(data){
+        
+        var html = '<li class="list-group-item">'
+                    +'    <span id="experience-'+data.id+'">'+data.ex_company+'</span>'
+                    +'    <div class="pull-right pr-edit-btn" id="edit-experience" data-id="'+data.id+'" style="cursor:pointer;">'
+                    +'        <i class="fa fa-edit"></i>'
+                    +'    </div>'
+                    +'</li>'
+        $('#work-experiences').append(html);
+    }
+
 });
 
 function prep_del_batch(id){
