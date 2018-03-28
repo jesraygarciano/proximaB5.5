@@ -387,6 +387,7 @@ header{
 
 .container-crs-outline .panel .panel-heading h4{
   color: #fff;
+  padding-bottom: 1rem;
 }
 
 /*.container-crs-outline .panel .panel-heading h4 i{
@@ -588,7 +589,7 @@ header{
 {
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
-  background: #232323;
+  background: #fff;
 }
 
 /*

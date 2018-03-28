@@ -269,13 +269,16 @@ class UserController extends Controller
 
         $resume_skills = Resume_skill::where('language',$request->language)->pluck('id');
 
-        $resume->has_skill()->whereIn('resume_skill_id',$resume_skills)->detach();
+        $resume->has_skill()->detach($resume_skills);
         $resume_skill_ids = $request->input('skills');
-        foreach($request->skills as $resume_skill_id){
-            $resume->has_skill()->attach($resume_skill_id);
+        if($resume_skill_ids)
+        {
+            foreach($request->skills as $resume_skill_id){
+                $resume->has_skill()->attach($resume_skill_id);
+            }
         }
 
-        return ['status'=>'success'];
+        return ['status'=>'success', 'skills'=>$resume->has_skill()->where('language',$request->language)->get()];
     }
 
     public function edit_resume_meta(Request $request){
@@ -286,7 +289,7 @@ class UserController extends Controller
             $resume->update([
                 $request->col=>$request->value
             ]);
-            return ['status'=>'success'];
+            return ['status'=>'success', 'resume'=>$resume];
         }
     }
 
@@ -294,31 +297,62 @@ class UserController extends Controller
         // 
         $validator = Validator::make($request->all(), [
             'ex_company' => 'required',
-            'ex_position' => 'required',
+            'ex_postion' => 'required',
             'ex_from_month' => 'required',
-            'ex_from_year' => 'email',
+            'ex_from_year' => 'required',
             'ex_to_month' => 'required',
             'ex_to_year' => 'required',
             'ex_explanation' => 'required',
+            'id' => 'required',
         ]);
 
         if($validator->fails()){
             return ['status'=>'failed', 'message'=>$validator->messages];
         }
 
-        $resume = \Auth::user()->findFirstOrCreateResume();
-
-        $request->update([
+        $experience = Experience::findOrFail($request->id);
+        $experience->update([
             'ex_company'=>$request->ex_company,
-            'ex_position'=>$request->ex_position,
+            'ex_postion'=>$request->ex_postion,
             'ex_from_month'=>$request->ex_from_month,
             'ex_from_year'=>$request->ex_from_year,
             'ex_to_month'=>$request->ex_to_month,
             'ex_to_year'=>$request->ex_to_year,
             'ex_explanation'=>$request->ex_explanation,
+            'resume_id'=>$request->resume_id
         ]);
 
-        return ['status'=>'success'];
+        return ['status'=>'success', 'experience'=>$experience];
+    }
+
+    public function j_c_r_p_experience(Request $request){
+        // 
+        $validator = Validator::make($request->all(), [
+            'ex_company' => 'required',
+            'ex_postion' => 'required',
+            'ex_from_month' => 'required',
+            'ex_from_year' => 'required',
+            'ex_to_month' => 'required',
+            'ex_to_year' => 'required',
+            'ex_explanation' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return ['status'=>'failed', 'message'=>$validator->messages()];
+        }
+
+        $experience = Experience::create([
+            'ex_company'=>$request->ex_company,
+            'ex_postion'=>$request->ex_postion,
+            'ex_from_month'=>$request->ex_from_month,
+            'ex_from_year'=>$request->ex_from_year,
+            'ex_to_month'=>$request->ex_to_month,
+            'ex_to_year'=>$request->ex_to_year,
+            'ex_explanation'=>$request->ex_explanation,
+            'resume_id'=>$request->resume_id
+        ]);
+
+        return ['status'=>'success', 'experience'=>$experience];
     }
 
     public function create_educational_background(Request $request){
@@ -382,5 +416,13 @@ class UserController extends Controller
         ->get();
 
         return ['resume_skills'=>$resume_skills, 'user_skills'=>$user_skills];
+    }
+
+    public function getResumeExperience(Request $request){
+        return Experience::findOrFail($request->id);
+    }
+
+    public function getResumeAwardCertificate(Request $request){
+        return \Auth::user()->findFirstOrCreateResume();
     }
 }

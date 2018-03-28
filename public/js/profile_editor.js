@@ -11,7 +11,12 @@
 		$this = this;
 
 		this.setEvents = function(){
-			$this.find('.pr-edit-btn').click(function(){
+			this.setEditButtonEdit($this.find('.pr-edit-btn'));
+			return $this;
+		}
+
+		this.setEditButtonEdit = function(elm){
+			elm.click(function(){
 				$this.id = $(this).data('id');
 				var handler = settings.editHandlers[$(this).attr('id')];
 				$this.current_panel = $(this).attr('id');
@@ -22,7 +27,6 @@
 					$this.prepUpdate(this);
 				}
 			});
-			return $this;
 		}
 
 		this.prepUpdate = function(elm){
