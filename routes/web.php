@@ -41,6 +41,8 @@ Route::group(['prefix'=>'itp'], function(){
 					Route::get('all',['as'=>'json_get_resume', 'uses'=>'UserController@returResume']);
 					Route::get('education',['as'=>'j_g_r_education', 'uses'=>'UserController@returResumeEducation']);
 					Route::get('skill/categories',['as'=>'j_g_skills_categories', 'uses'=>'UserController@getLanguageCategorySkills']);
+					Route::get('experience',['as'=>'j_g_experience', 'uses'=>'UserController@getResumeExperience']);
+					Route::get('award/certificate',['as'=>'j_g_award_certificate', 'uses'=>'UserController@getResumeAwardCertificate']);
 				});
 				Route::group(['prefix'=>'edit'], function(){
 					Route::patch('basic',['as'=>'j_e_r_p_basic', 'uses'=>'UserController@edit_resume_basic']);
@@ -51,6 +53,7 @@ Route::group(['prefix'=>'itp'], function(){
 				});
 				Route::group(['prefix'=>'create'], function(){
 					Route::patch('educational_background',['as'=>'j_c_r_p_educational_background', 'uses'=>'UserController@j_c_r_p_educational_background']);
+					Route::patch('experience',['as'=>'j_c_r_p_experience', 'uses'=>'UserController@j_c_r_p_experience']);
 				});
 			});
 		});
