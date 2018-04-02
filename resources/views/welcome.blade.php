@@ -94,7 +94,12 @@
         <h1 class="header-content-h1">Intern Training Program</h1>
         <p>A training program for aspiring students, which aims to help students who are into software development to access high value jobs from the high-demand sector.</p>
         <a href="#" class="btn btn-frst">Find Out More</a>
+
+        @if(!\Auth::check())
         <a href="{{ url('register') }}" class="btn btn-opposite">Register now!</a>
+        @else
+        <a href="{{ route('itp_applicant_profile') }}" class="btn btn-opposite">ITP Profile</a>
+        @endif
       </div>
 
     

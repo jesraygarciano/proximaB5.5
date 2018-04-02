@@ -455,7 +455,7 @@
                     <h5>Profile progress:</h5>
                     @if(!empty($resume->f_name))
                         <div class="progress progress-navbar">
-                            <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">30% profile complete</div>
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: {{\Auth::user()->profileProgress()}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{\Auth::user()->profileProgress()}}% profile complete</div>
                         </div>
                     @elseif(!empty($resume->f_name) && !empty($resume->summary))
                         <div class="progress progress-navbar">
@@ -466,6 +466,7 @@
                     @endif
 
                 </div>
+
                 {{-- @if(isset($application)) --}}
                 <div class="col-lg-7 col-md-7">
                         <div class="second-column-tab">
@@ -784,7 +785,8 @@ $(document).ready(function(){
                                                     title: 'All done!',
                                                     html:
                                                         '',
-                                                    confirmButtonText: 'Ok'
+                                                    confirmButtonText: 'Ok',
+                                                    type:'success'
                                                 })
                                             }
                                         });
@@ -906,7 +908,8 @@ $(document).ready(function(){
                                             title: 'All done!',
                                             html:
                                                 '',
-                                            confirmButtonText: 'Ok'
+                                            confirmButtonText: 'Ok',
+                                            type:'success'
                                         })
                                     }
                                 });
@@ -917,145 +920,198 @@ $(document).ready(function(){
             },
             'edit-education':function(obj){
                 swal({
-                    title: 'Loading Info',
-                    text: 'Please wait...',
-                    onOpen: () => {
-                        swal.showLoading()
-                    },
-                    allowOutsideClick: () => !swal.isLoading()
-                })
-                $.ajax({
-                    'url':"{{route('j_g_r_education')}}",
-                    type:"GET",
-                    data:{id:obj.id},
-                    success:function(_data){
-                        swal(
-                            'Edit Education Background?',
-                            'Click OK',
-                            'question').then((result) => {
-                                if(result.value)
-                                {
-                                    swal.setDefaults({
-                                        input: 'text',
-                                        confirmButtonText: 'Next &rarr;',
-                                        showCancelButton: true,
-                                        progressSteps: ['1', '2', '3', '4', '5', '6', '7'],
-                                        customClass: 'swal-wide',
-                                    })
+                    title: 'Action',
+                    text: 'What action do you wanna perform?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Update',
+                    cancelButtonText: 'Delete'
+                }).then((result)=>{
+                    if (result.value) {
+                        swal({
+                            title: 'Loading Info',
+                            text: 'Please wait...',
+                            onOpen: () => {
+                                swal.showLoading()
+                            },
+                            allowOutsideClick: () => !swal.isLoading()
+                        })
+                        $.ajax({
+                            'url':"{{route('j_g_r_education')}}",
+                            type:"GET",
+                            data:{id:obj.id},
+                            success:function(_data){
+                                swal(
+                                    'Edit Education Background?',
+                                    'Click OK',
+                                    'question').then((result) => {
+                                        if(result.value)
+                                        {
+                                            swal.setDefaults({
+                                                input: 'text',
+                                                confirmButtonText: 'Next &rarr;',
+                                                showCancelButton: true,
+                                                progressSteps: ['1', '2', '3', '4', '5', '6', '7'],
+                                                customClass: 'swal-wide',
+                                            })
 
-                                    var steps = [
-                                        {
-                                            title: 'University',
-                                            preConfirm: swalRequired,
-                                            inputValue: _data.ed_university,
-                                        },
-                                        {
-                                            
-                                            title: 'Field of study',
-                                            inputValue: _data.ed_field_of_study,
-                                            preConfirm: swalRequired,
-                                        },
-                                        {
-                                            title: 'Program of study',
-                                            preConfirm: swalRequired,
-                                            inputValue: _data.ed_program_of_study,
-                                        },
-                                        {
-                                            title: 'Month',
-                                            text: 'Month you started studying',
-                                            input: 'select',
-                                            inputValue: _data.ed_from_month,
-                                            inputOptions: {
-                                                @foreach(month_array() as $key => $value)
-                                                '{{$key}}':'{{$value}}',
-                                                @endforeach
-                                            },
-                                            preConfirm: swalRequired
-                                        },
-                                        {
-                                            title: 'Year',
-                                            text: 'Year you started studying',
-                                            input: 'select',
-                                            inputValue: _data.ed_from_year,
-                                            inputOptions: {
-                                                @foreach(year_array() as $key => $value)
-                                                '{{$key}}':'{{$value}}',
-                                                @endforeach
-                                            },
-                                            preConfirm: swalRequired
-                                        },
-                                        {
-                                            title: 'Month',
-                                            text: 'Month ended',
-                                            input: 'select',
-                                            inputValue: _data.ed_to_month,
-                                            inputOptions: {
-                                                @foreach(month_array() as $key => $value)
-                                                '{{$key}}':'{{$value}}',
-                                                @endforeach
-                                            },
-                                            preConfirm: swalRequired
-                                        },
-                                        {
-                                            title: 'Year',
-                                            text: 'Year ended',
-                                            input: 'select',
-                                            inputValue: _data.ed_to_year,
-                                            inputOptions: {
-                                                @foreach(year_array() as $key => $value)
-                                                '{{$key}}':'{{$value}}',
-                                                @endforeach
-                                            },
-                                            preConfirm: swalRequired
-                                        },
-                                    ]
+                                            var steps = [
+                                                {
+                                                    title: 'University',
+                                                    preConfirm: swalRequired,
+                                                    inputValue: _data.ed_university,
+                                                },
+                                                {
+                                                    
+                                                    title: 'Field of study',
+                                                    inputValue: _data.ed_field_of_study,
+                                                    preConfirm: swalRequired,
+                                                },
+                                                {
+                                                    title: 'Program of study',
+                                                    preConfirm: swalRequired,
+                                                    inputValue: _data.ed_program_of_study,
+                                                },
+                                                {
+                                                    title: 'Month',
+                                                    text: 'Month you started studying',
+                                                    input: 'select',
+                                                    inputValue: _data.ed_from_month,
+                                                    inputOptions: {
+                                                        @foreach(month_array() as $key => $value)
+                                                        '{{$key}}':'{{$value}}',
+                                                        @endforeach
+                                                    },
+                                                    preConfirm: swalRequired
+                                                },
+                                                {
+                                                    title: 'Year',
+                                                    text: 'Year you started studying',
+                                                    input: 'select',
+                                                    inputValue: _data.ed_from_year,
+                                                    inputOptions: {
+                                                        @foreach(year_array() as $key => $value)
+                                                        '{{$key}}':'{{$value}}',
+                                                        @endforeach
+                                                    },
+                                                    preConfirm: swalRequired
+                                                },
+                                                {
+                                                    title: 'Month',
+                                                    text: 'Month ended',
+                                                    input: 'select',
+                                                    inputValue: _data.ed_to_month,
+                                                    inputOptions: {
+                                                        @foreach(month_array() as $key => $value)
+                                                        '{{$key}}':'{{$value}}',
+                                                        @endforeach
+                                                    },
+                                                    preConfirm: swalRequired
+                                                },
+                                                {
+                                                    title: 'Year',
+                                                    text: 'Year ended',
+                                                    input: 'select',
+                                                    inputValue: _data.ed_to_year,
+                                                    inputOptions: {
+                                                        @foreach(year_array() as $key => $value)
+                                                        '{{$key}}':'{{$value}}',
+                                                        @endforeach
+                                                    },
+                                                    preConfirm: swalRequired
+                                                },
+                                            ]
 
-                                    swal.queue(steps).then((result) => {
-                                    swal.resetDefaults()
+                                            swal.queue(steps).then((result) => {
+                                            swal.resetDefaults()
 
-                                    if (result.value) {
-                                        var __data = {
-                                            id:_data.id,
-                                            ed_university:result.value[0],
-                                            ed_program_of_study:result.value[1],
-                                            ed_field_of_study:result.value[2],
-                                            ed_from_month:result.value[3],
-                                            ed_from_year:result.value[4],
-                                            ed_to_month:result.value[5],
-                                            ed_to_year:result.value[6],
-                                            resume_id:{{$resume->id}},
-                                            _method: "PATCH"
-                                        };
-                                        swal({
-                                            title: 'Saving',
-                                            text: 'Please wait...',
-                                            onOpen: () => {
-                                                swal.showLoading()
-                                            },
-                                            allowOutsideClick: () => !swal.isLoading()
-                                        })
-                                        $.ajax({
-                                            url:"{{route('j_e_r_p_educational_background')}}",
-                                            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-                                            type: 'PATCH',
-                                            data:__data,
-                                            success:function(data){
-                                                // 
-                                                console.log(obj.current_panel)
-                                                console.log($('#education-'+_data.id));
-                                                $('#education-'+_data.id).html(__data.ed_university);
+                                            if (result.value) {
+                                                var __data = {
+                                                    id:_data.id,
+                                                    ed_university:result.value[0],
+                                                    ed_program_of_study:result.value[1],
+                                                    ed_field_of_study:result.value[2],
+                                                    ed_from_month:result.value[3],
+                                                    ed_from_year:result.value[4],
+                                                    ed_to_month:result.value[5],
+                                                    ed_to_year:result.value[6],
+                                                    resume_id:{{$resume->id}},
+                                                    _method: "PATCH"
+                                                };
                                                 swal({
-                                                    title: 'All done!',
-                                                    html:
-                                                        '',
-                                                    confirmButtonText: 'Ok'
+                                                    title: 'Saving',
+                                                    text: 'Please wait...',
+                                                    onOpen: () => {
+                                                        swal.showLoading()
+                                                    },
+                                                    allowOutsideClick: () => !swal.isLoading()
                                                 })
+                                                $.ajax({
+                                                    url:"{{route('j_e_r_p_educational_background')}}",
+                                                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                                    type: 'PATCH',
+                                                    data:__data,
+                                                    success:function(data){
+                                                        // 
+                                                        console.log(obj.current_panel)
+                                                        console.log($('#education-'+_data.id));
+                                                        $('#education-'+_data.id).html(__data.ed_university);
+                                                        swal({
+                                                            title: 'All done!',
+                                                            type:'success',
+                                                            html:
+                                                                '',
+                                                            confirmButtonText: 'Ok'
+                                                        })
+                                                    }
+                                                });
                                             }
+                                            })
+                                        }
+                                });
+                            }
+                        });
+                    } else if (
+                        // Read more about handling dismissals
+                        result.dismiss === swal.DismissReason.cancel
+                    ) {
+                        swal({
+                            title: 'Are you sure?',
+                            text: "You won't be able to revert this!",
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                            if (result.value) {
+                                swal({
+                                    title: 'Updating database',
+                                    text: 'Please wait...',
+                                    onOpen: () => {
+                                        swal.showLoading()
+                                    },
+                                    allowOutsideClick: () => !swal.isLoading()
+                                })
+
+                                $.ajax({
+                                    url:"{{route('j_d_education')}}",
+                                    type:"delete",
+                                    data:{id:obj.id},
+                                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                    success:function(data){
+                                        swal(
+                                            'Deleted!',
+                                            'Your file has been deleted.',
+                                            'success'
+                                        ).then(()=>{
+                                            $('#education-'+obj.id).closest('.list-group-item').remove();
                                         });
                                     }
-                                    })
-                                }
-                        });
+                                });
+                            }
+                        })
                     }
                 });
             },
@@ -1167,6 +1223,7 @@ $(document).ready(function(){
                                                     title: 'All done!',
                                                     html:
                                                         '',
+                                                    type:'success',
                                                     confirmButtonText: 'Ok'
                                                 }).then(()=>{
                                                     updateResumeSkillsPanel(language,_data.skills);
@@ -1291,6 +1348,7 @@ $(document).ready(function(){
                                         obj.setEditButtonEdit($('#work-experiences .list-group-item:last-child').find('.pr-edit-btn'))
                                         swal({
                                             title: 'All done!',
+                                            type:'success',
                                             html:
                                                 '',
                                             confirmButtonText: 'Ok'
@@ -1304,145 +1362,196 @@ $(document).ready(function(){
             },
             'edit-experience':function(obj){
                 swal({
-                    title: 'Loading Info',
-                    text: 'Please wait...',
-                    onOpen: () => {
-                        swal.showLoading()
-                    },
-                    allowOutsideClick: () => !swal.isLoading()
-                })
+                    title: 'Action',
+                    text: 'What action do you wanna perform?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Update',
+                    cancelButtonText: 'Delete'
+                }).then((result)=>{
+                    if (result.value) {
+                        swal({
+                            title: 'Loading Info',
+                            text: 'Please wait...',
+                            onOpen: () => {
+                                swal.showLoading()
+                            },
+                            allowOutsideClick: () => !swal.isLoading()
+                        })
 
-                $.ajax({
-                    'url':"{{route('j_g_experience')}}",
-                    type:"GET",
-                    data:{id:obj.id},
-                    success:function(experience){
-                        swal(
-                            'Wanna Update Work Experience?',
-                            'Click OK',
-                            'question').then((result) => {
-                                if(result.value)
-                                {
-                                    swal.setDefaults({
-                                        input: 'text',
-                                        confirmButtonText: 'Next &rarr;',
-                                        showCancelButton: true,
-                                        progressSteps: ['1', '2', '3', '4', '5', '6', '7'],
-                                        customClass: 'swal-wide',
-                                    });
+                        $.ajax({
+                            'url':"{{route('j_g_experience')}}",
+                            type:"GET",
+                            data:{id:obj.id},
+                            success:function(experience){
+                                swal(
+                                    'Wanna Update Work Experience?',
+                                    'Click OK',
+                                    'question').then((result) => {
+                                        if(result.value)
+                                        {
+                                            swal.setDefaults({
+                                                input: 'text',
+                                                confirmButtonText: 'Next &rarr;',
+                                                showCancelButton: true,
+                                                progressSteps: ['1', '2', '3', '4', '5', '6', '7'],
+                                                customClass: 'swal-wide',
+                                            });
 
-                                    var steps = [
-                                        {
-                                            title: 'Company',
-                                            preConfirm: swalRequired,
-                                            inputValue: experience.ex_company,
-                                        },
-                                        {
-                                            
-                                            title: 'Position',
-                                            preConfirm: swalRequired,
-                                            inputValue: experience.ex_postion,
-                                        },
-                                        {
-                                            title: 'Responsibilities',
-                                            preConfirm: swalRequired,
-                                            input: 'textarea',
-                                            inputValue: experience.ex_explanation,
-                                        },
-                                        {
-                                            title: 'Month',
-                                            text: 'Month you started',
-                                            input: 'select',
-                                            inputValue: experience.ex_from_month,
-                                            inputOptions: {
-                                                @foreach(month_array() as $key => $value)
-                                                '{{$key}}':'{{$value}}',
-                                                @endforeach
-                                            },
-                                            preConfirm: swalRequired
-                                        },
-                                        {
-                                            title: 'Year',
-                                            text: 'Year you started',
-                                            input: 'select',
-                                            inputValue: experience.ex_from_year,
-                                            inputOptions: {
-                                                @foreach(year_array() as $key => $value)
-                                                '{{$key}}':'{{$value}}',
-                                                @endforeach
-                                            },
-                                            preConfirm: swalRequired
-                                        },
-                                        {
-                                            title: 'Month',
-                                            text: 'Month it ended',
-                                            input: 'select',
-                                            inputValue: experience.ex_to_month,
-                                            inputOptions: {
-                                                @foreach(month_array() as $key => $value)
-                                                '{{$key}}':'{{$value}}',
-                                                @endforeach
-                                            },
-                                            preConfirm: swalRequired
-                                        },
-                                        {
-                                            title: 'Year',
-                                            text: 'Year it ended',
-                                            input: 'select',
-                                            inputValue: experience.ex_to_year,
-                                            inputOptions: {
-                                                @foreach(year_array() as $key => $value)
-                                                '{{$key}}':'{{$value}}',
-                                                @endforeach
-                                            },
-                                            preConfirm: swalRequired
-                                        },
-                                    ]
+                                            var steps = [
+                                                {
+                                                    title: 'Company',
+                                                    preConfirm: swalRequired,
+                                                    inputValue: experience.ex_company,
+                                                },
+                                                {
+                                                    
+                                                    title: 'Position',
+                                                    preConfirm: swalRequired,
+                                                    inputValue: experience.ex_postion,
+                                                },
+                                                {
+                                                    title: 'Responsibilities',
+                                                    preConfirm: swalRequired,
+                                                    input: 'textarea',
+                                                    inputValue: experience.ex_explanation,
+                                                },
+                                                {
+                                                    title: 'Month',
+                                                    text: 'Month you started',
+                                                    input: 'select',
+                                                    inputValue: experience.ex_from_month,
+                                                    inputOptions: {
+                                                        @foreach(month_array() as $key => $value)
+                                                        '{{$key}}':'{{$value}}',
+                                                        @endforeach
+                                                    },
+                                                    preConfirm: swalRequired
+                                                },
+                                                {
+                                                    title: 'Year',
+                                                    text: 'Year you started',
+                                                    input: 'select',
+                                                    inputValue: experience.ex_from_year,
+                                                    inputOptions: {
+                                                        @foreach(year_array() as $key => $value)
+                                                        '{{$key}}':'{{$value}}',
+                                                        @endforeach
+                                                    },
+                                                    preConfirm: swalRequired
+                                                },
+                                                {
+                                                    title: 'Month',
+                                                    text: 'Month it ended',
+                                                    input: 'select',
+                                                    inputValue: experience.ex_to_month,
+                                                    inputOptions: {
+                                                        @foreach(month_array() as $key => $value)
+                                                        '{{$key}}':'{{$value}}',
+                                                        @endforeach
+                                                    },
+                                                    preConfirm: swalRequired
+                                                },
+                                                {
+                                                    title: 'Year',
+                                                    text: 'Year it ended',
+                                                    input: 'select',
+                                                    inputValue: experience.ex_to_year,
+                                                    inputOptions: {
+                                                        @foreach(year_array() as $key => $value)
+                                                        '{{$key}}':'{{$value}}',
+                                                        @endforeach
+                                                    },
+                                                    preConfirm: swalRequired
+                                                },
+                                            ]
 
-                                    swal.queue(steps).then((result) => {
-                                    swal.resetDefaults()
+                                            swal.queue(steps).then((result) => {
+                                            swal.resetDefaults()
 
-                                    if (result.value) {
-                                        var __data = {
-                                            id:experience.id,
-                                            ex_company:result.value[0],
-                                            ex_postion:result.value[1],
-                                            ex_explanation:result.value[2],
-                                            ex_from_month:result.value[3],
-                                            ex_from_year:result.value[4],
-                                            ex_to_month:result.value[5],
-                                            ex_to_year:result.value[6],
-                                            resume_id:{{$resume->id}},
-                                            _method: "PATCH"
-                                        };
-                                        swal({
-                                            title: 'Saving',
-                                            text: 'Please wait...',
-                                            onOpen: () => {
-                                                swal.showLoading()
-                                            },
-                                            allowOutsideClick: () => !swal.isLoading()
-                                        })
-                                        $.ajax({
-                                            url:"{{route('j_e_r_p_company_experiences')}}",
-                                            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-                                            type: 'PATCH',
-                                            data:__data,
-                                            success:function(data){
-                                                // 
-                                                $('#experience-'+data.experience.id).html(data.experience.ex_company);
+                                            if (result.value) {
+                                                var __data = {
+                                                    id:experience.id,
+                                                    ex_company:result.value[0],
+                                                    ex_postion:result.value[1],
+                                                    ex_explanation:result.value[2],
+                                                    ex_from_month:result.value[3],
+                                                    ex_from_year:result.value[4],
+                                                    ex_to_month:result.value[5],
+                                                    ex_to_year:result.value[6],
+                                                    resume_id:{{$resume->id}},
+                                                    _method: "PATCH"
+                                                };
                                                 swal({
-                                                    title: 'All done!',
-                                                    html:
-                                                        '',
-                                                    confirmButtonText: 'Ok'
+                                                    title: 'Saving',
+                                                    text: 'Please wait...',
+                                                    onOpen: () => {
+                                                        swal.showLoading()
+                                                    },
+                                                    allowOutsideClick: () => !swal.isLoading()
                                                 })
+                                                $.ajax({
+                                                    url:"{{route('j_e_r_p_company_experiences')}}",
+                                                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                                    type: 'PATCH',
+                                                    data:__data,
+                                                    success:function(data){
+                                                        // 
+                                                        $('#experience-'+data.experience.id).html(data.experience.ex_company);
+                                                        swal({
+                                                            title: 'All done!',
+                                                            type:'success',
+                                                            html:
+                                                                '',
+                                                            confirmButtonText: 'Ok'
+                                                        })
+                                                    }
+                                                });
                                             }
-                                        });
+                                        })
                                     }
-                                })
+                                });
                             }
                         });
+                    }
+                    else if (result.dismiss === swal.DismissReason.cancel){
+                        swal({
+                            title: 'Are you sure?',
+                            text: "You won't be able to revert this!",
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                            if (result.value) {
+                                swal({
+                                    title: 'Updating database',
+                                    text: 'Please wait...',
+                                    onOpen: () => {
+                                        swal.showLoading()
+                                    },
+                                    allowOutsideClick: () => !swal.isLoading()
+                                })
+
+                                $.ajax({
+                                    url:"{{route('j_d_experience')}}",
+                                    type:"delete",
+                                    data:{id:obj.id},
+                                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                    success:function(data){
+                                        swal(
+                                            'Deleted!',
+                                            'Your file has been deleted.',
+                                            'success'
+                                        ).then(()=>{
+                                            $('#experience-'+obj.id).closest('.list-group-item').remove();
+                                        });
+                                    }
+                                });
+                            }
+                        })
                     }
                 });
             },
@@ -1491,6 +1600,7 @@ $(document).ready(function(){
                                         console.log(data)
                                         swal({
                                             title: 'All done!',
+                                            type:'success',
                                             html:
                                                 '',
                                             confirmButtonText: 'Ok'
@@ -1549,6 +1659,7 @@ $(document).ready(function(){
                                         console.log(data)
                                         swal({
                                             title: 'All done!',
+                                            type:'success',
                                             html:
                                                 '',
                                             confirmButtonText: 'Ok'
@@ -1607,6 +1718,7 @@ $(document).ready(function(){
                                         console.log(data)
                                         swal({
                                             title: 'All done!',
+                                            type:'success',
                                             html:
                                                 '',
                                             confirmButtonText: 'Ok'
@@ -1665,6 +1777,7 @@ $(document).ready(function(){
                                         console.log(data)
                                         swal({
                                             title: 'All done!',
+                                            type:'success',
                                             html:
                                                 '',
                                             confirmButtonText: 'Ok'
@@ -1723,6 +1836,7 @@ $(document).ready(function(){
                                         console.log(data)
                                         swal({
                                             title: 'All done!',
+                                            type:'success',
                                             html:
                                                 '',
                                             confirmButtonText: 'Ok'
@@ -1736,8 +1850,7 @@ $(document).ready(function(){
                     }
                 });
             },
-        },
-        'submitHandlers':{}
+        }
     });
 
     var table = $('#applications-table').DataTable({

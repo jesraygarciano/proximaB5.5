@@ -23,7 +23,7 @@
 					<h4>Project Nexseed beagle</h4>	
 	                <ul>
 	                    <li><a href="{{ url('contact') }}">Contact Us</li>
-	                    <li><a href="{{ url('about') }}">What is project beagle</a></li>
+	                    <li><a href="{{ url('about') }}">What is Internship Training Program</a></li>
 	                    <li><a href="#!">Terms & Conditions</a></li>
 	                    <li><a href="#!">Privacy policy</a></li>
 	                </ul>
@@ -32,9 +32,6 @@
 					<h4>Job seeker</h4>	
 	                <ul>
 	                    <li><a href="{{ url('auth/login') }}">Login</a></li>
-	                    <li><a href="{{ url('companies') }}">Find a company</a></li>
-	                    <li><a href="#!">Post a resume</a></li>	                    
-	                    <li><a href="#!">Receive Job Alerts</a></li>
 	                    <li><a href="#!">Help</a></li>
 	                </ul>					
 			</div>
@@ -43,8 +40,7 @@
 	                <ul>
 	                    <li><a href="{{ url('auth/login') }}">Login</a></li>
 	                    <li><a href="#!">Overview</a></li>
-	                    <li><a href="#!">Post Jobs</a></li>
-	                    <li><a href="#!">Pricing</a></li>
+	                    <li><a href="#!">Internship Training Program costs</a></li>
 	                </ul>					
 			</div>
 		</div>
