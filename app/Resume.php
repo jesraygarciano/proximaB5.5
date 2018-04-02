@@ -68,4 +68,8 @@ class Resume extends Model
     public function skills(){
         return $this->belongsToMany('App\Resume_skill','joining_resume_skills','resume_id','resume_skill_id');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
