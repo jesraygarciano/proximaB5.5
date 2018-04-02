@@ -803,7 +803,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     {{-- {!!Form::label('objective', 'Objective:')!!} --}}
-                                                    {!!Form::textarea('seminars_attended', null, ['class' => 'form-control'])!!}
+                                                    {!!Form::textarea('seminars_attended', $resume->seminars_attended, ['class' => 'form-control'])!!}
                                                 </div>
                                             </div>
                                         </div>
@@ -817,7 +817,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     {{-- {!!Form::label('objective', 'Objective:')!!} --}}
-                                                    {!!Form::textarea('awards', null, ['class' => 'form-control'])!!}
+                                                    {!!Form::textarea('awards', $resume->awards, ['class' => 'form-control'])!!}
                                                 </div>
                                             </div>
                                         </div>

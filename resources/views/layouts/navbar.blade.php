@@ -170,6 +170,8 @@
                 return false;
                 });
 
+
+    @if(\Auth::check())
     var editor = $('#navigation').profileEditor({
         'editHandlers':{
             'basic-info-noti':function(obj){
@@ -547,12 +549,7 @@
         },
         'submitHandlers':{}
     });
-
-
-
-
-
-
+    @endif
 
 
         });
