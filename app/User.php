@@ -311,4 +311,48 @@ class User extends Authenticatable
     public function intershipApplication(){
         return $this->hasMany('App\InternshipApplication');
     }
+
+    public function profileProgress(){
+        $resume = $this->findFirstOrCreateResume();
+
+        $fields = [
+            'f_name',
+            'm_name',
+            'l_name',
+            'phone_number',
+            'email',
+            'birth_date',
+            'address1',
+            'address2',
+            'city',
+            'country',
+            'postal',
+            'gender',
+            'marital_status',
+            'spoken_language',
+            'photo',
+            'summary',
+            'websites',
+            'objective',
+            'seminars_attended',
+            'awards',
+            'other_skills',
+        ];
+
+        $filled = 0;
+        $_resume = $resume->toArray();
+        foreach($fields as $field){
+            // 
+            if($_resume[$field]){
+                $filled++;
+            }
+        }
+
+        if($resume->educations->count()) $filled++;
+        if($resume->skills->count()) $filled++;
+        if($resume->experiences->count()) $filled++;
+        // if($resume->character_references->count()) $filled++;
+
+        return $p = (int) (($filled / (count($fields) + 3)) * 100);
+    }
 }

@@ -205,7 +205,7 @@ class UserController extends Controller
         }
 
         // $resume->photo = $fileNameToStore;
-        $education = new Education;
+        $education = $request->hidden_1 ? Education::find($request->hidden_1) : new Education;
         $education->resume_id = $resume->id;
         $education->fill($input)->save();
 
@@ -424,5 +424,16 @@ class UserController extends Controller
 
     public function getResumeAwardCertificate(Request $request){
         return \Auth::user()->findFirstOrCreateResume();
+    }
+
+    // resume parts delete function
+    public function deleteEducation(Request $request){
+        Education::find($request->id)->delete();
+        return 'item deleted';
+    }
+
+    public function deleteExperience(Request $request){
+        Experience::findOrFail($request->id)->delete();
+        return 'item deleted';
     }
 }
