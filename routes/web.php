@@ -51,6 +51,12 @@ Route::group(['prefix'=>'itp'], function(){
 					Route::patch('educational_background',['as'=>'j_e_r_p_educational_background', 'uses'=>'UserController@j_e_r_p_educational_background']);
 					Route::patch('meta',['as'=>'j_e_r_p_meta', 'uses'=>'UserController@edit_resume_meta']);
 				});
+
+				Route::group(['prefix'=>'delete'], function(){
+					Route::delete('education',['as'=>'j_d_education', 'uses'=>'UserController@deleteEducation']);
+					Route::delete('experience',['as'=>'j_d_experience', 'uses'=>'UserController@deleteExperience']);
+				});
+
 				Route::group(['prefix'=>'create'], function(){
 					Route::patch('educational_background',['as'=>'j_c_r_p_educational_background', 'uses'=>'UserController@j_c_r_p_educational_background']);
 					Route::patch('experience',['as'=>'j_c_r_p_experience', 'uses'=>'UserController@j_c_r_p_experience']);
