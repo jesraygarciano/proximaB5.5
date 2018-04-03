@@ -57,7 +57,7 @@ class InternshipController extends Controller
         $applications = \Auth::user()->intershipApplication()->limit(3)->get()->load('trainingBatch');
         $user = \Auth::user();
 
-        $resume = $user->resume()->first();
+        $resume = $user->findFirstOrCreateResume();
         $skill_ids = $resume->skills()->pluck('resume_skill_id');
 
         $skills = $resume->has_skill()->get();
@@ -95,8 +95,8 @@ class InternshipController extends Controller
         $this->validate($requests,[
             'skills' => 'required',
             'objective' => 'required',
-            'school' => 'required',
-            'course' => 'required',
+            // 'school' => 'required',
+            // 'course' => 'required',
             'batch' => 'required',
         ]);
 
@@ -105,8 +105,8 @@ class InternshipController extends Controller
             $application = InternshipApplication::find($requests->id);
             $application->update([
                 'objectives'=>$requests->objective,
-                'school'=>$requests->school,
-                'course'=>$requests->course,
+                // 'school'=>$requests->school,
+                // 'course'=>$requests->course,
                 'training_batch_id'=>$requests->batch
             ]);
         }
@@ -119,8 +119,8 @@ class InternshipController extends Controller
             $application = InternshipApplication::create([
                 'user_id'=>\Auth::user()->id,
                 'objectives'=>$requests->objective,
-                'school'=>$requests->school,
-                'course'=>$requests->course,
+                // 'school'=>$requests->school,
+                // 'course'=>$requests->course,
                 'training_batch_id'=>$requests->batch
             ]);
         }
@@ -134,7 +134,6 @@ class InternshipController extends Controller
         }
         return redirect()->route('itp_applicant_profile');
     }
-
 
     public function save_batches(Request $requests){
 

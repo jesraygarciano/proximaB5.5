@@ -35,6 +35,24 @@ class HomeController extends Controller
         return view('welcome', compact('trainingBatches'));
     }
 
+    public function contact(){
+
+        // Mapper::map(10.318686,123.90317049999999);
+        Mapper::map(10.318686,123.90317049999999,['zoom' => 19, 'markers' => ['title' => 'My Location', 'animation' => 'DROP'], 'clusters' => ['size' => 10, 'center' => true, 'zoom' => 30]]);
+
+        $trainingBatches = TrainingBatch::isActive()->limit(4)->get();
+
+        return view('contact', compact('trainingBatches'));
+        
+    }
+
+    public function detailedInfo(){
+
+        return view('detailedinfo');
+        
+    } 
+
+    
     public function index()
     {
         return redirect()->to(route('itp_create'));
