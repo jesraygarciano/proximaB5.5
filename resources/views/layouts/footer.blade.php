@@ -9,40 +9,41 @@
 				</div>
 				<br />
 	            <p style="color: white;">
-	            	Nexseed is committed to connecting job seekers and
+					Nexseed is committed to connecting job seekers and
 					employers fast by keeping features super simple
 	            </p>
 				<div class="fb-page"
 				  data-href="https://www.facebook.com/NexSeed/" 
 				  data-width="340"
 				  data-hide-cover="false"
-				  data-show-facepile="true"></div>
+				  data-show-facepile="true">
+				</div>
 			</div>
 
 			<div class="col-md-3">
-					<h4>Project Nexseed beagle</h4>	
-	                <ul>
-	                    <li><a href="{{ url('contact') }}">Contact Us</li>
-	                    <li><a href="{{ url('about') }}">What is Internship Training Program</a></li>
-	                    <li><a href="#!">Terms & Conditions</a></li>
-	                    <li><a href="#!">Privacy policy</a></li>
-	                </ul>
+				<h4>Internship Training Program</h4>	
+					<ul>
+						<li><a href="{{ url('about') }}">What is Internship Training Program</a></li>
+						<li><a href="#!">Terms &amp; Conditions</a></li>
+						<li><a href="#!">Privacy policy</a></li>
+						<li><a href="{{ url('contact') }}">Contact Us</li>
+					</ul>
 			</div>
 			<div class="col-md-3">
-					<h4>Job seeker</h4>	
-	                <ul>
-	                    <li><a href="{{ url('auth/login') }}">Login</a></li>
-	                    <li><a href="#!">Help</a></li>
-	                </ul>					
+				<h4>ITP Applicants</h4>	
+				<ul>
+					<li><a href="{{ url('auth/login') }}">Login</a></li>
+					<li><a href="#!">Help</a></li>
+					<li><a href="#!">Overview</a></li>
+				</ul>
 			</div>
-			<div class="col-md-2">
-					<h4>Employers</h4>
-	                <ul>
-	                    <li><a href="{{ url('auth/login') }}">Login</a></li>
-	                    <li><a href="#!">Overview</a></li>
-	                    <li><a href="#!">Internship Training Program costs</a></li>
-	                </ul>					
+			<div class="row">
+				<div class="col-md-6"></div>
+				<div class="col-md-6">
+					<h4>© 2018 NexSeed, Inc.</h4>
+				</div>
 			</div>
+		</div>
 		</div>
 	</div>
 </footer>
