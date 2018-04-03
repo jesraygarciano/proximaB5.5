@@ -446,6 +446,14 @@ header{
     filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr='#2ecc71', endColorstr='#f1c40f')";
   }
 
+.col-md-6:hover .feature-box-style-1 .feature-icon i {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);	
+    -webkit-transition: .5s all ease;
+    -moz-transition: .5s all ease;
+    transition: .5s all ease;
+}
+
 .feature-box-style-1 .feature-icon i {
     width: 66px;
     height: 66px;
