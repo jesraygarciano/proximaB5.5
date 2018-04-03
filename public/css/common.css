@@ -513,7 +513,6 @@ padding:10px;
 }
 #notificationsBody {
       padding: 0px !important;
-      min-height:300px;
 }
 #notificationFooter{
       background-color: #e9eaed;

@@ -15,6 +15,10 @@ use Validator;
 
 class UserController extends Controller
 {
+    public function __construct(){
+        $this->middleware('profile');
+    }
+
     public function profile(Request $requests)
     {
     	$user = \Auth::user();
