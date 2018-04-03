@@ -13,17 +13,17 @@
 
 // Route::get('/', 'HomeController@welcome');
 Route::get('/', 'HomeController@welcome')->name('home');
-
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/contact', 'HomeController@contact')->name('contact');
+Route::get('/detailedinfo', 'HomeController@detailedInfo')->name('detailed');
 
 Route::group(['prefix'=>'itp'], function(){
 
 	Route::get('itp/create/{id?}',['as'=>'itp_create','uses'=>'InternshipController@create']);
-
 	Route::group(['middleware'=>'auth', 'prefix'=>'applicant'], function(){
 
 		Route::get('profile',['as'=>'itp_applicant_profile', 'uses'=>'InternshipController@userItpProfile']);
 		Route::get('finprofile',['as'=>'itp_applicant_finprofile', 'uses'=>'InternshipController@finuserItpProfile']);
-
 		Route::get('add/{id?}',['as'=>'itp_add','uses'=>'InternshipController@add_batch']);
 
 		Route::post('save/application',['as'=>'save_application', 'uses'=> 'InternshipController@save_application']);
@@ -31,7 +31,7 @@ Route::group(['prefix'=>'itp'], function(){
 		Route::post('update/application',['as'=>'update_application', 'uses'=> 'InternshipController@update_application']);
 
 		// json
-		Route::group(['prefix'=>'json'],function(){
+			Route::group(['prefix'=>'json'],function(){
 			Route::get('itp',['as'=>'json_get_itp_application', 'uses'=>'InternshipController@json_get_application_datatable']);
 			Route::post('delete',['as'=>'json_delete_itp_application', 'uses'=>'InternshipController@json_delete_application']);
 
@@ -81,5 +81,3 @@ Route::get('/github/callback', 'SocialAuthController@callbackGithub');
 Route::post('/confirm/role', 'UserController@confirm_role');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

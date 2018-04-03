@@ -65,11 +65,13 @@ class Resume extends Model
         return $this->hasMany(CharacterReferences::class);
     }
 
-    public function skills(){
+    public function skills()
+    {
         return $this->belongsToMany('App\Resume_skill','joining_resume_skills','resume_id','resume_skill_id');
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }
