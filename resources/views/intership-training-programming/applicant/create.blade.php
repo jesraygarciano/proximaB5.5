@@ -4,7 +4,7 @@
 
 <?php 
     $skills = return_resume_Skills();
-    $resume = \Auth::user()->resume()->first();
+    $resume = \Auth::user()->findFirstOrCreateResume();
     $current_opening_skills = $student ? $student->skills()->pluck('resume_skills.id')->toArray() : ($resume ? $resume->skills()->pluck('resume_skills.id')->toArray() : []);
     $opening=[];
     $provinces=[];
@@ -112,27 +112,6 @@
                     <label>Objective for applying</label>
                     <textarea type="text" name="objective">{{ $student->objectives ?? old('objectives') }}</textarea>
                 </div>
-
-                <br />
-
-                <div class="ui form">
-                    <label>School</label>
-                    <input type="text" name="school" value="{{ $student->school ?? old('school') }}">
-                </div>
-
-                <br />
-
-                <div class="ui form">
-                    <label>Course</label>
-                    <select name="course" class="ui dropdown">
-                        <option value="">Select</option>
-                        <option value="BSIT" {{$student ? ($student->course == 'BSIT' ? 'selected' : '') : ''}}>BSIT</option>
-                        <option value="BSCS" {{$student ? ($student->course == 'BSCS' ? 'selected' : '') : ''}}>BSCS</option>
-                        <option value="ACT" {{$student ? ($student->course == 'ACT' ? 'selected' : '') : ''}}>ACT</option>
-                    </select>
-                </div>
-
-                <br />
 
                 <div class="ui form">
                         <label>I wan't to sign-up for batch:</label>
@@ -466,12 +445,6 @@
                 objective: {
                     required: true
                 },
-                school: {
-                    required: true
-                },
-                course: {
-                    required: true
-                },
                 batch : {
                     required: true
                 },
@@ -480,16 +453,10 @@
                 objective: {
                   required: "Please input your objective."
                 },
-                school: {
-                  required: "Please input your school."
-                },
-                course: {
-                  required: "Please input your school."
-                },
                 batch: {
                   required: "Please input your preffered batch."
                 }
-           }       
+           }
         });
 
         $('#form-validate .save_application').click(function(){
@@ -507,9 +474,6 @@
         });
 
     });
-
-
-
 
 </script>
 

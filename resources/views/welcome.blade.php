@@ -93,7 +93,7 @@
       <div class="header-content text-md-center">
         <h1 class="header-content-h1">Intern Training Program</h1>
         <p>A training program for aspiring students, which aims to help students who are into software development to access high value jobs from the high-demand sector.</p>
-        <a href="#" class="btn btn-frst">Find Out More</a>
+        <a href="{{ url('/detailedinfo') }}" class="btn btn-frst">Find Out More</a>
 
         @if(!\Auth::check())
         <a href="{{ url('register') }}" class="btn btn-opposite">Register now!</a>
@@ -102,42 +102,44 @@
         @endif
       </div>
 
-    
       <nav role="navigation">
-  <div id="menuToggle">
-    <!--
-    A fake / hidden checkbox is used as click reciever,
-    so you can use the :checked selector on it.
-    -->
-    <input type="checkbox" />
-    
-    <!--
-    Some spans to act as a hamburger.
-    
-    They are acting like a real hamburger,
-    not that McDonalds stuff.
-    -->
-    <span></span>
-    <span></span>
-    <span></span>
-    
-    <!--
-    Too bad the menu has to be inside of the button
-    but hey, it's pure CSS magic.
-    -->
-    <ul id="menu">
-      <a href="#"><li>Home</li></a>
-      <a href="#"><li>Contact</li></a>
-      @if(!\Auth::check())
-      <a href="{{ url('register') }}"><li>Register</li></a>
-      <a href="{{ url('login') }}"><li>Login</li></a>
-      @else
-      <a href="{{ route('itp_applicant_profile') }}"><li>IT Profile</li></a>
-      <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li>Logout</li></a>
-      @endif
-    </ul>
-  </div>
-</nav>
+        <div id="menuToggle">
+          <!--
+          A fake / hidden checkbox is used as click reciever,
+          so you can use the :checked selector on it.
+          -->
+          <input type="checkbox" />
+
+          <!--
+          Some spans to act as a hamburger.
+
+          They are acting like a real hamburger,
+          not that McDonalds stuff.
+          -->
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+          <!--
+          Too bad the menu has to be inside of the button
+          but hey, it's pure CSS magic.
+          -->
+
+          <ul id="menu">
+            <a href="{{ url('/') }}"><li>Home</li></a>
+            <a href="{{ url('/contact') }}"><li>Contact</li></a>
+            @if(!\Auth::check())
+            <a href="{{ url('register') }}"><li>Register</li></a>
+            <a href="{{ url('login') }}"><li>Login</li></a>
+            @else
+            <a href="{{ route('itp_applicant_profile') }}"><li>IT Profile</li></a>
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li>Logout</li></a>
+            @endif
+          </ul>
+        </div>
+      </nav>
+
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     {{ csrf_field() }}
 </form>
@@ -362,7 +364,12 @@
           <br />
           <br />
           <!-- <a href="#" class="btn btn-lg btn-outline">Register</a> -->
+          @if(!\Auth::check())
           <a href="{{ url('register') }}" class="btn btn-reg-opposite">Register now!</a>
+          @else
+          {{-- <a href="{{ route('itp_applicant_profile') }}" class="btn btn-opposite">ITP Profile</a> --}}
+          <a href="{{ route('itp_applicant_profile') }}" class="btn btn-reg-opposite">ITP Profile</a>
+          @endif
         </div>
       </section>
   </div>

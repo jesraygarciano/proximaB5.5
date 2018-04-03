@@ -195,9 +195,7 @@
     background-color: #fff;
     border-radius: 2px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07);
-    height:158px;
     padding: 5px;
-    width:158px;
     }
     .profile-name {
     bottom: 60px;
@@ -331,9 +329,13 @@
     width:850px !important;
     }
 </style>
+<link href="{{ asset('css/components/info-tip.css') }}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{asset('css/croppie.css')}}">
+<link href="{{ asset('css/components/image-cropper-component.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
+@include('includes.image-cropper')
 <div class="container">
 
     <!-- Cover photo here -->
@@ -342,13 +344,28 @@
               <img class="fb-link-img" src="{{asset('img/default-opening.jpg')}}" alt="" title="">
           </div>
             <div class="profile-img">
-              <a href="#">
-                    @if(!empty($resume->photo))
-                        <img class="fb-link-img" src="{{$resume->photo}}" alt="{{$resume->f_name}}" title="{{$resume->f_name}}" />
-                    @else
-                        <img class="fb-link-img" src="http://santetotal.com/wp-content/uploads/2014/05/default-user.png" alt="" title="">
-                    @endif
-              </a>
+                <!-- <a href="#">
+                        @if(!empty($resume->photo))
+                            <img class="fb-link-img" id="update-profile-pic" src="{{$resume->photo}}" alt="{{$resume->f_name}}" title="{{$resume->f_name}}" />
+                        @else
+                            <img class="fb-link-img" src="http://santetotal.com/wp-content/uploads/2014/05/default-user.png" alt="" title="">
+                        @endif
+                </a> -->
+                <div class="crop-control" style="height: 170px; width: 170px; position:absolute; bottom:10px; left:10px; z-index:1;">
+                    <div class="image-container" style="height: 100%;">
+                    <img src="https://grangeprint.com/image/cache/placeholder-750x750-nofill-255255255.png">
+                    <label for="photo" class="input-trigger hover-div">
+                        <p>
+                        <i class="fa fa-file-image-o fa-5x" aria-hidden="true"></i>
+                        <br>
+                        Upload
+                        </p>
+                    </label>
+                    </div>
+                    <div class="input-container" id="photo-container">
+                    <input type="file" id="photo" name="photo" accept="image/*" />
+                    </div>
+                </div>
             </div>
           <div class="profile-name">
             <h2>{{$resume->f_name}} {{$resume->m_name}} {{$resume->l_name}}</h2>
@@ -362,7 +379,13 @@
                </div>
           </div>
     </div>
-
+    <script>
+        $(document).ready(function(){
+            $('#update-profile-pic').click(function(){
+                //  
+            });
+        });
+    </script>
     <div class="tab-content">
 
         <div class="tab-pane fade in active" id="home">
@@ -370,105 +393,153 @@
 
             <div class="row">
                 <div class="col-lg-5 col-md-5">
-                    <div class="first-column-tab">
-                        <h3>
-                            <i class="fa fa-globe"></i>
-                            Basic info
-                        </h3>
-                        <span class="pr-edit-btn" id="basic-info">
-                                <i class="fa fa-edit"></i>
-                        </span>
-                        
-                        <p>
-                            <span class="i-icon-wrapper">
-                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                            </span>
-                            <span class="resume-content">
-                                <a href="mailto:{{$resume->email}}" class="email" target="_blank">
-                                    {{$resume->email}}
-                                </a>
-                            </span>
-                        </p>
-
-                        <p>
-                            <span class="i-icon-wrapper">
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                            </span>
-                            <span class="resume-content phone_number">
-                                {{$resume->phone_number}}
-                            </span>
-                        </p>
-                        <p>
-                            <span class="i-icon-wrapper">
-                                <i class="fa fa-birthday-cake"></i>
-                            </span>
-                            <span class="resume-content formated_birthdate">
-                                {{$resume->formated_birthdate}}
-                            </span>
-                        </p>
-
-                        <p>
-                            <span class="i-icon-wrapper">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            </span>
-                            <span class="resume-content address1">
-                                {{$resume->address1}}
-                                {{$resume->address2}}
-                                {{$resume->city}}
-                                {{$resume->country}}
-                                {{$resume->postal}}
-                            </span>
-                        </p>
-                        <p style="padding-bottom: 1rem;">
-                            <span class="i-icon-wrapper">
-                                <i class="fa fa-language"></i>
-                            </span>
-                            <span class="resume-content spoken_language">
-                                {{$resume->spoken_language}}
-                            </span>
-                        </p>
-                    </div>
-
-                    <div class="first-column-tab">
-                        <h3>
-                        <i class="fa fa-graduation-cap"></i>
-                            Education
-                        </h3>
-
-                        <span class="pr-edit-btn" id="add-education">
-                                <i class="fa fa-plus"></i>
-                        </span>
-                        
-                        <ul class="list-group list-group-flush" id="educational-backgrounds">
-                            @foreach($resume->educations as $education)
-                            <li class="list-group-item">
-                                <span id="education-{{$education->id}}">{{$education->ed_university}}</span>
-                                <div class="pull-right pr-edit-btn" id="edit-education" data-id="{{$education->id}}" style="cursor:pointer;">
-                                    <i class="fa fa-edit"></i>
+                    <div style="position:relative;">
+                        <?php
+                        $missing_basic_info = [];
+                        if(!$resume->m_name)
+                            array_push($missing_basic_info,'middle name is missing');
+                        if(!$resume->phone_number)
+                            array_push($missing_basic_info,'phone number is missing');
+                        if(!$resume->birth_date)
+                            array_push($missing_basic_info,'birth date is missing');
+                        if(!$resume->address1)
+                            array_push($missing_basic_info,'address is missing');
+                        ?>
+                        @if(count($missing_basic_info))
+                        <div class="info-tip bounceIn warning-tip">
+                            <div class="body">
+                                <div class="header">
+                                    Information Incomplete
+                                    <span class="info-close"></span>
                                 </div>
-                            </li>
-                            @endforeach
-                        </ul>
+                                <div class="text">
+                                    @foreach($missing_basic_info as $info)
+                                        <div>{{$info}}</div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        <div class="first-column-tab">
+                            <h3>
+                                <i class="fa fa-globe"></i>
+                                Basic info
+                            </h3>
+                            <span class="pr-edit-btn" id="basic-info">
+                                    <i class="fa fa-edit"></i>
+                            </span>
+                            
+                            <p>
+                                <span class="i-icon-wrapper">
+                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                </span>
+                                <span class="resume-content">
+                                    <a href="mailto:{{$resume->email}}" class="email" target="_blank">
+                                        {{$resume->email}}
+                                    </a>
+                                </span>
+                            </p>
 
+                            <p>
+                                <span class="i-icon-wrapper">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                </span>
+                                <span class="resume-content phone_number">
+                                    {{$resume->phone_number}}
+                                </span>
+                            </p>
+                            <p>
+                                <span class="i-icon-wrapper">
+                                    <i class="fa fa-birthday-cake"></i>
+                                </span>
+                                <span class="resume-content formated_birthdate">
+                                    {{$resume->formated_birthdate}}
+                                </span>
+                            </p>
+
+                            <p>
+                                <span class="i-icon-wrapper">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                </span>
+                                <span class="resume-content address1">
+                                    {{$resume->address1}}
+                                    {{$resume->address2}}
+                                    {{$resume->city}}
+                                    {{$resume->country}}
+                                    {{$resume->postal}}
+                                </span>
+                            </p>
+                            <p style="padding-bottom: 1rem;">
+                                <span class="i-icon-wrapper">
+                                    <i class="fa fa-language"></i>
+                                </span>
+                                <span class="resume-content spoken_language">
+                                    {{$resume->spoken_language}}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div style="position:relative;">
+                        @if(!count($resume->educations))
+                        <div class="info-tip bounceIn warning-tip">
+                            <div class="body">
+                                <div class="header">
+                                    Information Incomplete
+                                    <span class="info-close"></span>
+                                </div>
+                                <div class="text">
+                                    Educational background is missing
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        <div class="first-column-tab">
+                            <h3>
+                            <i class="fa fa-graduation-cap"></i>
+                                Education
+                            </h3>
+
+                            <span class="pr-edit-btn" id="add-education">
+                                    <i class="fa fa-plus"></i>
+                            </span>
+                            
+                            <ul class="list-group list-group-flush" id="educational-backgrounds">
+                                @foreach($resume->educations as $education)
+                                <li class="list-group-item">
+                                    <span id="education-{{$education->id}}">{{$education->ed_university}}</span>
+                                    <div class="pull-right pr-edit-btn" id="edit-education" data-id="{{$education->id}}" style="cursor:pointer;">
+                                        <i class="fa fa-edit"></i>
+                                    </div>
+                                </li>
+                                @endforeach
+                            </ul>
+
+                        </div>
                     </div>
 
                     <h5>Profile progress:</h5>
-                    @if(!empty($resume->f_name))
                         <div class="progress progress-navbar">
-                            <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: {{\Auth::user()->profileProgress()}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{\Auth::user()->profileProgress()}}% profile complete</div>
+                            <div class="progress-bar progress-bar-striped active profile-progress" role="progressbar" style="width: {{\Auth::user()->profileProgress()}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="val">{{\Auth::user()->profileProgress()}}</span>% profile complete</div>
                         </div>
-                    @elseif(!empty($resume->f_name) && !empty($resume->summary))
-                        <div class="progress progress-navbar">
-                            <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">40% profile complete</div>
-                        </div>
-                    @else
-                        <h1>Bago mahuli ang lahat</h1>
-                    @endif
 
                 </div>
 
                 {{-- @if(isset($application)) --}}
                 <div class="col-lg-7 col-md-7">
+                    <div style="position:relative;">
+                        @if(!count($resume->skills))
+                        <div class="info-tip bounceIn tip-right warning-tip">
+                            <div class="body">
+                                <div class="header">
+                                    Information Incomplete
+                                    <span class="info-close"></span>
+                                </div>
+                                <div class="text">
+                                    Featured skills are missing
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="second-column-tab">
                                 <h3>
                                     <i class="fa fa-code"></i>
@@ -486,7 +557,21 @@
                                         <i class="fa fa-plus"></i>
                                 </span>
                         </div>
-
+                    </div>
+                    <div style="position:relative;">
+                        @if(!count($resume->experiences))
+                        <div class="info-tip bounceIn tip-right warning-tip">
+                            <div class="body">
+                                <div class="header">
+                                    Information Incomplete
+                                    <span class="info-close"></span>
+                                </div>
+                                <div class="text">
+                                    Experience information is missing
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="second-column-tab">
 
                                 <h3>
@@ -509,7 +594,21 @@
                                     @endforeach
                                 </ul>
                         </div>
-
+                    </div>
+                    <div style="position:relative;">
+                        @if(!$resume->awards)
+                        <div class="info-tip bounceIn tip-right warning-tip">
+                            <div class="body">
+                                <div class="header">
+                                    Information Incomplete
+                                    <span class="info-close"></span>
+                                </div>
+                                <div class="text">
+                                    Awards/Certificate information is missing
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="second-column-tab">
                             <h3>
                                 <i class="fa fa-trophy"></i>
@@ -522,7 +621,21 @@
                                 {{ $resume->awards }}
                             </p>
                         </div>
-
+                    </div>
+                    <div style="position:relative;">
+                        @if(!$resume->websites)
+                        <div class="info-tip bounceIn tip-right warning-tip">
+                            <div class="body">
+                                <div class="header">
+                                    Information Incomplete
+                                    <span class="info-close"></span>
+                                </div>
+                                <div class="text">
+                                    Portfolio information is missing
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="second-column-tab">
                             <h3>
                                 <i class="fa fa-briefcase"></i>
@@ -535,7 +648,21 @@
                                 {{ $resume->websites }}
                             </p>
                         </div>
-
+                    </div>
+                    <div style="position:relative;">
+                        @if(!$resume->objective)
+                        <div class="info-tip bounceIn tip-right warning-tip">
+                            <div class="body">
+                                <div class="header">
+                                    Information Incomplete
+                                    <span class="info-close"></span>
+                                </div>
+                                <div class="text">
+                                    Objective is missing
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="second-column-tab">
                             <div>
                                 <h3>
@@ -550,7 +677,21 @@
                                 </p>
                             </div>
                         </div>
-
+                    </div>
+                    <div style="position:relative;">
+                        @if(!$resume->other_skills)
+                        <div class="info-tip bounceIn tip-right warning-tip">
+                            <div class="body">
+                                <div class="header">
+                                    Information Incomplete
+                                    <span class="info-close"></span>
+                                </div>
+                                <div class="text">
+                                    Other skills information is missing
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="second-column-tab">
                             <div>
                                 <h3>
@@ -565,7 +706,21 @@
                                 </p>
                             </div>
                         </div>
-
+                    </div>
+                    <div style="position:relative;">
+                        @if(!$resume->other_skills)
+                        <div class="info-tip bounceIn tip-right warning-tip">
+                            <div class="body">
+                                <div class="header">
+                                    Information Incomplete
+                                    <span class="info-close"></span>
+                                </div>
+                                <div class="text">
+                                    Seminars attended information missing
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="second-column-tab">
                             <div>
                                 <h3>
@@ -580,6 +735,7 @@
                                 </p>
                             </div>
                         </div>
+                    </div>
                 </div>
                 {{-- @endif --}}
             </div>
@@ -2097,4 +2253,5 @@ if (text) {
 
 @section('scripts')
 <script src="{{ asset('js/profile_editor.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/croppie.min.js')}}"></script>
 @endsection
