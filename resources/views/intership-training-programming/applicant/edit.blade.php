@@ -74,7 +74,7 @@
                     <textarea type="text" name="objective">{{ $student->objectives ?? old('objectives') }}</textarea>
                 </div>
 
-                <br />
+                <!-- <br />
 
                 <div class="ui form">
                     <label>School</label>
@@ -91,7 +91,7 @@
                         <option value="BSCS" {{$student ? ($student->course == 'BSCS' ? 'selected' : '') : ''}}>BSCS</option>
                         <option value="ACT" {{$student ? ($student->course == 'ACT' ? 'selected' : '') : ''}}>ACT</option>
                     </select>
-                </div>
+                </div> -->
 
                 <br />
 
@@ -365,12 +365,12 @@
                 objective: {
                     required: true
                 },
-                school: {
-                    required: true
-                },
-                course: {
-                    required: true
-                },
+                // school: {
+                //     required: true
+                // },
+                // course: {
+                //     required: true
+                // },
                 preffered_training_date:{
                     required: true
                 }
@@ -379,12 +379,12 @@
                 objective: {
                   required: "Please input your objective."
                 },
-                school: {
-                  required: "Please input your school."
-                },
-                course: {
-                  required: "Please input your school."
-                },
+                // school: {
+                //   required: "Please input your school."
+                // },
+                // course: {
+                //   required: "Please input your school."
+                // },
                 preffered_training_date: {
                   required: "Please input your preffered training date."
                 }

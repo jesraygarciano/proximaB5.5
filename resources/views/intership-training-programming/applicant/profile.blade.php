@@ -340,8 +340,23 @@
 
     <!-- Cover photo here -->
     <div class="fb-profile-block">
-          <div class="fb-profile-block-thumb">
-              <img class="fb-link-img" src="{{asset('img/default-opening.jpg')}}" alt="" title="">
+          <div class="fb-profile-block-thumb" style="background:#dedede;">
+                <div class="crop-control" style="border-bottom-right-radius:0px; border-bottom-left-radius:0px; height: 100%;" data-width="1200" data-height="400" data-dim="true">
+                    <div class="image-container-cover" style="height: 100%;">
+                        <img style="width: 100%;" id="cover-image" src="{{ \Auth::user()->cover_image }}" alt="{{ \Auth::user()->name}} Cover photo" />
+                        <label for="cover_image" class="input-trigger hover-div" style="width: initial;
+                            left: initial;
+                            height:initial;
+                            right: 10px;
+                            top: 10px; text-shadow: 1px 1px 1px #000000;
+                            background:initial;">
+                            <i class="fa fa-edit fa-3x" aria-hidden="true"></i>
+                        </label>
+                    </div>
+                    <div class="input-container">
+                        <input type="file" id="cover_image" name="cover_image" accept="image/*" />
+                    </div>
+                </div>
           </div>
             <div class="profile-img">
                 <!-- <a href="#">
@@ -353,7 +368,7 @@
                 </a> -->
                 <div class="crop-control" style="height: 170px; width: 170px; position:absolute; bottom:10px; left:10px; z-index:1;">
                     <div class="image-container" style="height: 100%;">
-                    <img src="https://grangeprint.com/image/cache/placeholder-750x750-nofill-255255255.png">
+                    <img id="profile-picture" src="{{$resume->photo}}" style="width:100%;">
                     <label for="photo" class="input-trigger hover-div">
                         <p>
                         <i class="fa fa-file-image-o fa-5x" aria-hidden="true"></i>
@@ -381,8 +396,64 @@
     </div>
     <script>
         $(document).ready(function(){
-            $('#update-profile-pic').click(function(){
+            $('#profile-picture').on('load',function(){
                 //  
+                if($(this).prop('need-save'))
+                {
+                    swal({
+                        title: 'Saving',
+                        text: 'Please wait...',
+                        onOpen: () => {
+                            swal.showLoading()
+                        },
+                        allowOutsideClick: () => !swal.isLoading()
+                    })
+                    $.ajax({
+                        url:"{{route('j_e_r_p_photo')}}",
+                        type:'PATCH',
+                        headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                        data:{'photo':$(this).prop('src'),resume_id:{{$resume->id}}},
+                        success:function(data){
+                            swal({
+                                title: 'All done!',
+                                type:'success',
+                                html:
+                                    '',
+                                confirmButtonText: 'Ok'
+                            })
+                        }
+                    });
+                }
+            });
+
+            $('#cover-image').on('load',function(){
+                //  
+                if($(this).prop('need-save'))
+                {
+                    swal({
+                        title: 'Saving',
+                        text: 'Please wait...',
+                        onOpen: () => {
+                            swal.showLoading()
+                        },
+                        allowOutsideClick: () => !swal.isLoading()
+                    })
+                    $.ajax({
+                        url:"{{route('j_e_r_p_cover')}}",
+                        type:'PATCH',
+                        headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                        data:{'photo':$(this).prop('src')},
+                        success:function(data){
+                            swal({
+                                title: 'All done!',
+                                type:'success',
+                                html:
+                                    '',
+                                confirmButtonText: 'Ok'
+                            })
+                        }
+                    });
+                }
             });
         });
     </script>
@@ -393,6 +464,14 @@
 
             <div class="row">
                 <div class="col-lg-5 col-md-5">
+                    <h5>Profile progress:</h5>
+                    <div class="progress progress-navbar">
+                        <div class="progress-bar progress-bar-striped active profile-progress" role="progressbar" style="width: {{\Auth::user()->profileProgress()}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="val">{{\Auth::user()->profileProgress()}}</span>% profile complete</div>
+                    </div>
+                    <div>
+                        <a href="{{ route('resume_edit', $resume->id) }}" class="btn btn-primary">Update Using Wizard</a>
+                    </div>
+                    <br>
                     <div style="position:relative;">
                         <?php
                         $missing_basic_info = [];
@@ -516,12 +595,6 @@
 
                         </div>
                     </div>
-
-                    <h5>Profile progress:</h5>
-                        <div class="progress progress-navbar">
-                            <div class="progress-bar progress-bar-striped active profile-progress" role="progressbar" style="width: {{\Auth::user()->profileProgress()}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="val">{{\Auth::user()->profileProgress()}}</span>% profile complete</div>
-                        </div>
-
                 </div>
 
                 {{-- @if(isset($application)) --}}

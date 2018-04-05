@@ -100,6 +100,8 @@ $(document).ready(function(){
 			current_elm.find('.input-container').html(input_container);
 
 			setInputEvent(current_elm);
+
+			$('#crop-modal').css({'margin-top':'initial','transform':'translateY(-50%)'});
 	    },
 	    onApprove: function () {
 	      console.log('approved');
@@ -119,6 +121,7 @@ $(document).ready(function(){
 				},
 			}).then(function(canvas){
 				current_elm.find('img').prop('src',canvas.toDataURL());
+				current_elm.find('img').prop('need-save',1);
 				current_elm.find('[type=hidden]').val(canvas.toDataURL());
 			});
 	});
