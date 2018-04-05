@@ -43,7 +43,6 @@ class HomeController extends Controller
         $trainingBatches = TrainingBatch::isActive()->limit(4)->get();
 
         return view('contact', compact('trainingBatches'));
-        
     }
 
     public function detailedInfo(){

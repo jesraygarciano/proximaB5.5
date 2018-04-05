@@ -132,10 +132,22 @@ class UserController extends Controller
             $experience->resume_id = $resume->id;
             $experience->fill($input)->save();
         }
+        
+        $eds = json_decode($request->educational_backgrounds);
 
-        $education = new Education;
-        $education->resume_id = $resume->id;
-        $education->fill($input)->save();
+        foreach($eds as $ed){
+            $education = new Education;
+            $education->resume_id = $resume->id;
+            $education->ed_university = $ed->ed_university;
+            $education->ed_program_of_study = $ed->ed_program_of_study;
+            $education->ed_field_of_study = $ed->ed_field_of_study;
+            $education->ed_from_year = $ed->ed_from_year;
+            $education->ed_from_month = $ed->ed_from_month;
+            $education->ed_to_year = $ed->ed_to_year;
+            $education->ed_to_month = $ed->ed_to_month;
+
+            $education->save();
+        }
 
 
         if ($request->has('skills')) {
@@ -144,7 +156,7 @@ class UserController extends Controller
                 $resume->has_skill()->attach($resume_skill_id);
             }
         }
-        return redirect(route('user_profile'))->with('success', 'Registered you resume.');
+        return redirect(route('itp_applicant_profile'))->with('success', 'Registered you resume.');
     }
 
     public function resume_save_edit(Request $request)
@@ -209,9 +221,21 @@ class UserController extends Controller
         }
 
         // $resume->photo = $fileNameToStore;
-        $education = $request->hidden_1 ? Education::find($request->hidden_1) : new Education;
-        $education->resume_id = $resume->id;
-        $education->fill($input)->save();
+        $eds = json_decode($request->educational_backgrounds);
+
+        foreach($eds as $ed){
+            $education = isset($ed->id) ? Education::findOrFail($ed->id) : new Education;
+            $education->resume_id = $resume->id;
+            $education->ed_university = $ed->ed_university;
+            $education->ed_program_of_study = $ed->ed_program_of_study;
+            $education->ed_field_of_study = $ed->ed_field_of_study;
+            $education->ed_from_year = $ed->ed_from_year;
+            $education->ed_from_month = $ed->ed_from_month;
+            $education->ed_to_year = $ed->ed_to_year;
+            $education->ed_to_month = $ed->ed_to_month;
+
+            $education->save();
+        }
 
         $resume->fill($input)->save();
 
@@ -221,7 +245,33 @@ class UserController extends Controller
             $resume->has_skill()->attach($resume_skill_id);
         }
 
-        return redirect(route('user_profile'))->with('success', 'Resume updated.');
+        return redirect(route('itp_applicant_profile'))->with('success', 'Resume updated.');
+    }
+
+    public function editResumePhoto(Request $request){
+        if($request->photo){
+            $resume = Resume::findOrFail($request->resume_id);
+            $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->photo));
+            $fileNameToStore = Common::resume_photo_name($resume->id);
+            file_put_contents(public_path('/storage/').$fileNameToStore, $data);
+            $resume->photo = $fileNameToStore;
+            $resume->save();
+
+            return ['message'=>'photo updated'];
+        }
+    }
+
+    public function editCover(Request $request){
+        if($request->photo){
+            $user = \Auth::user();
+            $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->photo));
+            $fileNameToStore = Common::resume_photo_name($user->id);
+            file_put_contents(public_path('/storage/').$fileNameToStore, $data);
+            $user->cover_image = $fileNameToStore;
+            $user->save();
+
+            return ['message'=>'photo updated'];
+        }
     }
 
     public function edit_resume_basic(Request $request){

@@ -61,7 +61,7 @@ class InternshipController extends Controller
         $skill_ids = $resume->skills()->pluck('resume_skill_id');
 
         $skills = $resume->has_skill()->get();
-        
+
         // dd($user);
         return view('intership-training-programming.applicant.profile', compact('applications','user','resume','skills_ids','skills'));
     }
@@ -157,10 +157,7 @@ class InternshipController extends Controller
         }
 
         return redirect()->route('itp_applicant_profile');
-
     }
-
-
 
 
     public function json_get_application_datatable(Request $requests){
