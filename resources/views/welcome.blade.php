@@ -81,6 +81,49 @@
     background: rgba(255, 255, 255, .02);
     color: #ffffff;
 }
+
+/*Scroll to Top*/
+#return-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.7);
+    width: 50px;
+    height: 50px;
+    display: block;
+    text-decoration: none;
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    border-radius: 35px;
+    display: none;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+#return-to-top i {
+    color: #fff;
+    margin: 0;
+    position: relative;
+    left: 0px;
+    top: 13px;
+    font-size: 19px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+#return-to-top:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+#return-to-top:hover i {
+    color: #fff;
+    top: 5px;
+}
+
 </style>
 
 <div class="main-lp-container">
@@ -94,6 +137,7 @@
         <h1 class="header-content-h1">Intern Training Program</h1>
         <p>A training program for aspiring students, which aims to help students who are into software development to access high value jobs from the high-demand sector.</p>
         <a href="{{ url('/detailedinfo') }}" class="btn btn-frst">Find Out More</a>
+        <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
 
         @if(!\Auth::check())
         <a href="{{ url('register') }}" class="btn btn-opposite">Register now!</a>
@@ -374,8 +418,8 @@
       </section>
   </div>
 </div>
-<script>
 
+<script>
   const [current, imgs] = [document.querySelector('#current'), document.querySelectorAll('.lp-imgs img')];
   const opacity = 0.4;
 
@@ -403,6 +447,21 @@
     // Change the opacity to opacity var
     e.target.style.opacity = opacity;
   }
+
+// ===== Scroll to Top ==== 
+$(window).scroll(function() {
+    if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+        $('#return-to-top').fadeIn(200);    // Fade in the arrow
+    } else {
+        $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+    }
+});
+$('#return-to-top').click(function() {      // When arrow is clicked
+    $('body,html').animate({
+        scrollTop : 0                       // Scroll to top of body
+    }, 500);
+});
+  
 </script>
 
 @endsection

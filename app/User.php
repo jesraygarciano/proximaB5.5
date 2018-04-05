@@ -124,6 +124,14 @@ class User extends Authenticatable
         return asset('storage/'.$this->attributes['photo']);
     }
 
+    public function getCoverImageAttribute(){
+        if(!file_exists('storage/'.$this->attributes['cover_image']) || str_replace(' ','',$this->attributes['cover_image']) == ''){
+            return asset('img/default-opening.png');
+        }
+
+        return asset('storage/'.$this->attributes['cover_image']);
+    }
+
     public function companies_that_scout_users_save($company_id)
     {
         return $this->companies_that_scout_users->attach($company_id);
@@ -297,6 +305,7 @@ class User extends Authenticatable
                 'user_id'=>$this->attributes['id'],
                 'f_name'=>$this->attributes['f_name'],
                 'l_name'=>$this->attributes['l_name'],
+                'email'=>$this->attributes['email'],
                 'is_active'=>1,
             ]);
         }

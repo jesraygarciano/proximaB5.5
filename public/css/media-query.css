@@ -175,6 +175,7 @@
     padding: .7rem 2rem;
     text-decoration: none;
 }
+
 .btn-opposite {
     font-size: 1rem;
 }
@@ -239,4 +240,40 @@
   #schedulenskills{
     margin-top: 2rem;
   }
+
+    #notificationContainer {
+    background-color: #fff;
+    border: 1px solid rgba(100, 100, 100, .4);
+    -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+    overflow: visible;
+    position: initial;
+    /* top: 30px; */
+    top: 48px;      
+    margin-left: 0px;
+    width: 400px;
+    z-index: -1;
+    display: none;
+    }
+
+    #notificationContainer:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    color: red;
+    border: 10px solid red;
+    border-color: transparent transparent #989898;
+    margin-top: -20px;
+    margin-left: 15px;
+    }
+
+    .progress {
+        border-radius: 0!important;
+        border: 1px solid #bfbebe;
+        height: 30px;
+        width: 75%;
+    }
+
 }

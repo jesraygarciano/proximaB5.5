@@ -2,9 +2,19 @@
 
 @section('content')
 <style>
+	
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 #how-we-do{
  color:#ffffff;
+}
+#menuToggle{
+	display: block;
+    position: absolute;
+    top: 35px;
+    left: 50px;
+    z-index: 5;
+    -webkit-user-select: none;
+    user-select: none;
 }
 #how-we-do h4{
     color: #fff;
@@ -24,12 +34,14 @@
 	filter:grayscale(1%);
 }
 #how-we-do .how-contents{
-	padding:60px 30px;
+	padding:40px 30px;
 	background:#007b5e;
 }
+
 #how-we-do .how-contents ul{
 	
 }
+
 #how-we-do .how-contents ul li{
 	padding-left: 50px;
     position: relative;
@@ -43,9 +55,7 @@
     color: #ffffff;
     left: 0;
 }
-/* section{C
-	padding: 60px 0;
-} */
+
 section .section-title{
 	text-align:center;
 	color:#007b5e;
@@ -128,13 +138,32 @@ section .section-title{
 <section id="how-we-do" class="p-0">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 how-bg-img"></div>
+			<div class="col-xs-12 col-sm-12 col-md-6 how-bg-img"></div>
+			<nav role="navigation">
+				<div id="menuToggle">
+				  <input type="checkbox" />
+		
+				  <span></span>
+				  <span></span>
+				  <span></span>
+				
+				  <ul id="menu">
+					<a href="{{ url('/') }}"><li>Home</li></a>
+					<a href="{{ url('/contact') }}"><li>Contact</li></a>
+					@if(!\Auth::check())
+					<a href="{{ url('register') }}"><li>Register</li></a>
+					<a href="{{ url('login') }}"><li>Login</li></a>
+					@else
+					<a href="{{ route('itp_applicant_profile') }}"><li>IT Profile</li></a>
+					<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li>Logout</li></a>
+					@endif
+				  </ul>
+				</div>
+			  </nav>
             <div class="col-xs-12 col-sm-12 col-md-6 how-contents">
                 <h4 class="section-title mb-2 h1">What we do</h4>
                 <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Having and managing a correct marketing strategy is crucial in a fast moving market.</p>
                 <ul class="list-unstyled">
-                    <li>Some quick example text to build on the card title and make the card's content.</li>
-                    <li>Some quick example text to build on the card title and make the card's content.</li>
                     <li>Some quick example text to build on the card title and make the card's content.</li>
                     <li>Some quick example text to build on the card title and make the card's content.</li>
                     <li>Some quick example text to build on the card title and make the card's content.</li>
@@ -146,68 +175,68 @@ section .section-title{
 	<!-- ./how we do section -->
 <!-- Services section -->
 <section id="what-we-do">
-		<div class="container-fluid">
-			<h2 class="section-title mb-2 h1">What we do</h2>
-			<p class="text-center text-muted h5">Having and managing a correct marketing strategy is crucial in a fast moving market.</p>
-			<div class="row mt-5">
-				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-					<div class="card">
-						<div class="card-block block-1">
-							<h3 class="card-title">Special title</h3>
-							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius error a culpa quis accusantium quos asperiores tempore minima dolores, sed. Assumenda officia exercitationem voluptatum aperiam nam amet consectetur, itaque, mollitia dolor ducimus adipisci fugit velit. Deleniti, ad, itaque. Nobis cum, sequi aliquid veniam iure nam obcaecati, aliquam voluptas possimus sint!</p>
-							<a href="javascript:void();" title="Read more" class="read-more" >Read more &nbsp; <i class="fa fa-angle-double-right ml-2"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-					<div class="card">
-						<div class="card-block block-2">
-							<h3 class="card-title">Special title</h3>
-							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum laudantium illum velit explicabo adipisci deserunt ab aliquid repellendus necessitatibus nostrum! Recusandae doloremque deserunt vero, iste velit facere, vitae sapiente nemo obcaecati odio, sit quae repellat autem magni aspernatur perspiciatis corporis nulla asperiores laborum cupiditate. Quisquam vero nihil omnis perspiciatis, magni.</p>
-							<a href="javascript:void();" title="Read more" class="read-more" >Read more &nbsp; <i class="fa fa-angle-double-right ml-2"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-					<div class="card">
-						<div class="card-block block-3">
-							<h3 class="card-title">Special title</h3>
-							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis asperiores et corporis consequatur, placeat fugiat quas aliquam nisi rerum provident quisquam ea dolorum nulla necessitatibus voluptates facilis labore commodi at vero sequi quibusdam totam qui doloremque sapiente. Quod perspiciatis odio nesciunt, sint, eligendi minus, totam iste recusandae rem dolorem non.</p>
-							<a href="javascript:void();" title="Read more" class="read-more" >Read more &nbsp; <i class="fa fa-angle-double-right ml-2"></i></a>
-						</div>
+	<div class="container-fluid">
+		<h2 class="section-title mb-2 h1">What we do</h2>
+		<p class="text-center text-muted h5">Having and managing a correct marketing strategy is crucial in a fast moving market.</p>
+		<div class="row mt-5">
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+				<div class="card">
+					<div class="card-block block-1">
+						<h3 class="card-title">Special title</h3>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius error a culpa quis accusantium quos asperiores tempore minima dolores, sed. Assumenda officia exercitationem voluptatum aperiam nam amet consectetur, itaque, mollitia dolor ducimus adipisci fugit velit. Deleniti, ad, itaque. Nobis cum, sequi aliquid veniam iure nam obcaecati, aliquam voluptas possimus sint!</p>
+						<a href="javascript:void();" title="Read more" class="read-more" >Read more &nbsp; <i class="fa fa-angle-double-right ml-2"></i></a>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-					<div class="card">
-						<div class="card-block block-4">
-							<h3 class="card-title">Special title</h3>
-							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate tenetur assumenda veniam eum consectetur tempora. Totam cupiditate eveniet odit reprehenderit optio, provident sit iure ducimus deserunt porro laborum illum exercitationem nam ex modi dolores, aliquam nihil. Nemo ea vitae aut iste ratione, distinctio nam fuga dolore maxime id, ad architecto.</p>
-							<a href="javascript:void();" title="Read more" class="read-more" >Read more &nbsp; <i class="fa fa-angle-double-right ml-2"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-					<div class="card">
-						<div class="card-block block-5">
-							<h3 class="card-title">Special title</h3>
-							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore nihil ea, sapiente, facilis necessitatibus culpa accusamus et iste delectus quia quisquam eos excepturi. Minus, quo rerum. Quibusdam iste repellendus, quaerat ullam. Deserunt nulla, inventore, porro ad dolore earum ullam repellendus ab sed et, dolorum! Ipsam non quasi doloremque mollitia architecto!</p>
-							<a href="javascript:void();" title="Read more" class="read-more" >Read more &nbsp; <i class="fa fa-angle-double-right ml-2"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-					<div class="card">
-						<div class="card-block block-6">
-							<h3 class="card-title">Special title</h3>
-							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis molestias cupiditate alias modi odio quasi. Esse veritatis nulla nihil sunt, quo ipsam laborum, aspernatur, quasi quam consequatur ex, aliquid assumenda? Voluptatem vel quo a animi adipisci sequi quae quis doloribus, alias ipsum dolorum, iste suscipit, possimus eos esse in architecto!</p>
-							<a href="javascript:void();" title="Read more" class="read-more" >Read more &nbsp; <i class="fa fa-angle-double-right ml-2"></i></a>
-						</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+				<div class="card">
+					<div class="card-block block-2">
+						<h3 class="card-title">Special title</h3>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum laudantium illum velit explicabo adipisci deserunt ab aliquid repellendus necessitatibus nostrum! Recusandae doloremque deserunt vero, iste velit facere, vitae sapiente nemo obcaecati odio, sit quae repellat autem magni aspernatur perspiciatis corporis nulla asperiores laborum cupiditate. Quisquam vero nihil omnis perspiciatis, magni.</p>
+						<a href="javascript:void();" title="Read more" class="read-more" >Read more &nbsp; <i class="fa fa-angle-double-right ml-2"></i></a>
 					</div>
 				</div>
 			</div>
-		</div>	
-	</section>
-	<!-- /Services section -->
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+				<div class="card">
+					<div class="card-block block-3">
+						<h3 class="card-title">Special title</h3>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis asperiores et corporis consequatur, placeat fugiat quas aliquam nisi rerum provident quisquam ea dolorum nulla necessitatibus voluptates facilis labore commodi at vero sequi quibusdam totam qui doloremque sapiente. Quod perspiciatis odio nesciunt, sint, eligendi minus, totam iste recusandae rem dolorem non.</p>
+						<a href="javascript:void();" title="Read more" class="read-more" >Read more &nbsp; <i class="fa fa-angle-double-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+				<div class="card">
+					<div class="card-block block-4">
+						<h3 class="card-title">Special title</h3>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate tenetur assumenda veniam eum consectetur tempora. Totam cupiditate eveniet odit reprehenderit optio, provident sit iure ducimus deserunt porro laborum illum exercitationem nam ex modi dolores, aliquam nihil. Nemo ea vitae aut iste ratione, distinctio nam fuga dolore maxime id, ad architecto.</p>
+						<a href="javascript:void();" title="Read more" class="read-more" >Read more &nbsp; <i class="fa fa-angle-double-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+				<div class="card">
+					<div class="card-block block-5">
+						<h3 class="card-title">Special title</h3>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore nihil ea, sapiente, facilis necessitatibus culpa accusamus et iste delectus quia quisquam eos excepturi. Minus, quo rerum. Quibusdam iste repellendus, quaerat ullam. Deserunt nulla, inventore, porro ad dolore earum ullam repellendus ab sed et, dolorum! Ipsam non quasi doloremque mollitia architecto!</p>
+						<a href="javascript:void();" title="Read more" class="read-more" >Read more &nbsp; <i class="fa fa-angle-double-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+				<div class="card">
+					<div class="card-block block-6">
+						<h3 class="card-title">Special title</h3>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis molestias cupiditate alias modi odio quasi. Esse veritatis nulla nihil sunt, quo ipsam laborum, aspernatur, quasi quam consequatur ex, aliquid assumenda? Voluptatem vel quo a animi adipisci sequi quae quis doloribus, alias ipsum dolorum, iste suscipit, possimus eos esse in architecto!</p>
+						<a href="javascript:void();" title="Read more" class="read-more" >Read more &nbsp; <i class="fa fa-angle-double-right ml-2"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+</section>
+<!-- /Services section -->
 @endsection
