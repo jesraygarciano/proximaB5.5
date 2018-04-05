@@ -23,7 +23,8 @@
 
     <!-- Font-awesome -->
     <script src="https://use.fontawesome.com/cb65da78f4.js"></script>
-
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    
     {{-- font --}}
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">

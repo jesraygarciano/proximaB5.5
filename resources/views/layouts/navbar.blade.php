@@ -44,61 +44,6 @@
                                             <div class="progress-bar progress-bar-striped active profile-progress" role="progressbar" style="width: {{\Auth::user()->profileProgress()}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="val">{{\Auth::user()->profileProgress()}}</span>% profile complete</div>
                                         </div>
 
-                                        <!-- <div id="navigation">
-                                            <h5>Kindly fill-up the following categories:</h5>
-
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col-sm-5 noti-flex" id="basic-info-noti">
-                                                        <span class="noti-flex-sp">
-                                                            Basic info
-                                                        </span>
-
-                                                        {{--  <span class="noti-flex-icon">
-                                                                <i class="fa fa-globe"></i>
-                                                        </span>  --}}
-
-                                                    </div>
-                                                    <div class="col-sm-5 noti-flex" id="education-noti">
-                                                        <span class="noti-flex-sp">
-                                                            Education
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-sm-5 noti-flex" id="experiences-noti">
-                                                        <span class="noti-flex-sp">
-                                                            Experiences
-                                                        </span>
-                                                    </div>
-                                                    <div class="col-sm-5 noti-flex" id="awards-noti">
-                                                            <span class="noti-flex-sp">
-                                                                Awards..
-                                                            </span>
-                                                    </div>
-                                                    <div class="col-sm-5 noti-flex" id="portfolio-noti">
-                                                            <span class="noti-flex-sp">
-                                                                Portfolio
-                                                            </span>
-                                                    </div>
-                                                    <div class="col-sm-5 noti-flex" id="objective-noti">
-                                                            <span class="noti-flex-sp">
-                                                                Objective
-                                                            </span>
-                                                    </div>
-                                                    <div class="col-sm-5 noti-flex" id="otherskills-noti">
-                                                            <span class="noti-flex-sp">
-                                                                Other Skills
-                                                            </span>
-                                                    </div>
-                                                    <div class="col-sm-5 noti-flex" id="seminars-noti">
-                                                            <span class="noti-flex-sp">
-                                                                Seminars
-                                                            </span>
-                                                    </div>                                                    
-                                                </div>
-                                            </div>
-                                        </div> -->
                                         <div class="text-primary"><center>The more information you provide for us, the higher is your chance to be qualified.</center></div>
                                     </div>
                                 </div>
@@ -124,6 +69,7 @@
                             <li><a href="{{ route('resume_create') }}">Create Resume</a></li>
                             @endif
                             <li>
+                                
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
@@ -156,6 +102,7 @@
         });
     });
 
+    
     $(document).ready(function(){
         // $("#notificationLink").click(function(){
             $("#notificationLink").css({"color" : "red"});
