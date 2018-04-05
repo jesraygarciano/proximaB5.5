@@ -49,6 +49,8 @@ Route::group(['prefix'=>'itp'], function(){
 					Route::patch('skills',['as'=>'j_e_r_p_skills', 'uses'=>'UserController@edit_resume_skills']);
 					Route::patch('company_experience',['as'=>'j_e_r_p_company_experiences', 'uses'=>'UserController@edit_resume_company_experience']);
 					Route::patch('educational_background',['as'=>'j_e_r_p_educational_background', 'uses'=>'UserController@j_e_r_p_educational_background']);
+					Route::patch('photo',['as'=>'j_e_r_p_photo', 'uses'=>'UserController@editResumePhoto']);
+					Route::patch('cover',['as'=>'j_e_r_p_cover', 'uses'=>'UserController@editCover']);
 					Route::patch('meta',['as'=>'j_e_r_p_meta', 'uses'=>'UserController@edit_resume_meta']);
 				});
 
