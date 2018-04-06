@@ -25,7 +25,7 @@
                     <li><a href="{{ route('register') }}">Register</a></li>
                 @else
 
-                    @if(\Auth::check())
+                    @if(\Auth::check() && \Auth::user()->profileProgress() < 100)
 
                     <li class="notification_li" id="notification_li">
                         <a href="#" id="notificationLink">
@@ -47,11 +47,7 @@
                                         <div class="text-primary"><center>The more information you provide for us, the higher is your chance to be qualified.</center></div>
                                     </div>
                                 </div>
-                                @if(\Auth::user()->resume()->first())
-                                <div id="notificationFooter"><a href="{{ route('user_profile') }}">See All</a></div>
-                                @else
-                                <div id="notificationFooter"><a href="{{ route('resume_create') }}">See All</a></div>
-                                @endif
+                                <div id="notificationFooter"><a href="{{ route('itp_applicant_profile') }}">See All</a></div>
                         </div>
                     </li>
                     @endif
@@ -63,11 +59,11 @@
 
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('itp_applicant_profile') }}">IT Profile</a></li>
-                            @if(\Auth::user()->resume()->first())
+                            <!-- @if(\Auth::user()->resume()->first())
                             <li><a href="{{ route('user_profile') }}">See Resume</a></li>
                             @else
                             <li><a href="{{ route('resume_create') }}">Create Resume</a></li>
-                            @endif
+                            @endif -->
                             <li>
                                 
                                 <a href="{{ route('logout') }}"

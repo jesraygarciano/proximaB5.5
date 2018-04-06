@@ -36,7 +36,7 @@
     {{-- @include('includes.message') --}}
     @include('errors.form_errors')
 
-    <h1>Creating your resume</h1>
+    <h1>Profile Wizard</h1>
     <hr/>
 
         <div class="row">
