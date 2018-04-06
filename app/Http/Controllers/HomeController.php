@@ -48,8 +48,8 @@ class HomeController extends Controller
     public function detailedInfo(){
 
         return view('detailedinfo');
-        
-    } 
+
+    }
 
     
     public function index()

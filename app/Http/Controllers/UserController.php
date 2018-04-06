@@ -237,6 +237,22 @@ class UserController extends Controller
             $education->save();
         }
 
+        $exps = json_decode($request->experiences);
+
+        foreach($exps as $exp){
+            $experience = isset($exp->id) ? Experience::findOrFail($exp->id) : new Experience;
+            $experience->resume_id = $resume->id;
+            $experience->ex_company = $exp->ex_company;
+            $experience->ex_postion = $exp->ex_position;
+            $experience->ex_explanation = $exp->ex_explanation;
+            $experience->ex_from_year = $exp->ex_from_year;
+            $experience->ex_from_month = $exp->ex_from_month;
+            $experience->ex_to_year = $exp->ex_to_year;
+            $experience->ex_to_month = $exp->ex_to_month;
+
+            $experience->save();
+        }
+
         $resume->fill($input)->save();
 
         $resume->has_skill()->detach();
