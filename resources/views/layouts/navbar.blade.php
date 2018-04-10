@@ -132,10 +132,13 @@
     });
 
     function setNotificationBackdrop(){
+        @if(\Auth::check() && \Auth::user()->profileProgress() < 100)
         var div = document.createElement('div');
         $(div).addClass('notification-backdrop');
-        $(div).css({'position':'fixed', 'z-index':'1','width':'100%','height':'100%', top:'0px', left:'0px'});
+        $(div).css({'position':'fixed', 'z-index':'1','width':'100%','height':'100%', top:'0px', left:'0px', background:'#0a0a0ad4'});
         $('body').append(div);
+        @endif
+
         
         $(div).click(function(){
             $("#notificationContainer").hide();

@@ -184,9 +184,9 @@
         </div>
       </nav>
 
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    {{ csrf_field() }}
-</form>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          {{ csrf_field() }}
+      </form>
   </header>
 
   <div class="landing-cont-logos text-center container">
@@ -331,7 +331,7 @@
             <div class="panel-heading">
                 <h4>
                     <i class="fa fa-calendar" aria-hidden="true"></i>
-                    <span style="padding-left: .5rem;">Schedule of Training</span>
+                    <span style="padding-left: .5rem;">Training Schedule</span>
                 </h4>
             </div>
 
