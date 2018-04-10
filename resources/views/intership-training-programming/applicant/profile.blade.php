@@ -3,7 +3,7 @@
 @section('css')
 <style type="text/css">
     /* USER PROFILE PAGE */
-    .card {
+    .card{
         /*margin-top: 20px;*/
         padding: 30px;
         background-color: rgba(214, 224, 226, 0.2);
@@ -154,7 +154,6 @@
     .bar-warning {    background-color: #f0ad4e;}
     .bar-danger {  background-color: #d9534f;}
 
-
     /*Facebook cover photo and Profile*/
 
     .fb-profile-block {
@@ -300,6 +299,7 @@
         right: 0;
         border-radius: 0!important;
     }
+    
     .pr-edit-btn{
         font-size: 1.3rem;
         color: #187aa4;
@@ -317,17 +317,17 @@
         width: 0px;
         overflow: hidden;
         display: block;
-        transition: 200ms ease all;        
+        transition: 200ms ease all;
         cursor: pointer;
     }
     .second-column-tab:hover .pr-edit-btn, .first-column-tab:hover .pr-edit-btn{
         opacity: 1;
         width: 30px;
     }
-
     .swal-wide{
     width:850px !important;
     }
+
 </style>
 <link href="{{ asset('css/components/info-tip.css') }}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{asset('css/croppie.css')}}">
@@ -344,13 +344,16 @@
                 <div class="crop-control" style="border-bottom-right-radius:0px; border-bottom-left-radius:0px; height: 100%;" data-width="1200" data-height="400" data-dim="true">
                     <div class="image-container-cover" style="height: 100%;">
                         <img style="width: 100%;" id="cover-image" src="{{ \Auth::user()->cover_image }}" alt="{{ \Auth::user()->name}} Cover photo" />
+                        <div style="background: linear-gradient(transparent,rgba(0, 0, 0, 0.71));position: absolute;width: 100%;height: 70px;bottom: 0px;"></div>
                         <label for="cover_image" class="input-trigger hover-div" style="width: initial;
                             left: initial;
                             height:initial;
                             right: 10px;
-                            top: 10px; text-shadow: 1px 1px 1px #000000;
-                            background:initial;">
-                            <i class="fa fa-edit fa-3x" aria-hidden="true"></i>
+                            top: 10px;
+                            padding: 10px;
+                            border-radius:3px;
+                            background:#0000008c;">
+                            Update Cover <i class="fa fa-camera" aria-hidden="true"></i>
                         </label>
                     </div>
                     <div class="input-container">
@@ -369,12 +372,15 @@
                 <div class="crop-control" style="height: 170px; width: 170px; position:absolute; bottom:10px; left:10px; z-index:1;">
                     <div class="image-container" style="height: 100%;">
                     <img id="profile-picture" src="{{$resume->photo}}" style="width:100%;">
-                    <label for="photo" class="input-trigger hover-div">
-                        <p>
-                        <i class="fa fa-file-image-o fa-5x" aria-hidden="true"></i>
-                        <br>
-                        Upload
-                        </p>
+                    <label for="photo" class="input-trigger hover-div" style="width: initial;
+                        left: initial;
+                        height:initial;
+                        left: 10px;
+                        top: 10px;
+                        padding: 5px;
+                        border-radius:3px;
+                        background:#0000008c;">
+                        Update Profile <i class="fa fa-camera" aria-hidden="true"></i>
                     </label>
                     </div>
                     <div class="input-container" id="photo-container">
@@ -464,12 +470,14 @@
 
             <div class="row">
                 <div class="col-lg-5 col-md-5">
+                    @if(\Auth::user()->profileProgress() < 100)
                     <h5>Profile progress:</h5>
                     <div class="progress progress-navbar">
                         <div class="progress-bar progress-bar-striped active profile-progress" role="progressbar" style="width: {{\Auth::user()->profileProgress()}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="val">{{\Auth::user()->profileProgress()}}</span>% profile complete</div>
                     </div>
+                    @endif
                     <div>
-                        <a href="{{ route('resume_edit', $resume->id) }}" class="btn btn-primary">Update Using Wizard</a>
+                        <a href="{{ route('resume_edit', $resume->id) }}" class="btn btn-primary">Update Profile Using Wizard</a>
                     </div>
                     <br>
                     <div style="position:relative;">

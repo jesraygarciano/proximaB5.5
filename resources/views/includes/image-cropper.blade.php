@@ -9,6 +9,12 @@
   	</div>
   </div>
   <div class="actions">
+		<div class="range-container" style="
+				padding: 10px;
+				background: #ffffff;
+				border-radius: 5px;
+				margin-bottom: 30px;
+		"></div>
     <button type="button" class="btn btn-primary save">Save changes</button>
     <button type="button" class="btn deny btn-secondary" data-dismiss="modal">Close</button>
   </div>
@@ -74,6 +80,13 @@ $(document).ready(function(){
 				      type: 'square'
 				  },
 				  boundary: { width: border_width, height: border_height },
+				});
+
+				basic.croppie('result', 'html').then(function(html) {
+					$('#crop-modal .range-container').html('');
+					$('#crop-modal .cr-boundary').css({overflow:'initial'});
+					$('#crop-modal .content').css({overflow:'hidden', padding:'100px'});
+					$('#crop-modal .cr-slider-wrap').prependTo('#crop-modal .range-container');
 				});
 
 				current_elm = elm;
