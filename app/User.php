@@ -364,4 +364,22 @@ class User extends Authenticatable
 
         return $p = (int) (($filled / (count($fields) + 3)) * 100);
     }
+
+    public function saveResumeFile($file){
+        $arrayExtensions = array(".pptx", "pdf", ".docx", ".dotx", ".xlsx");
+
+        $extension = $file->extension();
+
+        $msStr = substr(explode(".", (microtime(true) . ""))[1], 0, 3);
+        $file_name = public_path('/storage/').date("Y_m_d_H_i_s" . "_" . $msStr).'.'.$extension;
+
+        if (in_array($extension, $arrayExtensions))
+        {
+            file_put_contents($file_name, $file->getRealPath());
+            // $file->storeAs('resume_files', $file_name);
+            return ['status'=>'success'];
+        }
+
+        return ['status'=>'fail', 'message'=>'invalid_file'];
+    }
 }
