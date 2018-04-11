@@ -328,6 +328,34 @@
     width:850px !important;
     }
 
+.feature-box-style-gart .feature-icon-gart {
+    float: left;
+    width: 70px;
+    height: 70px;
+    padding: 2px;
+    margin-right: 30px;
+    margin-left: 13px;    
+    display: inline-block;
+    border: 2px dashed #953020;
+}
+.feature-box-style-gart:hover .feature-icon-gart {
+    border: 2px solid #953020;
+}
+.feature-box-style-gart .feature-icon-gart i{
+    color: #953020;
+    font-size: 2rem;
+    width: 66px;
+    height: 66px;
+    display: block;
+    line-height: 66px;
+    text-align: center;
+    /* background-color: #ffffff; */
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;    
+}
 </style>
 <link href="{{ asset('css/components/info-tip.css') }}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{asset('css/croppie.css')}}">
@@ -582,7 +610,7 @@
                         @endif
                         <div class="first-column-tab">
                             <h3>
-                            <i class="fa fa-graduation-cap"></i>
+                                <i class="fa fa-graduation-cap"></i>
                                 Education
                             </h3>
 
@@ -594,7 +622,7 @@
                                 @foreach($resume->educations as $education)
                                 <li class="list-group-item">
                                     <span id="education-{{$education->id}}">{{$education->ed_university}}</span>
-                                    <div class="pull-right pr-edit-btn" id="edit-education" data-id="{{$education->id}}" style="cursor:pointer;">
+                                    <div class="pull-right pr-edit-btn" id="edit-education" data-id="{{$education->id}}" style="`:pointer;">
                                         <i class="fa fa-edit"></i>
                                     </div>
                                 </li>
@@ -603,7 +631,26 @@
 
                         </div>
                     </div>
-                </div>
+
+                    <div class="first-column-tab">
+                        <h3>
+                            <i class="fa fa-cloud-download"></i>
+                            Uploaded compiled resume
+                        </h3>
+                        
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6" >
+                                <div class="feature-box-style-gart" style="cursor: pointer;">
+                                    <div class="feature-icon-gart">
+                                        <i class="fa fa-plus"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div> <!--End of Col-md-->
+
+                    
 
                 {{-- @if(isset($application)) --}}
                 <div class="col-lg-7 col-md-7">
@@ -819,6 +866,12 @@
                     </div>
                 </div>
                 {{-- @endif --}}
+            </div>
+            <div>
+                <form id="resume-file-form">
+                    <input type="file" name="resume_file">
+                    <input type="hidden" value="{{$resume->id}}">
+                </form>
             </div>
         </div>
 
@@ -2225,6 +2278,26 @@ $(document).ready(function(){
                     +'</li>'
         $('#work-experiences').append(html);
     }
+
+});
+
+$('[name=resume_file]').change(function(){
+
+    var formData = new FormData();
+    formData.append('resume_file',this.files[0]);
+    formData.append('resume_id','{{$resume->id}}');
+
+    $.ajax({
+        url:"{{route('j_g_resume_file')}}",
+        headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+        type: 'POST',
+        data:formData,
+        success:function(data){
+            console.log(data);
+        },
+        processData:false,
+        contentType: false,
+    });
 
 });
 
