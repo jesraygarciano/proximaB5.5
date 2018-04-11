@@ -203,6 +203,12 @@
     padding: 1.2rem 2rem;
 }
 
+.profile-name h2 {
+    color: #fff;
+    font-size: 15px!important;
+    font-weight: 600;
+    line-height: initial!important;
+}
 }
 
 /*Customized Media Queries*/
