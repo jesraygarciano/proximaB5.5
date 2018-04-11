@@ -506,4 +506,9 @@ class UserController extends Controller
         Experience::findOrFail($request->id)->delete();
         return 'item deleted';
     }
+
+    public function uploadResumeFiles(Request $request){
+        // 
+        return \Auth::user()->saveResumeFile($request->file('resume_file'));
+    }
 }
