@@ -74,4 +74,12 @@ class Resume extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getResumeFileAttribute(){
+        return asset('storage/'.$this->attributes['resume_file']);
+    }
+
+    public function resumeFileExist(){
+        return file_exists('storage/'.$this->attributes['resume_file']) && str_replace(' ','',$this->attributes['resume_file']);
+    }
 }
