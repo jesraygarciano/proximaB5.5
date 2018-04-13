@@ -330,24 +330,25 @@
 
 .feature-box-style-gart .feature-icon-gart {
     float: left;
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 76px;
     padding: 2px;
     margin-right: 30px;
-    margin-left: 13px;    
+    /* margin-left: 13px; */
     display: inline-block;
-    border: 2px dashed #953020;
+    /* border: 2px dashed #953020; */
+    background-color: #b2ceea;
 }
 .feature-box-style-gart:hover .feature-icon-gart {
     border: 2px solid #953020;
 }
 .feature-box-style-gart .feature-icon-gart i{
-    color: #953020;
+    color: #2793ff;
     font-size: 2rem;
-    width: 66px;
+    width: 73px;
     height: 66px;
     display: block;
-    line-height: 66px;
+    line-height: 73px;
     text-align: center;
     /* background-color: #ffffff; */
     -webkit-transition: all 0.1s ease-in-out;
@@ -355,6 +356,133 @@
     -ms-transition: all 0.1s ease-in-out;
     -o-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;    
+}
+
+
+/*Upload resume */
+.file-upload {
+    display: block;
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    padding: 0 1rem;
+}
+
+.file-upload .file-select {
+    display: block;
+    border: 2px dashed #55a5f5;
+    color: #34495e;
+    cursor: pointer;
+    height: 80px;
+    line-height: 40px;
+    text-align: left;
+    background: #FFFFFF;
+    overflow: hidden;
+    position: relative;
+}
+
+.file-upload .file-select .file-select-button {
+    background: #dce4ec;
+    padding: 0 10px;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+}
+
+.file-upload .file-select .file-select-name {
+    line-height: 40px;
+    display: inline-block;
+    padding: 18px 11px;
+}
+
+.file-upload .file-select:hover {
+    border-color: #34495e;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+
+.file-upload .file-select:hover .file-select-button {
+    background: #34495e;
+    color: #FFFFFF;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+
+.file-upload.active .file-select {
+    border-color: #3fa46a;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+
+.file-upload.active .file-select .file-select-button {
+    background: #3fa46a;
+    color: #FFFFFF;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+.file-upload.active .file-select .feature-box-style-gart .feature-icon-gart i {
+    color: #3fa46a;
+}
+
+.file-upload .file-select input[type=file] {
+    z-index: 100;
+    cursor: pointer;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.file-upload .file-select.file-select-disabled {
+    opacity: 0.65;
+}
+
+.file-upload .file-select.file-select-disabled:hover {
+    cursor: default;
+    display: block;
+    border: 2px solid #dce4ec;
+    color: #34495e;
+    cursor: pointer;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 5px;
+    text-align: left;
+    background: #FFFFFF;
+    overflow: hidden;
+    position: relative;
+}
+
+.file-upload .file-select.file-select-disabled:hover .file-select-button {
+    background: #dce4ec;
+    color: #666666;
+    padding: 0 10px;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+}
+
+.file-upload .file-select.file-select-disabled:hover .file-select-name {
+    line-height: 40px;
+    display: inline-block;
+    padding: 0 10px;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    color: #fff;
+    cursor: default;
+    background-color: #337ab7;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
 }
 </style>
 <link href="{{ asset('css/components/info-tip.css') }}" rel="stylesheet">
@@ -399,20 +527,20 @@
                 </a> -->
                 <div class="crop-control" style="height: 170px; width: 170px; position:absolute; bottom:10px; left:10px; z-index:1;">
                     <div class="image-container" style="height: 100%;">
-                    <img id="profile-picture" src="{{$resume->photo}}" style="width:100%;">
-                    <label for="photo" class="input-trigger hover-div" style="width: initial;
-                        left: initial;
-                        height:initial;
-                        left: 10px;
-                        top: 10px;
-                        padding: 5px;
-                        border-radius:3px;
-                        background:#0000008c;">
-                        Update Profile <i class="fa fa-camera" aria-hidden="true"></i>
-                    </label>
+                        <img id="profile-picture" src="{{$resume->photo}}" style="width:100%;">
+                        <label for="photo" class="input-trigger hover-div" style="width: initial;
+                            left: initial;
+                            height:initial;
+                            left: 10px;
+                            top: 10px;
+                            padding: 5px;
+                            border-radius:3px;
+                            background:#0000008c;">
+                            Update Profile <i class="fa fa-camera" aria-hidden="true"></i>
+                        </label>
                     </div>
                     <div class="input-container" id="photo-container">
-                    <input type="file" id="photo" name="photo" accept="image/*" />
+                        <input type="file" id="photo" name="photo" accept="image/*" />
                     </div>
                 </div>
             </div>
@@ -422,8 +550,20 @@
           <div class="fb-profile-block-menu">
                <div class="block-menu" style="background: #fff">
                     <ul class="nav nav-tabs" style="background: #fff">
-                       <li class="active"><a data-toggle="tab" href="#home">Resume</a></li>
-                       <li><a data-toggle="tab" href="#application1">Application</a></li>
+                       <li class="active">
+                            <a data-toggle="tab" href="#home">
+                                    <i class="fa fa-th-list"></i>
+                                    <span id="resume-tab-itp">Resume</span>
+                            </a>
+                        </li>
+
+                        <li>
+                           <a data-toggle="tab" href="#application1">
+                                <i class="fa fa-suitcase"></i>                               
+                                <span id="application-tab-itp">Application</span>
+                           </a>
+                        </li>
+
                     </ul>
                </div>
           </div>
@@ -495,7 +635,6 @@
 
         <div class="tab-pane fade in active" id="home">
             <br />
-
             <div class="row">
                 <div class="col-lg-5 col-md-5">
                     @if(\Auth::user()->profileProgress() < 100)
@@ -637,20 +776,27 @@
                             <i class="fa fa-cloud-download"></i>
                             Uploaded compiled resume
                         </h3>
-                        
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6" >
+                        <div class="file-upload">
+                            <div class="file-select">
                                 <div class="feature-box-style-gart" style="cursor: pointer;">
                                     <div class="feature-icon-gart">
                                         <i class="fa fa-plus"></i>
                                     </div>
                                 </div>
+
+                              <div class="file-select-name" id="noFile">{{$resume->resumeFileExist() ? 'Upload updated resume' : 'No resume uploaded'}}</div>
+                              <div style="position:absolute; top:0px; left:0px; right:0px; bottom:0px;" id="choose_resume_file_bttn">
+                              </div>
+                              
+                              <form id="resume-file-form">
+                                    <input type="file" style="display:none;" name="resume_file" id="chooseFile">
+                                    {{-- <input type="file" name="resume_file"> --}}
+                                    <input type="hidden" value="{{$resume->id}}">
+                                </form>
                             </div>
                         </div>
                     </div>
             </div> <!--End of Col-md-->
-
-                    
 
                 {{-- @if(isset($application)) --}}
                 <div class="col-lg-7 col-md-7">
@@ -866,12 +1012,6 @@
                     </div>
                 </div>
                 {{-- @endif --}}
-            </div>
-            <div>
-                <form id="resume-file-form">
-                    <input type="file" name="resume_file">
-                    <input type="hidden" value="{{$resume->id}}">
-                </form>
             </div>
         </div>
 
@@ -2281,83 +2421,95 @@ $(document).ready(function(){
 
 });
 
+
+
+// this code is for the upload resume file function
+$('#choose_resume_file_bttn').click(function(){
+    swal(
+    'Upload New Resume File?',
+    'Click OK',
+    'question').then((result) => {
+            if(result.value)
+            {
+                // 
+                $('[name=resume_file]').trigger('click');
+            }
+    });
+});
+
 $('[name=resume_file]').change(function(){
 
-    var formData = new FormData();
-    formData.append('resume_file',this.files[0]);
-    formData.append('resume_id','{{$resume->id}}');
+    var myfile= $( this ).val();
+    var ext = myfile.split('.').pop();
+    if(ext=="pdf" || ext=="docx" || ext=="doc"){
+        var formData = new FormData();
+        formData.append('resume_file',this.files[0]);
+        formData.append('resume_id','{{$resume->id}}');
 
-    $.ajax({
-        url:"{{route('j_g_resume_file')}}",
-        headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-        type: 'POST',
-        data:formData,
-        success:function(data){
-            console.log(data);
-        },
-        processData:false,
-        contentType: false,
-    });
+        swal({
+        title: 'Please confirm',
+        type: 'info',
+        html:
+            'Click save',
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText:
+            'Save',
+        cancelButtonText:
+        'Cancel',
+        }).then(function(result){
+            if(result.value){
+                swal({
+                    title: 'Saving',
+                    text: 'Please wait...',
+                    onOpen: () => {
+                        swal.showLoading()
+                    },
+                    allowOutsideClick: () => !swal.isLoading()
+                });
+
+                $.ajax({
+                    url:"{{route('j_g_resume_file')}}",
+                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                    type: 'POST',
+                    data:formData,
+                    success:function(data){
+                        console.log(data);
+                        swal({
+                            title: 'All done!',
+                            html:
+                                '',
+                            confirmButtonText: 'Ok',
+                            type:'success'
+                        }).then(()=>{
+                            $("#noFile").text("Upload updated resume");
+                        });
+                    },
+                    processData:false,
+                    contentType: false,
+                });
+            }
+        })
+    }
+    else
+    {
+        swal({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Please choose .pdf, .doc, or .docx files!',
+        })
+    }
 
 });
+
+// end if code
 
 function prep_del_batch(id){
     $('#delete_application').modal('show');
     $('#delete_application').data('id',id);
 }
 
-{{--  Sweet Alert  --}}
-
-    $('#skills-info').click(function(){
-        swal.setDefaults({
-        input: 'text',
-        confirmButtonText: 'Next &rarr;',
-        showCancelButton: true,
-        progressSteps: ['1', '2', '3']
-        })
-
-        var steps = [
-        {
-            title: 'Question 1',
-            text: 'Chaining swal2 modals is easy'
-        },
-        'Question 2',
-        'Question 3'
-        ]
-
-        swal.queue(steps).then((result) => {
-        swal.resetDefaults()
-
-        if (result.value) {
-            swal({
-            title: 'All done!',
-            html:
-                'Your answers: <pre>' +
-                JSON.stringify(result.value) +
-                '</pre>',
-            confirmButtonText: 'Lovely!'
-            })
-        }
-        })
-    });
-
-
-// {{--  Accomplishments  --}}
-$('#accomplishments').click(function(){
-
-// const {value: text} = await swal({
-//   input: 'textarea',
-//   inputPlaceholder: 'Type your message here',
-//   showCancelButton: true
-// })
-
-if (text) {
-  swal(text)
-}
-});
-
-
-{{--  End Sweet alert  --}}
 
 @if(\Auth::user()->resume()->first())
 {{-- @if(isset($application)) --}}
@@ -2400,6 +2552,21 @@ if (text) {
         }
     });
 @endif
+
+
+        $('#chooseFile').bind('change', function () {
+        var filename = $("#chooseFile").val();
+        // if (/^\s*$/.test(filename)) {
+        //     $(".file-upload").removeClass('active');
+        //     $("#noFile").text("No resume uploaded"); 
+        // }
+        // else {
+        //     $(".file-upload").addClass('active');
+        //     // $("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+        //     $("#noFile").text("Upload updated resume"); 
+
+        // }
+        });
 
 </script>
 

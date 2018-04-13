@@ -12,7 +12,10 @@
     $applied_batches = \Auth::user()->intershipApplication()->pluck('training_batch_id')->toArray();
 ?>
 <script>
-$('#notification_li').hide();
+$(document).ready(function(){
+    $('#notification_li').hide();
+    $('.notification-backdrop').hide();
+});
 </script>
 <style type="text/css">
     .error{
@@ -116,24 +119,6 @@ $('#notification_li').hide();
                 </div>
 
                 <br />
-
-                <!-- <div class="ui form">
-                    <label>School</label>
-                    <input type="text" name="school" value="{{ $student->school ?? old('school') }}">
-                </div>
-
-                <br /> -->
-
-                <!-- <div class="ui form">
-                    <label>Course</label>
-                    <select name="course" class="ui dropdown">
-                        <option value="">Select</option>
-                        <option value="BSIT" {{$student ? ($student->course == 'BSIT' ? 'selected' : '') : ''}}>BSIT</option>
-                        <option value="BSCS" {{$student ? ($student->course == 'BSCS' ? 'selected' : '') : ''}}>BSCS</option>
-                        <option value="ACT" {{$student ? ($student->course == 'ACT' ? 'selected' : '') : ''}}>ACT</option>
-                    </select>
-                </div> -->
-
                 <br />
 
                 <div class="ui form">
@@ -206,7 +191,6 @@ $('#notification_li').hide();
                         }
                     });
                 </script>
-                
 
                 <br />
                 <br />
