@@ -41,6 +41,7 @@ Route::group(['prefix'=>'itp'], function(){
 					Route::get('all',['as'=>'json_get_resume', 'uses'=>'UserController@returResume']);
 					Route::get('education',['as'=>'j_g_r_education', 'uses'=>'UserController@returResumeEducation']);
 					Route::get('skill/categories',['as'=>'j_g_skills_categories', 'uses'=>'UserController@getLanguageCategorySkills']);
+					Route::get('resumefile',['as'=>'j_g_resume_file', 'uses'=>'UserController@uploadResumeFiles']);
 					Route::get('experience',['as'=>'j_g_experience', 'uses'=>'UserController@getResumeExperience']);
 					Route::get('award/certificate',['as'=>'j_g_award_certificate', 'uses'=>'UserController@getResumeAwardCertificate']);
 				});
@@ -49,6 +50,7 @@ Route::group(['prefix'=>'itp'], function(){
 					Route::patch('skills',['as'=>'j_e_r_p_skills', 'uses'=>'UserController@edit_resume_skills']);
 					Route::patch('company_experience',['as'=>'j_e_r_p_company_experiences', 'uses'=>'UserController@edit_resume_company_experience']);
 					Route::patch('educational_background',['as'=>'j_e_r_p_educational_background', 'uses'=>'UserController@j_e_r_p_educational_background']);
+					Route::post('resumefile',['as'=>'j_g_resume_file', 'uses'=>'UserController@uploadResumeFiles']);
 					Route::patch('photo',['as'=>'j_e_r_p_photo', 'uses'=>'UserController@editResumePhoto']);
 					Route::patch('cover',['as'=>'j_e_r_p_cover', 'uses'=>'UserController@editCover']);
 					Route::patch('meta',['as'=>'j_e_r_p_meta', 'uses'=>'UserController@edit_resume_meta']);
