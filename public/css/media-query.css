@@ -79,6 +79,12 @@
   ##Screen = B/w 320px to 479px
 */
 
+#resume-tab-itp{
+    display: none;
+}
+#application-tab-itp{
+    display: none;
+}
 
 .mt-0 .mb-1{
   font-size: 20px!important;

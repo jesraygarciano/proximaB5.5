@@ -98,13 +98,11 @@
         });
     });
 
-    
     $(document).ready(function(){
         // $("#notificationLink").click(function(){
             $("#notificationLink").css({"color" : "red"});
             $("#notificationContainer").fadeToggle(300);
             $("#notification_count").fadeOut("slow");
-            setNotificationBackdrop();
         // return false;
         // });
 
@@ -127,7 +125,6 @@
                 $("#notificationLink").css({"color" : "red"});
                 setNotificationBackdrop();
             }
-
         // return false;
     });
 
@@ -146,6 +143,6 @@
             $(div).remove();
         });
     }
-
+    setNotificationBackdrop();
         });
     </script>
