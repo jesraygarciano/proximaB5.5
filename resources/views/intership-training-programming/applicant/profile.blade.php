@@ -166,17 +166,18 @@
         width: 100%;
         height: auto;
     }
+
     .fb-profile-block-thumb{
-    display: block;
-    /* height: 315px; */
-    width:100%;
-    overflow: hidden;
-    position: relative;
-    text-decoration: none;
+        display: block;
+        /* height: 315px; */
+        width:100%;
+        overflow: hidden;
+        position: relative;
+        text-decoration: none;
     }
     .fb-profile-block-menu {
-    border: 1px solid #d3d6db;
-    border-radius: 0 0 3px 3px;
+        border: 1px solid #d3d6db;
+        border-radius: 0 0 3px 3px;
     }
     .profile-img a{
         bottom: 15px;
@@ -191,56 +192,56 @@
         z-index:9;
     }
     .profile-img img {
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07);
-    padding: 5px;
+        background-color: #fff;
+        border-radius: 2px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07);
+        padding: 5px;
     }
     .profile-name {
-    bottom: 60px;
-    left: 205px;
-    position: absolute;
+        bottom: 60px;
+        left: 205px;
+        position: absolute;
     }
     .profile-name h2 {
-    color: #fff;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 30px;
-    max-width: 275px;
-    position: relative;
-    text-transform: capitalize;
+        color: #fff;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 30px;
+        max-width: 275px;
+        position: relative;
+        text-transform: capitalize;
     }
     .fb-profile-block-menu{
-    height: 44px;
-    position: relative;
-    /*width:850px;*/
-    /* width: 1170px; */
-    overflow:hidden;
+        height: 44px;
+        position: relative;
+        /*width:850px;*/
+        /* width: 1170px; */
+        overflow:hidden;
     }
     .block-menu {
-    clear: right;
-    padding-left: 205px;
+        clear: right;
+        padding-left: 205px;
     }
     .block-menu ul{
         margin:0;
         padding:0;
-        }
+    }
     .block-menu ul li{
         display:inline-block;
         }
     .block-menu ul li a {
-    border-right: 1px solid #e9eaed;
-    float: left;
-    font-size: 14px;
-    font-weight: bold;
-    height: 42px;
-    line-height: 3.0;
-    padding: 0 17px;
-    position: relative;
-    vertical-align: middle;
-    white-space: nowrap;
-    color:#4b4f56;
-    text-transform:capitalize;
+        border-right: 1px solid #e9eaed;
+        float: left;
+        font-size: 14px;
+        font-weight: bold;
+        height: 42px;
+        line-height: 3.0;
+        padding: 0 17px;
+        position: relative;
+        vertical-align: middle;
+        white-space: nowrap;
+        color:#4b4f56;
+        text-transform:capitalize;
     }
 
     .block-menu ul li:first-child a{
@@ -325,165 +326,165 @@
         width: 30px;
     }
     .swal-wide{
-    width:850px !important;
+        width:850px !important;
     }
 
-.feature-box-style-gart .feature-icon-gart {
-    float: left;
-    width: 80px;
-    height: 76px;
-    padding: 2px;
-    margin-right: 30px;
-    /* margin-left: 13px; */
-    display: inline-block;
-    /* border: 2px dashed #953020; */
-    background-color: #b2ceea;
-}
-.feature-box-style-gart:hover .feature-icon-gart {
-    border: 2px solid #953020;
-}
-.feature-box-style-gart .feature-icon-gart i{
-    color: #2793ff;
-    font-size: 2rem;
-    width: 73px;
-    height: 66px;
-    display: block;
-    line-height: 73px;
-    text-align: center;
-    /* background-color: #ffffff; */
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    -ms-transition: all 0.1s ease-in-out;
-    -o-transition: all 0.1s ease-in-out;
-    transition: all 0.1s ease-in-out;    
-}
+    .feature-box-style-gart .feature-icon-gart {
+        float: left;
+        width: 80px;
+        height: 76px;
+        padding: 2px;
+        margin-right: 30px;
+        /* margin-left: 13px; */
+        display: inline-block;
+        /* border: 2px dashed #953020; */
+        background-color: #b2ceea;
+    }
+    .feature-box-style-gart:hover .feature-icon-gart {
+        border: 2px solid #953020;
+    }
+    .feature-box-style-gart .feature-icon-gart i{
+        color: #2793ff;
+        font-size: 2rem;
+        width: 73px;
+        height: 66px;
+        display: block;
+        line-height: 73px;
+        text-align: center;
+        /* background-color: #ffffff; */
+        -webkit-transition: all 0.1s ease-in-out;
+        -moz-transition: all 0.1s ease-in-out;
+        -ms-transition: all 0.1s ease-in-out;
+        -o-transition: all 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out;    
+    }
 
 
-/*Upload resume */
-.file-upload {
-    display: block;
-    text-align: center;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    padding: 0 1rem;
-}
+    /*Upload resume */
+    .file-upload {
+        display: block;
+        text-align: center;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        padding: 0 1rem;
+    }
 
-.file-upload .file-select {
-    display: block;
-    border: 2px dashed #55a5f5;
-    color: #34495e;
-    cursor: pointer;
-    height: 80px;
-    line-height: 40px;
-    text-align: left;
-    background: #FFFFFF;
-    overflow: hidden;
-    position: relative;
-}
+    .file-upload .file-select {
+        display: block;
+        border: 2px dashed #55a5f5;
+        color: #34495e;
+        cursor: pointer;
+        height: 80px;
+        line-height: 40px;
+        text-align: left;
+        background: #FFFFFF;
+        overflow: hidden;
+        position: relative;
+    }
 
-.file-upload .file-select .file-select-button {
-    background: #dce4ec;
-    padding: 0 10px;
-    display: inline-block;
-    height: 40px;
-    line-height: 40px;
-}
+    .file-upload .file-select .file-select-button {
+        background: #dce4ec;
+        padding: 0 10px;
+        display: inline-block;
+        height: 40px;
+        line-height: 40px;
+    }
 
-.file-upload .file-select .file-select-name {
-    line-height: 40px;
-    display: inline-block;
-    padding: 18px 11px;
-}
+    .file-upload .file-select .file-select-name {
+        line-height: 40px;
+        display: inline-block;
+        padding: 18px 11px;
+    }
 
-.file-upload .file-select:hover {
-    border-color: #34495e;
-    transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-}
+    .file-upload .file-select:hover {
+        border-color: #34495e;
+        transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -webkit-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+    }
 
-.file-upload .file-select:hover .file-select-button {
-    background: #34495e;
-    color: #FFFFFF;
-    transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-}
+    .file-upload .file-select:hover .file-select-button {
+        background: #34495e;
+        color: #FFFFFF;
+        transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -webkit-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+    }
 
-.file-upload.active .file-select {
-    border-color: #3fa46a;
-    transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-}
+    .file-upload.active .file-select {
+        border-color: #3fa46a;
+        transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -webkit-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+    }
 
-.file-upload.active .file-select .file-select-button {
-    background: #3fa46a;
-    color: #FFFFFF;
-    transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-}
-.file-upload.active .file-select .feature-box-style-gart .feature-icon-gart i {
-    color: #3fa46a;
-}
+    .file-upload.active .file-select .file-select-button {
+        background: #3fa46a;
+        color: #FFFFFF;
+        transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -webkit-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+    }
+    .file-upload.active .file-select .feature-box-style-gart .feature-icon-gart i {
+        color: #3fa46a;
+    }
 
-.file-upload .file-select input[type=file] {
-    z-index: 100;
-    cursor: pointer;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    filter: alpha(opacity=0);
-}
+    .file-upload .file-select input[type=file] {
+        z-index: 100;
+        cursor: pointer;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
 
-.file-upload .file-select.file-select-disabled {
-    opacity: 0.65;
-}
+    .file-upload .file-select.file-select-disabled {
+        opacity: 0.65;
+    }
 
-.file-upload .file-select.file-select-disabled:hover {
-    cursor: default;
-    display: block;
-    border: 2px solid #dce4ec;
-    color: #34495e;
-    cursor: pointer;
-    height: 40px;
-    line-height: 40px;
-    margin-top: 5px;
-    text-align: left;
-    background: #FFFFFF;
-    overflow: hidden;
-    position: relative;
-}
+    .file-upload .file-select.file-select-disabled:hover {
+        cursor: default;
+        display: block;
+        border: 2px solid #dce4ec;
+        color: #34495e;
+        cursor: pointer;
+        height: 40px;
+        line-height: 40px;
+        margin-top: 5px;
+        text-align: left;
+        background: #FFFFFF;
+        overflow: hidden;
+        position: relative;
+    }
 
-.file-upload .file-select.file-select-disabled:hover .file-select-button {
-    background: #dce4ec;
-    color: #666666;
-    padding: 0 10px;
-    display: inline-block;
-    height: 40px;
-    line-height: 40px;
-}
+    .file-upload .file-select.file-select-disabled:hover .file-select-button {
+        background: #dce4ec;
+        color: #666666;
+        padding: 0 10px;
+        display: inline-block;
+        height: 40px;
+        line-height: 40px;
+    }
 
-.file-upload .file-select.file-select-disabled:hover .file-select-name {
-    line-height: 40px;
-    display: inline-block;
-    padding: 0 10px;
-}
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
-    color: #fff;
-    cursor: default;
-    background-color: #337ab7;
-    border: 1px solid #ddd;
-    border-bottom-color: transparent;
-}
+    .file-upload .file-select.file-select-disabled:hover .file-select-name {
+        line-height: 40px;
+        display: inline-block;
+        padding: 0 10px;
+    }
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+        color: #fff;
+        cursor: default;
+        background-color: #337ab7;
+        border: 1px solid #ddd;
+        border-bottom-color: transparent;
+    }
 </style>
 <link href="{{ asset('css/components/info-tip.css') }}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{asset('css/croppie.css')}}">
@@ -779,12 +780,12 @@
                         <div class="file-upload">
                             <div class="file-select">
                                 <div class="feature-box-style-gart" style="cursor: pointer;">
-                                    <div class="feature-icon-gart">
-                                        <i class="fa fa-plus"></i>
+                                    <div class="feature-icon-gart" style="background-color:{{$resume->resumeFileExist() ? '#b2eabd' : '#b2ceea'}}">
+                                        <i class="fa {{$resume->resumeFileExist() ? 'fa-check-circle' : 'fa-plus'}}" style="color:{{$resume->resumeFileExist() ? 'white' : '#2793ff'}}"></i>
                                     </div>
                                 </div>
 
-                              <div class="file-select-name" id="noFile">{{$resume->resumeFileExist() ? 'Upload updated resume' : 'No resume uploaded'}}</div>
+                              <div class="file-select-name" id="noFile">{{$resume->resumeFileExist() ? 'Update Resume Document' : 'Upload Resume Document'}}</div>
                               <div style="position:absolute; top:0px; left:0px; right:0px; bottom:0px;" id="choose_resume_file_bttn">
                               </div>
                               
@@ -982,7 +983,7 @@
                         </div>
                     </div>
                     <div style="position:relative;">
-                        @if(!$resume->other_skills)
+                        @if(!$resume->seminars_attended)
                         <div class="info-tip bounceIn tip-right warning-tip">
                             <div class="body">
                                 <div class="header">
@@ -1091,6 +1092,123 @@
         </div>
     </div>
 </div>
+
+<div class="ui modal" id="edit_education_modal">
+    <div class="header">
+        Educational Background
+    </div>
+    <div class="content">
+        <form action="">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group required">
+                        <label for="ed_university" class="required-label">University</label>
+                        <input class="form-control" name="ed_university" type="text" value="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group required">
+                        <label for="ed_field_of_study" class="required-label">Field of study</label>
+                        <input class="form-control" name="ed_field_of_study" type="text" value="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group required">
+                        <label for="ed_program_of_study" class="required-label">Program of study</label>
+                        <input class="form-control" name="ed_program_of_study" type="text" value="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group required start_end_date_range">
+                        <label for="duration" class="required-label">Duration</label><br>'
+                        {!!Form::select("ed_from_month", month_array(), null, ['class' => 'from_month ed_from_month ui dropdown single-select parent-form-group'])!!},
+                        {!!Form::select("ed_from_year", year_array(), null, ['class' => 'from_year ed_from_year ui dropdown single-select parent-form-group'])!!}
+                        &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+                        {!!Form::select("ed_to_month", month_array(), null, ['class' => 'to_month ed_to_month ui dropdown single-select parent-form-group'])!!},
+                        {!!Form::select("ed_to_year", year_array(), null, ['class' => 'to_year ed_to_year ui dropdown single-select parent-form-group'])!!}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+      <div class="ui button">Cancel</div>
+      <div class="ui green button" onclick="$('#edit_education_modal form').submit();">Send</div>
+    </div>
+</div>
+
+<div class="ui modal" id="edit_experience_modal">
+    <div class="header">
+        Experience
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group required">
+                    <label for="ed_university" class="required-label">Company</label>
+                    <input class="form-control" name="ed_university" type="text" value="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group required">
+                    <label for="ed_field_of_study" class="required-label">Position</label>
+                    <input class="form-control" name="ed_field_of_study" type="text" value="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group required">
+                <label for="duration" class="required-label">Duration</label><br>'
+                    {!!Form::select("ed_from_month", month_array(), null, ['class' => 'ed_from_month ui dropdown single-select parent-form-group'])!!},
+                    {!!Form::select("ed_from_year", year_array(), null, ['class' => 'ed_from_year ui dropdown single-select parent-form-group'])!!}
+                    &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+                    {!!Form::select("ed_to_month", month_array(), null, ['class' => 'ed_to_month ui dropdown single-select parent-form-group'])!!},
+                    {!!Form::select("ed_to_year", year_array(), null, ['class' => 'ed_to_year ui dropdown single-select parent-form-group'])!!}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group required">
+                    <label for="ex_explanation" class="required-label">Responsibilities</label>
+                    <textarea class="form-control" name="ex_explanation" cols="50" rows="10"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Nope
+        </div>
+        <div class="ui positive right labeled icon button">
+            Yep, that's me
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('#edit_education_modal form').unickForm(
+            {
+                validations : { // initialize the plugin
+                    ed_university : {
+                        type:'empty',
+                        prompt:'Please enter your first name'
+                    },
+                    ed_field_of_study : {
+                        type:'empty',
+                        prompt:'Please enter your first name'
+                    },
+                    ed_program_of_study : {
+                        type:'empty',
+                        prompt:'Please enter your first name'
+                    },
+                    start_end_date_range : {
+                        type:'start_end_date_range',
+                    }
+                }
+            }
+        );
+    });
+</script>
 
 <script>
 $(document).ready(function(){
@@ -2483,7 +2601,9 @@ $('[name=resume_file]').change(function(){
                             confirmButtonText: 'Ok',
                             type:'success'
                         }).then(()=>{
-                            $("#noFile").text("Upload updated resume");
+                            $("#noFile").text("Update Resume Document");
+                            $('#resume-file-form').closest('.feature-box-style-gart').find('.feature-icon-gart').css({'background-color':'#b2eabd'});
+                            $('#resume-file-form').closest('.feature-box-style-gart').find('.feature-icon-gart .fa').css({'color':'#ffffff'});
                         });
                     },
                     processData:false,
@@ -2575,4 +2695,5 @@ function prep_del_batch(id){
 @section('scripts')
 <script src="{{ asset('js/profile_editor.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/croppie.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/unick-form.js')}}"></script>
 @endsection

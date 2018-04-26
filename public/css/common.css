@@ -483,8 +483,8 @@ padding:10px;
       overflow: visible;
       position: absolute;
       /* top: 30px; */
-      top: 48px;      
-      margin-left: -170px;
+      top: 51px;      
+      margin-left: -359px;
       width: 400px;
       z-index: -1;
       display: none;
@@ -499,7 +499,7 @@ padding:10px;
       border: 10px solid red;
       border-color: transparent transparent #989898;
       margin-top: -20px;
-      margin-left: 184px;
+      margin-left: 375px;
 }
 #notificationTitle {
       font-weight: bold;
