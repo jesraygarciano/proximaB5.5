@@ -251,6 +251,7 @@
 
 @media (max-width: 768px) {
 
+    
   #schedulenskills{
     margin-top: 2rem;
   }
@@ -265,7 +266,8 @@
     /* top: 30px; */
     top: 48px;      
     margin-left: 0px;
-    width: 400px;
+    margin-bottom: 1rem;
+    width: 100%;
     z-index: -1;
     display: none;
     }
