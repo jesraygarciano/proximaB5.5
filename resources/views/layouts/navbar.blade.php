@@ -16,6 +16,35 @@
             </a>
         </div>
 
+        @if(\Auth::check() && \Auth::user()->profileProgress() < 100)
+            <ul class="nav navbar-nav navbar-right" style="margin: initial;">
+                <li class="notification_li" id="notification_li">
+                    <a href="#" id="notificationLink">
+                        <i class="fa fa-bell"></i>
+                    </a>
+                    <div id="notification_count">
+                        1
+                    </div>
+                    <div id="notificationContainer">
+                        <div id="notificationTitle">Updates and notifications</div>
+                            <div id="notificationsBody" class="notifications">
+                                <div class="noti-content">
+                                    {{--  <h4>Updates</h4>  --}}
+                                    <h5>Profile progress:</h5>
+                                    <div class="progress progress-navbar">
+                                        <div class="progress-bar progress-bar-striped active profile-progress" role="progressbar" style="width: {{\Auth::user()->profileProgress()}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="val">{{\Auth::user()->profileProgress()}}</span>% profile complete</div>
+                                    </div>
+
+                                    <div class="text-primary"><center>The more information you provide for us, the higher is your chance to be qualified.</center></div>
+                                </div>
+                            </div>
+
+                            <div id="notificationFooter"><a href="{{ route('itp_applicant_profile') }}">See All</a></div>
+                    </div>
+                </li>
+            </ul>
+        @endif
+
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right" style="margin: initial;">
@@ -25,7 +54,7 @@
                     <li><a href="{{ route('register') }}">Register</a></li>
                 @else
 
-                    @if(\Auth::check() && \Auth::user()->profileProgress() < 100)
+                    {{-- @if(\Auth::check() && \Auth::user()->profileProgress() < 100)
 
                     <li class="notification_li" id="notification_li">
                         <a href="#" id="notificationLink">
@@ -38,7 +67,7 @@
                             <div id="notificationTitle">Updates and notifications</div>
                                 <div id="notificationsBody" class="notifications">
                                     <div class="noti-content">
-                                        {{--  <h4>Updates</h4>  --}}
+                                         <h4>Updates</h4> 
                                         <h5>Profile progress:</h5>
                                         <div class="progress progress-navbar">
                                             <div class="progress-bar progress-bar-striped active profile-progress" role="progressbar" style="width: {{\Auth::user()->profileProgress()}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="val">{{\Auth::user()->profileProgress()}}</span>% profile complete</div>
@@ -50,7 +79,7 @@
                                 <div id="notificationFooter"><a href="{{ route('itp_applicant_profile') }}">See All</a></div>
                         </div>
                     </li>
-                    @endif
+                    @endif --}}
 
                 <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -100,9 +129,11 @@
 
     $(document).ready(function(){
         // $("#notificationLink").click(function(){
-            $("#notificationLink").css({"color" : "red"});
-            $("#notificationContainer").fadeToggle(300);
-            $("#notification_count").fadeOut("slow");
+            @if(\Auth::check() && \Auth::user()->profileProgress() < 26)
+                $("#notificationLink").css({"color" : "red"});
+                $("#notificationContainer").fadeToggle(300);
+                $("#notification_count").fadeOut("slow");
+            @endif
         // return false;
         // });
 
@@ -118,7 +149,6 @@
         // });
 
         $("#notificationLink").click(function(){
-
             if(!$('.notification-backdrop').length){
                 $("#notificationContainer").fadeToggle(300);
                 $("#notification_count").fadeOut("slow");
@@ -129,7 +159,7 @@
     });
 
     function setNotificationBackdrop(){
-        @if(\Auth::check() && \Auth::user()->profileProgress() < 100)
+        @if(\Auth::check() && \Auth::user()->profileProgress() < 26)
         var div = document.createElement('div');
         $(div).addClass('notification-backdrop');
         $(div).css({'position':'fixed', 'z-index':'1','width':'100%','height':'100%', top:'0px', left:'0px', background:'#0a0a0ad4'});

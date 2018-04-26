@@ -40,7 +40,7 @@
 			<div class="row">
 				<div class="col-md-6"></div>
 				<div class="col-md-6">
-					<h4>© 2018 NexSeed, Inc.</h4>
+					<h4>Â© 2018 NexSeed, Inc.</h4>
 				</div>
 			</div>
 		</div>
