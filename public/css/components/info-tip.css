@@ -8,8 +8,8 @@
 
 .info-tip{
     position: absolute;
-    left: 0px;
-    right: initial;
+    right: 0px;
+    /* right: initial; */
     bottom: 100%;
     z-index: 10;
 }

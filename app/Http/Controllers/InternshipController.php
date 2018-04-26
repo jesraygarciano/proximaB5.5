@@ -87,7 +87,6 @@ class InternshipController extends Controller
 
     public function save_application(Request $requests){
 
-
         if (!$requests->has('skills')) {
             $requests->skills = "";
         }
