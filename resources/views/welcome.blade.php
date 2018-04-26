@@ -124,6 +124,23 @@
     top: 5px;
 }
 
+.row-striped:nth-of-type(odd){
+  background-color: #efefef;
+  border-left: 4px #000000 solid;
+}
+
+.row-striped:nth-of-type(even){
+  background-color: #ffffff;
+  border-left: 4px #efefef solid;
+}
+
+.row-striped {
+    padding: 15px 0;
+}
+.badge {
+    padding: 10px 12px;
+    font-size: 18px;
+}
 </style>
 
 <div class="main-lp-container">
@@ -338,12 +355,29 @@
             <div class="row">
               @foreach($trainingBatches as $batch)
               <div class="col-md-5" style="margin: 1rem 2rem;">
-                  <h3>{{$batch->name}}</h3>
+                  {{-- <h3>{{$batch->name}}</h3>
                   <ul class="list-group">
                       <li class="list-group-item">Start of Classes : <strong>{{$batch->startdate}}</strong></li>
                       <li class="list-group-item">Schedule : <br><strong>{{$batch->schedule}}</strong></li>
                       <li class="list-group-item">Registration Deadline : <strong>{{$batch->regitrationdeadline}}</strong></li>
-                  </ul>
+                  </ul> --}}
+
+                  <div class="row">
+                    <div class="col-md-2 text-right">
+                      <h1 class="display-4" style="margin:0;"><span class="badge badge-secondary">{{ date('d',strtotime($batch->startdate)) }}</span></h1>
+                      <h2 style="margin:0px;">{{ date('M',strtotime($batch->startdate)) }}</h2>
+                    </div>
+                    <div class="col-md-10">
+                      <h3 class="text-uppercase"><strong>{{$batch->name}}</strong></h3>
+                      <ul class="list-inline">
+                        <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> {{$batch->schedule}}</li>
+                        <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> 12:30 PM - 2:00 PM</li>
+                        <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> Cafe</li>
+                      </ul>
+                    <p>Registration deadline: <strong> {{$batch->regitrationdeadline}} </strong></p>
+                    </div>
+                  </div>
+
               </div>
               @endforeach
             </div>
