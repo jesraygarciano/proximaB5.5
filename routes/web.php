@@ -65,6 +65,10 @@ Route::group(['prefix'=>'itp'], function(){
 					Route::patch('educational_background',['as'=>'j_c_r_p_educational_background', 'uses'=>'UserController@j_c_r_p_educational_background']);
 					Route::patch('experience',['as'=>'j_c_r_p_experience', 'uses'=>'UserController@j_c_r_p_experience']);
 				});
+
+				Route::group(['prefix'=>'create/update'], function(){
+					Route::post('education_background',['as'=>'j_create_update_ed', 'uses'=>'UserController@j_c_r_p_educational_background']);
+				});
 			});
 		});
 	});

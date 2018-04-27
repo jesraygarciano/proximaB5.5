@@ -456,7 +456,7 @@ class UserController extends Controller
     }
 
     public function j_c_r_p_educational_background(Request $request){
-        $education = Education::create([
+        $fields = [
             'ed_university'=>$request->ed_university,
             'ed_program_of_study'=>$request->ed_program_of_study,
             'ed_field_of_study'=>$request->ed_field_of_study,
@@ -465,7 +465,15 @@ class UserController extends Controller
             'ed_to_year'=>$request->ed_to_year,
             'ed_to_month'=>$request->ed_to_month,
             'resume_id'=>$request->resume_id,
-        ]);
+        ];
+
+        if($request->id){
+            $education = Education::find($request->id)->update($fields);
+            $education = $request;
+        }
+        else{
+            $education = Education::create($fields);
+        }
 
         return ['status'=>'success', 'education'=>$education];
     }

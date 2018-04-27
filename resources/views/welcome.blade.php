@@ -140,6 +140,7 @@
 .badge {
     padding: 10px 12px;
     font-size: 18px;
+    border-radius: 7px;    
 }
 </style>
 
@@ -338,7 +339,7 @@
               <li class="list-group-item">Back-end Development</li>
               <li class="list-group-item">Testing</li>
             </ul>
-          </div>        
+          </div>
         </div>
       </div>
 
@@ -362,17 +363,17 @@
                       <li class="list-group-item">Registration Deadline : <strong>{{$batch->regitrationdeadline}}</strong></li>
                   </ul> --}}
 
-                  <div class="row">
-                    <div class="col-md-2 text-right">
-                      <h1 class="display-4" style="margin:0;"><span class="badge badge-secondary">{{ date('d',strtotime($batch->startdate)) }}</span></h1>
-                      <h2 style="margin:0px;">{{ date('M',strtotime($batch->startdate)) }}</h2>
+                  <div class="row" id="welc-calendar-cont">
+                    <div class="col-md-2">
+                      <h1 class="display-4" style="margin:0px;"><span class="badge badge-secondary">{{ date('d',strtotime($batch->startdate)) }}</span></h1>
+                      <h2 style="margin:0px;font-size:1rem;">{{ strtoupper(date('M',strtotime($batch->startdate))) }}</h2>
                     </div>
                     <div class="col-md-10">
                       <h3 class="text-uppercase"><strong>{{$batch->name}}</strong></h3>
                       <ul class="list-inline">
                         <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> {{$batch->schedule}}</li>
                         <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> 12:30 PM - 2:00 PM</li>
-                        <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> Cafe</li>
+                        <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> FLB Building, Cebu Business Park, Cebu City</li>
                       </ul>
                     <p>Registration deadline: <strong> {{$batch->regitrationdeadline}} </strong></p>
                     </div>
@@ -381,10 +382,34 @@
               </div>
               @endforeach
             </div>
+
+            <div class="container">  
+              <br>
+            <!-- Trigger Button HTML -->
+            
+            <input type="button" class="btn btn-primary" data-toggle="collapse" data-target="#toggleDemo" value="Calendar">
+            <!-- Collapsible Element HTML -->
+            <div id="toggleDemo" class="collapse collapse in">
+            <div id='calendar'></div></div>
+            <br>
+            
           </div>        
         </div>
       </div>
 
+      
+      <script>
+      $(document).ready(function() {
+
+          // page is now ready, initialize the calendar...
+
+          $('#calendar').fullCalendar({
+              // put your options and callbacks here
+          })
+
+          });
+
+  </script>
       <div class="course-outline">
         <div class="container-crs-outline">
           <div class="panel panel-default">

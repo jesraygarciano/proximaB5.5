@@ -309,7 +309,7 @@
         right: 22px;
         cursor: pointer;
     }
-    .second-column-tab .pr-edit-btn, .first-column-tab .pr-edit-btn{
+    .second-column-tab .pr-edit-btn, .first-column-tab .pr-edit-btn, .first-column-tab .edit-btn{
         font-size: 1.3rem;
         color: #187aa4;
         position: absolute;
@@ -321,7 +321,7 @@
         transition: 200ms ease all;
         cursor: pointer;
     }
-    .second-column-tab:hover .pr-edit-btn, .first-column-tab:hover .pr-edit-btn{
+    .second-column-tab:hover .pr-edit-btn, .first-column-tab:hover .pr-edit-btn, .first-column-tab:hover .edit-btn{
         opacity: 1;
         width: 30px;
     }
@@ -754,7 +754,7 @@
                                 Education
                             </h3>
 
-                            <span class="pr-edit-btn" id="add-education">
+                            <span class="edit-btn" id="add-education">
                                     <i class="fa fa-plus"></i>
                             </span>
                             
@@ -762,7 +762,7 @@
                                 @foreach($resume->educations as $education)
                                 <li class="list-group-item">
                                     <span id="education-{{$education->id}}">{{$education->ed_university}}</span>
-                                    <div class="pull-right pr-edit-btn" id="edit-education" data-id="{{$education->id}}" style="`:pointer;">
+                                    <div class="pull-right edit-btn" id="edit-education" data-id="{{$education->id}}" style="`:pointer;">
                                         <i class="fa fa-edit"></i>
                                     </div>
                                 </li>
@@ -1098,7 +1098,10 @@
         Educational Background
     </div>
     <div class="content">
-        <form action="">
+        <form action="{{route('j_create_update_ed')}}" method="POST">
+            {{ csrf_field() }}
+            <input type="hidden" name="resume_id" value="{{\Auth::user()->findFirstOrCreateResume()->id}}">
+            <input type="hidden" name="id" value="">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group required">
@@ -1112,6 +1115,8 @@
                         <input class="form-control" name="ed_field_of_study" type="text" value="">
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group required">
                         <label for="ed_program_of_study" class="required-label">Program of study</label>
@@ -1120,7 +1125,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group required start_end_date_range">
-                        <label for="duration" class="required-label">Duration</label><br>'
+                        <label for="duration" class="required-label">Duration</label><br>
                         {!!Form::select("ed_from_month", month_array(), null, ['class' => 'from_month ed_from_month ui dropdown single-select parent-form-group'])!!},
                         {!!Form::select("ed_from_year", year_array(), null, ['class' => 'from_year ed_from_year ui dropdown single-select parent-form-group'])!!}
                         &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
@@ -1132,8 +1137,8 @@
         </form>
     </div>
     <div class="actions">
-      <div class="ui button">Cancel</div>
-      <div class="ui green button" onclick="$('#edit_education_modal form').submit();">Send</div>
+      <div class="ui button deny">Cancel</div>
+      <div class="ui green button" onclick="$('#edit_education_modal form').submit();">Save</div>
     </div>
 </div>
 
@@ -1185,6 +1190,16 @@
 </div>
 
 <script>
+    function addEducationalBackground(data){
+        var html = '<li class="list-group-item">'
+                    +'    <span id="education-'+data.id+'">'+data.ed_university+'</span>'
+                    +'    <div class="pull-right edit-btn" id="edit-education" data-id="'+data.id+'" style="cursor:pointer;">'
+                    // +'    <div class="pull-right pr-edit-btn" id="edit-education" data-id="'+data.id+'" style="cursor:pointer;">'
+                    +'        <i class="fa fa-edit"></i>'
+                    +'    </div>'
+                    +'</li>'
+        $('#educational-backgrounds').append(html);
+    }
     $(document).ready(function(){
         $('#edit_education_modal form').unickForm(
             {
@@ -1205,9 +1220,120 @@
                         type:'start_end_date_range',
                     }
                 }
+            },
+            function(data){
+                if(!$('#edit_education_modal [name=id]').val())
+                {
+                    addEducationalBackground(data.education);
+                }
+                else
+                {
+                    $('#education-'+data.education.id).html(data.education.ed_university);
+                }
+                setEditEdBtn($('#educational-backgrounds .list-group-item:last-child').find('.edit-btn'))
+                $('#edit_education_modal').modal('hide');
             }
         );
     });
+
+    $('#add-education').click(function(){
+        showCreateEd();
+    });
+
+    function setEditEdBtn(elm){
+        console.log(elm)
+        elm.click(function(){
+            var ed_id = $(this).data('id');
+            swal({
+                title: 'Action',
+                text: 'What action do you wanna perform?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Update',
+                cancelButtonText: 'Delete'
+            }).then((result)=>{
+                if (result.value) {
+                    swal({
+                        title: 'Loading Info',
+                        text: 'Please wait...',
+                        onOpen: () => {
+                            swal.showLoading()
+                        },
+                        allowOutsideClick: () => !swal.isLoading()
+                    })
+                    $.ajax({
+                        'url':"{{route('j_g_r_education')}}",
+                        type:"GET",
+                        data:{id:ed_id},
+                        success:function(_data){
+                            swal.close();
+                            $('#edit_education_modal').find('[name=id]').val(ed_id);
+                            $('#edit_education_modal [name=ed_university]').val(_data.ed_university);
+                            $('#edit_education_modal [name=ed_program_of_study]').val(_data.ed_program_of_study);
+                            $('#edit_education_modal [name=ed_field_of_study]').val(_data.ed_field_of_study);
+                            $('#edit_education_modal [name=ed_from_year]').val(_data.ed_from_year).change();
+                            $('#edit_education_modal [name=ed_from_month]').val(_data.ed_from_month).change();
+                            $('#edit_education_modal [name=ed_to_year]').val(_data.ed_to_year).change();
+                            $('#edit_education_modal [name=ed_to_month]').val(_data.ed_to_month).change();
+                            $('#edit_education_modal [name=resume_id]').val(_data.resume_id);
+                            $('#edit_education_modal').modal('show');
+                        }
+                    });
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    swal({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.value) {
+                            swal({
+                                title: 'Updating database',
+                                text: 'Please wait...',
+                                onOpen: () => {
+                                    swal.showLoading()
+                                },
+                                allowOutsideClick: () => !swal.isLoading()
+                            })
+
+                            $.ajax({
+                                url:"{{route('j_d_education')}}",
+                                type:"delete",
+                                data:{id:ed_id},
+                                headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                success:function(data){
+                                    swal(
+                                        'Deleted!',
+                                        'Your file has been deleted.',
+                                        'success'
+                                    ).then(()=>{
+                                        $('#education-'+ed_id).closest('.list-group-item').remove();
+                                    });
+                                }
+                            });
+                        }
+                    })
+                }
+            });
+            
+        });
+    }
+
+    function showCreateEd(){
+        $('#edit_education_modal').find('input').val('');
+        $('#edit_education_modal').find('[name={{\Auth::user()->findFirstOrCreateResume()->id}}]').val('');
+        $('#edit_education_modal').find('select').dropdown('clear');
+        $('#edit_education_modal').modal('show');
+    }
+
+    setEditEdBtn($('#educational-backgrounds .edit-btn'));
 </script>
 
 <script>
@@ -1345,127 +1471,127 @@ $(document).ready(function(){
                     }
                 });
             },
-            'add-education':function(obj){
-                swal(
-                    'Add Education Background?',
-                    'Click OK',
-                    'question').then((result) => {
-                        if(result.value)
-                        {
-                            swal.setDefaults({
-                                input: 'text',
-                                confirmButtonText: 'Next &rarr;',
-                                showCancelButton: true,
-                                progressSteps: ['1', '2', '3', '4', '5', '6', '7'],
-                                customClass: 'swal-wide',
-                            })
+            // 'add-education':function(obj){
+            //     swal(
+            //         'Add Education Background?',
+            //         'Click OK',
+            //         'question').then((result) => {
+            //             if(result.value)
+            //             {
+            //                 swal.setDefaults({
+            //                     input: 'text',
+            //                     confirmButtonText: 'Next &rarr;',
+            //                     showCancelButton: true,
+            //                     progressSteps: ['1', '2', '3', '4', '5', '6', '7'],
+            //                     customClass: 'swal-wide',
+            //                 })
 
-                            var steps = [
-                                {
-                                    title: 'University',
-                                    preConfirm: swalRequired,
-                                },
-                                {
+            //                 var steps = [
+            //                     {
+            //                         title: 'University',
+            //                         preConfirm: swalRequired,
+            //                     },
+            //                     {
                                     
-                                    title: 'Field of study',
-                                    preConfirm: swalRequired,
-                                },
-                                {
-                                    title: 'Program of study',
-                                    preConfirm: swalRequired,
-                                },
-                                {
-                                    title: 'Montn',
-                                    text: 'Month you started studying',
-                                    input: 'select',
-                                    inputOptions: {
-                                        @foreach(month_array() as $key => $value)
-                                        '{{$key}}':'{{$value}}',
-                                        @endforeach
-                                    },
-                                    preConfirm: swalRequired
-                                },
-                                {
-                                    title: 'Year',
-                                    text: 'Year you started studying',
-                                    input: 'select',
-                                    inputOptions: {
-                                        @foreach(year_array() as $key => $value)
-                                        '{{$key}}':'{{$value}}',
-                                        @endforeach
-                                    },
-                                    preConfirm: swalRequired
-                                },
-                                {
-                                    title: 'Montn',
-                                    text: 'Month ended',
-                                    input: 'select',
-                                    inputOptions: {
-                                        @foreach(month_array() as $key => $value)
-                                        '{{$key}}':'{{$value}}',
-                                        @endforeach
-                                    },
-                                    preConfirm: swalRequired
-                                },
-                                {
-                                    title: 'Year',
-                                    text: 'Year ended',
-                                    input: 'select',
-                                    inputOptions: {
-                                        @foreach(year_array() as $key => $value)
-                                        '{{$key}}':'{{$value}}',
-                                        @endforeach
-                                    },
-                                    preConfirm: swalRequired
-                                },
-                            ]
+            //                         title: 'Field of study',
+            //                         preConfirm: swalRequired,
+            //                     },
+            //                     {
+            //                         title: 'Program of study',
+            //                         preConfirm: swalRequired,
+            //                     },
+            //                     {
+            //                         title: 'Montn',
+            //                         text: 'Month you started studying',
+            //                         input: 'select',
+            //                         inputOptions: {
+            //                             @foreach(month_array() as $key => $value)
+            //                             '{{$key}}':'{{$value}}',
+            //                             @endforeach
+            //                         },
+            //                         preConfirm: swalRequired
+            //                     },
+            //                     {
+            //                         title: 'Year',
+            //                         text: 'Year you started studying',
+            //                         input: 'select',
+            //                         inputOptions: {
+            //                             @foreach(year_array() as $key => $value)
+            //                             '{{$key}}':'{{$value}}',
+            //                             @endforeach
+            //                         },
+            //                         preConfirm: swalRequired
+            //                     },
+            //                     {
+            //                         title: 'Montn',
+            //                         text: 'Month ended',
+            //                         input: 'select',
+            //                         inputOptions: {
+            //                             @foreach(month_array() as $key => $value)
+            //                             '{{$key}}':'{{$value}}',
+            //                             @endforeach
+            //                         },
+            //                         preConfirm: swalRequired
+            //                     },
+            //                     {
+            //                         title: 'Year',
+            //                         text: 'Year ended',
+            //                         input: 'select',
+            //                         inputOptions: {
+            //                             @foreach(year_array() as $key => $value)
+            //                             '{{$key}}':'{{$value}}',
+            //                             @endforeach
+            //                         },
+            //                         preConfirm: swalRequired
+            //                     },
+            //                 ]
 
-                            swal.queue(steps).then((result) => {
-                            swal.resetDefaults()
+            //                 swal.queue(steps).then((result) => {
+            //                 swal.resetDefaults()
 
-                            if (result.value) {
-                                var data = {
-                                    ed_university:result.value[0],
-                                    ed_program_of_study:result.value[1],
-                                    ed_field_of_study:result.value[2],
-                                    ed_from_month:result.value[3],
-                                    ed_from_year:result.value[4],
-                                    ed_to_month:result.value[5],
-                                    ed_to_year:result.value[6],
-                                    resume_id:{{$resume->id}},
-                                    _method: "PATCH"
-                                };
-                                swal({
-                                    title: 'Saving',
-                                    text: 'Please wait...',
-                                    onOpen: () => {
-                                        swal.showLoading()
-                                    },
-                                    allowOutsideClick: () => !swal.isLoading()
-                                })
-                                $.ajax({
-                                    url:"{{route('j_c_r_p_educational_background')}}",
-                                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-                                    type: 'PATCH',
-                                    data:data,
-                                    success:function(_data){
-                                        // 
-                                        addEducationalBackground(_data.education);
-                                        obj.setEditButtonEdit($('#educational-backgrounds .list-group-item:last-child').find('.pr-edit-btn'))
-                                        swal({
-                                            title: 'All done!',
-                                            html:
-                                                '',
-                                            confirmButtonText: 'Ok',
-                                            type:'success'
-                                        })
-                                    }
-                                });
-                            }
-                            })
-                        }
-                });
-            },
+            //                 if (result.value) {
+            //                     var data = {
+            //                         ed_university:result.value[0],
+            //                         ed_program_of_study:result.value[1],
+            //                         ed_field_of_study:result.value[2],
+            //                         ed_from_month:result.value[3],
+            //                         ed_from_year:result.value[4],
+            //                         ed_to_month:result.value[5],
+            //                         ed_to_year:result.value[6],
+            //                         resume_id:{{$resume->id}},
+            //                         _method: "PATCH"
+            //                     };
+            //                     swal({
+            //                         title: 'Saving',
+            //                         text: 'Please wait...',
+            //                         onOpen: () => {
+            //                             swal.showLoading()
+            //                         },
+            //                         allowOutsideClick: () => !swal.isLoading()
+            //                     })
+            //                     $.ajax({
+            //                         url:"{{route('j_c_r_p_educational_background')}}",
+            //                         headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            //                         type: 'PATCH',
+            //                         data:data,
+            //                         success:function(_data){
+            //                             // 
+            //                             addEducationalBackground(_data.education);
+            //                             obj.setEditButtonEdit($('#educational-backgrounds .list-group-item:last-child').find('.pr-edit-btn'))
+            //                             swal({
+            //                                 title: 'All done!',
+            //                                 html:
+            //                                     '',
+            //                                 confirmButtonText: 'Ok',
+            //                                 type:'success'
+            //                             })
+            //                         }
+            //                     });
+            //                 }
+            //                 })
+            //             }
+            //     });
+            // },
             'edit-education':function(obj){
                 swal({
                     title: 'Action',
@@ -2514,16 +2640,6 @@ $(document).ready(function(){
         else{
             skills_container.find('.'+lang).closest('.job-card').remove();
         }
-    }
-
-    function addEducationalBackground(data){
-        var html = '<li class="list-group-item">'
-                    +'    <span id="education-'+data.id+'">'+data.ed_university+'</span>'
-                    +'    <div class="pull-right pr-edit-btn" id="edit-education" data-id="'+data.id+'" style="cursor:pointer;">'
-                    +'        <i class="fa fa-edit"></i>'
-                    +'    </div>'
-                    +'</li>'
-        $('#educational-backgrounds').append(html);
     }
 
     function addWorkExperience(data){

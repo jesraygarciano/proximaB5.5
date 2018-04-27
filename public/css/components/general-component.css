@@ -674,3 +674,10 @@
         display: none;
     }
 }
+
+/* Calendar Schedule Welcome Page */
+
+#welc-calendar-cont{
+    border-left: 3px solid black;
+    color:#444343;
+}
