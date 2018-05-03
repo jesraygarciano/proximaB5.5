@@ -45,6 +45,7 @@
 
     {{-- js dependencies --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
 
     @yield('css')
 
@@ -86,6 +87,17 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/unick-notifier.js') }}"></script>
+    <!-- import socket to JQuery -->
+    <script>
+        @if(\Auth::check())
+        (function(){
+            $.socket = io("localhost:3000");
+            // $.socket = io("http://284a30e7.ngrok.io");
+            $.socket.emit('client add',{{\Auth::user()->id}});
+        })($)
+        @endif
+    </script>
     <script type="text/javascript" src="{{asset('js/jquery.validate.min.js')}}"></script>
     <!-- Sweet alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>

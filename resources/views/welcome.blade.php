@@ -356,13 +356,6 @@
             <div class="row">
               @foreach($trainingBatches as $batch)
               <div class="col-md-5" style="margin: 1rem 2rem;">
-                  {{-- <h3>{{$batch->name}}</h3>
-                  <ul class="list-group">
-                      <li class="list-group-item">Start of Classes : <strong>{{$batch->startdate}}</strong></li>
-                      <li class="list-group-item">Schedule : <br><strong>{{$batch->schedule}}</strong></li>
-                      <li class="list-group-item">Registration Deadline : <strong>{{$batch->regitrationdeadline}}</strong></li>
-                  </ul> --}}
-
                   <div class="row" id="welc-calendar-cont">
                     <div class="col-md-2">
                       <h1 class="display-4" style="margin:0px;"><span class="badge badge-secondary">{{ date('d',strtotime($batch->startdate)) }}</span></h1>
@@ -378,70 +371,44 @@
                     <p>Registration deadline: <strong> {{$batch->regitrationdeadline}} </strong></p>
                     </div>
                   </div>
-
+                </div>
+                  @endforeach
               </div>
-              @endforeach
             </div>
-
-            <div class="container">  
-              <br>
-            <!-- Trigger Button HTML -->
-            
-            <input type="button" class="btn btn-primary" data-toggle="collapse" data-target="#toggleDemo" value="Calendar">
-            <!-- Collapsible Element HTML -->
-            <div id="toggleDemo" class="collapse collapse in">
-            <div id='calendar'></div></div>
-            <br>
-            
-          </div>        
-        </div>
+          </div>
       </div>
-
-      
-      <script>
-      $(document).ready(function() {
-
-          // page is now ready, initialize the calendar...
-
-          $('#calendar').fullCalendar({
-              // put your options and callbacks here
-          })
-
-          });
-
-  </script>
-      <div class="course-outline">
-        <div class="container-crs-outline">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>
-                    <i class="fa fa-clipboard" aria-hidden="true"></i>
-                    <span style="padding-left: .5rem;">CURRICULUM</span>
-                </h4>
+          <div class="course-outline">
+            <div class="container-crs-outline">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>
+                        <i class="fa fa-clipboard" aria-hidden="true"></i>
+                        <span style="padding-left: .5rem;">CURRICULUM</span>
+                    </h4>
+                </div>
+              <h4 style="padding: 15px;">
+                Our curriculum design is developed through a series of industry consultation. And through this, we are able to create a short course that will fill the high demand sector of the IT market.
+              </h4>
+              </div>
             </div>
-          <h4 style="padding: 15px;">
-            Our curriculum design is developed through a series of industry consultation. And through this, we are able to create a short course that will fill the high demand sector of the IT market.
-          </h4>
+          </div>
+
+        <div class="lp-photo-container">
+          <div class="lg-main-img">
+            <img src="https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9a027edb5b7b5ef475a0a4441a54b630&auto=format&fit=crop&w=750&q=80" alt="" id="current">
+          </div>
+
+          <div class="lp-imgs">
+            <img src="https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9a027edb5b7b5ef475a0a4441a54b630&auto=format&fit=crop&w=750&q=80" alt="">
+            <img src="https://images.unsplash.com/photo-1500015139098-84b51c349a60?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=723d79deb963b314924b180d6e8fc241&auto=format&fit=crop&w=1650&q=80" alt="">
+            <img src="https://images.unsplash.com/photo-1494707924465-e1426acb48cb?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d7cac606b3752d340f2c342f32536727&auto=format&fit=crop&w=1050&q=80" alt="">
+            <img src="https://images.unsplash.com/photo-1503428593586-e225b39bddfe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=36c64b55cbc13bba1e00133b3fcbb8fd&auto=format&fit=crop&w=1050&q=80" alt="">
+            <img src="https://images.unsplash.com/photo-1498622429433-bbb22b92ee02?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bfea5f4bae9d48800b7a85cf4669a704&auto=format&fit=crop&w=1500&q=80" alt="">
+            <img src="https://images.unsplash.com/photo-1498622205843-3b0ac17f8ba4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a93cb0b8a2f6a5da8d1acba7d337db33&auto=format&fit=crop&w=1050&q=80" alt="">
+            <img src="https://images.unsplash.com/photo-1512577107354-cc925a586320?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e08130e8cddc1460ae560709f25ef069&auto=format&fit=crop&w=1050&q=80" alt="">
+            <img src="https://images.unsplash.com/photo-1498622429433-bbb22b92ee02?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bfea5f4bae9d48800b7a85cf4669a704&auto=format&fit=crop&w=1500&q=80" alt="">
           </div>
         </div>
-      </div>
-
-      <div class="lp-photo-container">
-        <div class="lg-main-img">
-          <img src="https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9a027edb5b7b5ef475a0a4441a54b630&auto=format&fit=crop&w=750&q=80" alt="" id="current">
-        </div>
-
-        <div class="lp-imgs">
-          <img src="https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9a027edb5b7b5ef475a0a4441a54b630&auto=format&fit=crop&w=750&q=80" alt="">
-          <img src="https://images.unsplash.com/photo-1500015139098-84b51c349a60?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=723d79deb963b314924b180d6e8fc241&auto=format&fit=crop&w=1650&q=80" alt="">
-          <img src="https://images.unsplash.com/photo-1494707924465-e1426acb48cb?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d7cac606b3752d340f2c342f32536727&auto=format&fit=crop&w=1050&q=80" alt="">
-          <img src="https://images.unsplash.com/photo-1503428593586-e225b39bddfe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=36c64b55cbc13bba1e00133b3fcbb8fd&auto=format&fit=crop&w=1050&q=80" alt="">
-          <img src="https://images.unsplash.com/photo-1498622429433-bbb22b92ee02?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bfea5f4bae9d48800b7a85cf4669a704&auto=format&fit=crop&w=1500&q=80" alt="">
-          <img src="https://images.unsplash.com/photo-1498622205843-3b0ac17f8ba4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a93cb0b8a2f6a5da8d1acba7d337db33&auto=format&fit=crop&w=1050&q=80" alt="">
-          <img src="https://images.unsplash.com/photo-1512577107354-cc925a586320?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e08130e8cddc1460ae560709f25ef069&auto=format&fit=crop&w=1050&q=80" alt="">
-          <img src="https://images.unsplash.com/photo-1498622429433-bbb22b92ee02?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bfea5f4bae9d48800b7a85cf4669a704&auto=format&fit=crop&w=1500&q=80" alt="">
-        </div>
-      </div>
 
       <div class="course-outline">
         <div class="container-crs-outline">

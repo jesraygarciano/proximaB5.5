@@ -68,8 +68,14 @@ Route::group(['prefix'=>'itp'], function(){
 
 				Route::group(['prefix'=>'create/update'], function(){
 					Route::post('education_background',['as'=>'j_create_update_ed', 'uses'=>'UserController@j_c_r_p_educational_background']);
+					Route::post('experience',['as'=>'j_create_update_experience', 'uses'=>'UserController@j_c_r_p_experience']);
 				});
 			});
+		});
+
+		Route::group(['prefix'=>'fetch'], function(){
+			Route::get('notifications',['as'=>'fetch_notifications', 'uses'=>'UserController@fetch_notifications']);
+			Route::get('latest/notifications',['as'=>'fetch_latest_notifications', 'uses'=>'UserController@fetch_latest_notifications']);
 		});
 	});
 });
@@ -89,3 +95,5 @@ Route::get('/github/callback', 'SocialAuthController@callbackGithub');
 Route::post('/confirm/role', 'UserController@confirm_role');
 
 Auth::routes();
+
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');

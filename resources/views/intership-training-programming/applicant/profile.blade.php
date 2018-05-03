@@ -309,7 +309,7 @@
         right: 22px;
         cursor: pointer;
     }
-    .second-column-tab .pr-edit-btn, .first-column-tab .pr-edit-btn, .first-column-tab .edit-btn{
+    .second-column-tab .pr-edit-btn, .first-column-tab .pr-edit-btn,.edit-btn{
         font-size: 1.3rem;
         color: #187aa4;
         position: absolute;
@@ -321,7 +321,7 @@
         transition: 200ms ease all;
         cursor: pointer;
     }
-    .second-column-tab:hover .pr-edit-btn, .first-column-tab:hover .pr-edit-btn, .first-column-tab:hover .edit-btn{
+    .second-column-tab:hover .pr-edit-btn, .first-column-tab:hover .pr-edit-btn, .first-column-tab:hover .edit-btn, .second-column-tab:hover .edit-btn{
         opacity: 1;
         width: 30px;
     }
@@ -854,7 +854,7 @@
                                     Experiences
                                 </h3>
 
-                                <span class="pr-edit-btn" id="add-experiences">
+                                <span class="edit-btn" id="add-experiences">
                                         <i class="fa fa-plus"></i>
                                 </span>
 
@@ -862,7 +862,7 @@
                                     @foreach($resume->experiences as $experience)
                                     <li class="list-group-item">
                                         <span id="experience-{{$experience->id}}">{{$experience->ex_company}}</span>
-                                        <div class="pull-right pr-edit-btn" id="edit-experience" data-id="{{$experience->id}}" style="cursor:pointer;">
+                                        <div class="pull-right edit-btn" id="edit-experience" data-id="{{$experience->id}}" style="cursor:pointer;">
                                             <i class="fa fa-edit"></i>
                                         </div>
                                     </li>
@@ -1035,8 +1035,8 @@
                                 <b> Status : </b>
                                 <?php
                                     switch ($application->status) {
-                                        case 'under_consideration':
-                                            echo '<span class="label label-primary">Under Consideration</span>';
+                                        case 'under_review':
+                                            echo '<span class="label label-primary">Under Review</span>';
                                             break;
                                         case 'approved':
                                             echo '<span class="label label-success">Approved</span>';
@@ -1147,49 +1147,50 @@
         Experience
     </div>
     <div class="content">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group required">
-                    <label for="ed_university" class="required-label">Company</label>
-                    <input class="form-control" name="ed_university" type="text" value="">
+        <form action="{{route('j_create_update_experience')}}" method="POST">
+            {{ csrf_field() }}
+            <input type="hidden" name="resume_id" value="{{\Auth::user()->findFirstOrCreateResume()->id}}">
+            <input type="hidden" name="id" value="">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group required">
+                        <label for="ex_company" class="required-label">Company</label>
+                        <input class="form-control" name="ex_company" type="text" value="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group required">
+                        <label for="ex_postion" class="required-label">Position</label>
+                        <input class="form-control" name="ex_postion" type="text" value="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group required start_end_date_range">
+                        <label for="duration" class="required-label">Duration</label><br>
+                        {!!Form::select("ex_from_month", month_array(), null, ['class' => 'ex_from_month from_month ui dropdown single-select parent-form-group'])!!},
+                        {!!Form::select("ex_from_year", year_array(), null, ['class' => 'ex_from_year from_year ui dropdown single-select parent-form-group'])!!}
+                        &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+                        {!!Form::select("ex_to_month", month_array(), null, ['class' => 'ex_to_month to_month ui dropdown single-select parent-form-group'])!!},
+                        {!!Form::select("ex_to_year", year_array(), null, ['class' => 'ex_to_year to_year ui dropdown single-select parent-form-group'])!!}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group required">
+                        <label for="ex_explanation" class="required-label">Responsibilities</label>
+                        <textarea class="form-control" name="ex_explanation" cols="50" rows="10"></textarea>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group required">
-                    <label for="ed_field_of_study" class="required-label">Position</label>
-                    <input class="form-control" name="ed_field_of_study" type="text" value="">
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group required">
-                <label for="duration" class="required-label">Duration</label><br>'
-                    {!!Form::select("ed_from_month", month_array(), null, ['class' => 'ed_from_month ui dropdown single-select parent-form-group'])!!},
-                    {!!Form::select("ed_from_year", year_array(), null, ['class' => 'ed_from_year ui dropdown single-select parent-form-group'])!!}
-                    &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
-                    {!!Form::select("ed_to_month", month_array(), null, ['class' => 'ed_to_month ui dropdown single-select parent-form-group'])!!},
-                    {!!Form::select("ed_to_year", year_array(), null, ['class' => 'ed_to_year ui dropdown single-select parent-form-group'])!!}
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group required">
-                    <label for="ex_explanation" class="required-label">Responsibilities</label>
-                    <textarea class="form-control" name="ex_explanation" cols="50" rows="10"></textarea>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
     <div class="actions">
-        <div class="ui black deny button">
-            Nope
-        </div>
-        <div class="ui positive right labeled icon button">
-            Yep, that's me
-            <i class="checkmark icon"></i>
-        </div>
+      <div class="ui button deny">Cancel</div>
+      <div class="ui green button" onclick="$('#edit_experience_modal form').submit();">Save</div>
     </div>
 </div>
 
 <script>
+
     function addEducationalBackground(data){
         var html = '<li class="list-group-item">'
                     +'    <span id="education-'+data.id+'">'+data.ed_university+'</span>'
@@ -1200,6 +1201,18 @@
                     +'</li>'
         $('#educational-backgrounds').append(html);
     }
+    
+    function addWorkExperience(data){
+        
+        var html = '<li class="list-group-item">'
+                    +'    <span id="experience-'+data.id+'">'+data.ex_company+'</span>'
+                    +'    <div class="pull-right edit-btn" id="edit-experience" data-id="'+data.id+'" style="cursor:pointer;">'
+                    +'        <i class="fa fa-edit"></i>'
+                    +'    </div>'
+                    +'</li>'
+        $('#work-experiences').append(html);
+    }
+
     $(document).ready(function(){
         $('#edit_education_modal form').unickForm(
             {
@@ -1234,14 +1247,51 @@
                 $('#edit_education_modal').modal('hide');
             }
         );
+
+        $('#edit_experience_modal form').unickForm(
+            {
+                validations : { // initialize the plugin
+                    ex_company : {
+                        type:'empty',
+                        prompt:'Please enter Company Name'
+                    },
+                    ex_postion : {
+                        type:'empty',
+                        prompt:'Please enter Position or Role'
+                    },
+                    ex_explanation : {
+                        type:'empty',
+                        prompt:'Please enter your Responsibility'
+                    },
+                    start_end_date_range : {
+                        type:'start_end_date_range',
+                    }
+                }
+            },
+            function(data){
+                if(!$('#edit_experience_modal [name=id]').val())
+                {
+                    addWorkExperience(data.experience);
+                }
+                else
+                {
+                    $('#experience-'+data.experience.id).html(data.experience.ex_company);
+                }
+                setEditExBtn($('#work-experiences .list-group-item:last-child').find('.edit-btn'))
+                $('#edit_experience_modal').modal('hide');
+            }
+        );
     });
 
     $('#add-education').click(function(){
         showCreateEd();
     });
 
+    $('#add-experiences').click(function(){
+        showCreateEx();
+    });
+
     function setEditEdBtn(elm){
-        console.log(elm)
         elm.click(function(){
             var ed_id = $(this).data('id');
             swal({
@@ -1328,12 +1378,105 @@
 
     function showCreateEd(){
         $('#edit_education_modal').find('input').val('');
-        $('#edit_education_modal').find('[name={{\Auth::user()->findFirstOrCreateResume()->id}}]').val('');
+        $('#edit_education_modal').find('[name=resume_id]').val('{{\Auth::user()->findFirstOrCreateResume()->id}}');
         $('#edit_education_modal').find('select').dropdown('clear');
         $('#edit_education_modal').modal('show');
     }
 
+    function setEditExBtn(elm){
+        elm.click(function(){
+            var _id = $(this).data('id');
+            swal({
+                title: 'Action',
+                text: 'What action do you wanna perform?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Update',
+                cancelButtonText: 'Delete'
+            }).then((result)=>{
+                if (result.value) {
+                    swal({
+                        title: 'Loading Info',
+                        text: 'Please wait...',
+                        onOpen: () => {
+                            swal.showLoading()
+                        },
+                        allowOutsideClick: () => !swal.isLoading()
+                    })
+                    $.ajax({
+                        'url':"{{route('j_g_experience')}}",
+                        type:"GET",
+                        data:{id:_id},
+                        success:function(_data){
+                            swal.close();
+                            $('#edit_experience_modal').find('[name=id]').val(_id);
+                            $('#edit_experience_modal [name=ex_company]').val(_data.ex_company);
+                            $('#edit_experience_modal [name=ex_postion]').val(_data.ex_postion);
+                            $('#edit_experience_modal [name=ex_explanation]').val(_data.ex_explanation);
+                            $('#edit_experience_modal [name=ex_from_year]').val(_data.ex_from_year).change();
+                            $('#edit_experience_modal [name=ex_from_month]').val(_data.ex_from_month).change();
+                            $('#edit_experience_modal [name=ex_to_year]').val(_data.ex_to_year).change();
+                            $('#edit_experience_modal [name=ex_to_month]').val(_data.ex_to_month).change();
+                            $('#edit_experience_modal [name=resume_id]').val(_data.resume_id);
+                            $('#edit_experience_modal').modal('show');
+                        }
+                    });
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    swal({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.value) {
+                            swal({
+                                title: 'Updating database',
+                                text: 'Please wait...',
+                                onOpen: () => {
+                                    swal.showLoading()
+                                },
+                                allowOutsideClick: () => !swal.isLoading()
+                            })
+
+                            $.ajax({
+                                url:"{{route('j_d_experience')}}",
+                                type:"delete",
+                                data:{id:_id},
+                                headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                success:function(data){
+                                    swal(
+                                        'Deleted!',
+                                        'Your file has been deleted.',
+                                        'success'
+                                    ).then(()=>{
+                                        $('#experience-'+_id).closest('.list-group-item').remove();
+                                    });
+                                }
+                            });
+                        }
+                    })
+                }
+            });
+            
+        });
+    }
+
+    function showCreateEx(){
+        $('#edit_experience_modal').find('input,textarea').val('');
+        $('#edit_experience_modal').find('[name=resume_id]').val('{{\Auth::user()->findFirstOrCreateResume()->id}}');
+        $('#edit_experience_modal').find('select').dropdown('clear');
+        $('#edit_experience_modal').modal('show');
+    }
+
     setEditEdBtn($('#educational-backgrounds .edit-btn'));
+    setEditExBtn($('#work-experiences .edit-btn'));
 </script>
 
 <script>
@@ -1911,129 +2054,129 @@ $(document).ready(function(){
                     }
                 });
             },
-            'add-experiences':function(obj){
-                swal(
-                    'Wanna Add Work Experience?',
-                    'Click OK',
-                    'question').then((result) => {
-                        if(result.value)
-                        {
-                            swal.setDefaults({
-                                input: 'text',
-                                confirmButtonText: 'Next &rarr;',
-                                showCancelButton: true,
-                                progressSteps: ['1', '2', '3', '4', '5', '6', '7'],
-                                customClass: 'swal-wide',
-                            });
+            // 'add-experiences':function(obj){
+            //     swal(
+            //         'Wanna Add Work Experience?',
+            //         'Click OK',
+            //         'question').then((result) => {
+            //             if(result.value)
+            //             {
+            //                 swal.setDefaults({
+            //                     input: 'text',
+            //                     confirmButtonText: 'Next &rarr;',
+            //                     showCancelButton: true,
+            //                     progressSteps: ['1', '2', '3', '4', '5', '6', '7'],
+            //                     customClass: 'swal-wide',
+            //                 });
 
-                            var steps = [
-                                {
-                                    title: 'Company',
-                                    preConfirm: swalRequired,
-                                },
-                                {
+            //                 var steps = [
+            //                     {
+            //                         title: 'Company',
+            //                         preConfirm: swalRequired,
+            //                     },
+            //                     {
                                     
-                                    title: 'Position',
-                                    preConfirm: swalRequired,
-                                },
-                                {
-                                    title: 'Responsibilities',
-                                    preConfirm: swalRequired,
-                                    input: 'textarea',
-                                },
-                                {
-                                    title: 'Month',
-                                    text: 'Month you started',
-                                    input: 'select',
-                                    inputOptions: {
-                                        @foreach(month_array() as $key => $value)
-                                        '{{$key}}':'{{$value}}',
-                                        @endforeach
-                                    },
-                                    preConfirm: swalRequired
-                                },
-                                {
-                                    title: 'Year',
-                                    text: 'Year you started',
-                                    input: 'select',
-                                    inputOptions: {
-                                        @foreach(year_array() as $key => $value)
-                                        '{{$key}}':'{{$value}}',
-                                        @endforeach
-                                    },
-                                    preConfirm: swalRequired
-                                },
-                                {
-                                    title: 'Month',
-                                    text: 'Month it ended',
-                                    input: 'select',
-                                    inputOptions: {
-                                        @foreach(month_array() as $key => $value)
-                                        '{{$key}}':'{{$value}}',
-                                        @endforeach
-                                    },
-                                    preConfirm: swalRequired
-                                },
-                                {
-                                    title: 'Year',
-                                    text: 'Year it ended',
-                                    input: 'select',
-                                    inputOptions: {
-                                        @foreach(year_array() as $key => $value)
-                                        '{{$key}}':'{{$value}}',
-                                        @endforeach
-                                    },
-                                    preConfirm: swalRequired
-                                },
-                            ]
+            //                         title: 'Position',
+            //                         preConfirm: swalRequired,
+            //                     },
+            //                     {
+            //                         title: 'Responsibilities',
+            //                         preConfirm: swalRequired,
+            //                         input: 'textarea',
+            //                     },
+            //                     {
+            //                         title: 'Month',
+            //                         text: 'Month you started',
+            //                         input: 'select',
+            //                         inputOptions: {
+            //                             @foreach(month_array() as $key => $value)
+            //                             '{{$key}}':'{{$value}}',
+            //                             @endforeach
+            //                         },
+            //                         preConfirm: swalRequired
+            //                     },
+            //                     {
+            //                         title: 'Year',
+            //                         text: 'Year you started',
+            //                         input: 'select',
+            //                         inputOptions: {
+            //                             @foreach(year_array() as $key => $value)
+            //                             '{{$key}}':'{{$value}}',
+            //                             @endforeach
+            //                         },
+            //                         preConfirm: swalRequired
+            //                     },
+            //                     {
+            //                         title: 'Month',
+            //                         text: 'Month it ended',
+            //                         input: 'select',
+            //                         inputOptions: {
+            //                             @foreach(month_array() as $key => $value)
+            //                             '{{$key}}':'{{$value}}',
+            //                             @endforeach
+            //                         },
+            //                         preConfirm: swalRequired
+            //                     },
+            //                     {
+            //                         title: 'Year',
+            //                         text: 'Year it ended',
+            //                         input: 'select',
+            //                         inputOptions: {
+            //                             @foreach(year_array() as $key => $value)
+            //                             '{{$key}}':'{{$value}}',
+            //                             @endforeach
+            //                         },
+            //                         preConfirm: swalRequired
+            //                     },
+            //                 ]
 
-                            swal.queue(steps).then((result) => {
-                            swal.resetDefaults()
+            //                 swal.queue(steps).then((result) => {
+            //                 swal.resetDefaults()
 
-                            if (result.value) {
-                                var __data = {
-                                    ex_company:result.value[0],
-                                    ex_postion:result.value[1],
-                                    ex_explanation:result.value[2],
-                                    ex_from_month:result.value[3],
-                                    ex_from_year:result.value[4],
-                                    ex_to_month:result.value[5],
-                                    ex_to_year:result.value[6],
-                                    resume_id:{{$resume->id}},
-                                    _method: "PATCH"
-                                };
-                                swal({
-                                    title: 'Saving',
-                                    text: 'Please wait...',
-                                    onOpen: () => {
-                                        swal.showLoading()
-                                    },
-                                    allowOutsideClick: () => !swal.isLoading()
-                                })
-                                $.ajax({
-                                    url:"{{route('j_c_r_p_experience')}}",
-                                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-                                    type: 'PATCH',
-                                    data:__data,
-                                    success:function(data){
-                                        // 
-                                        console.log(data)
-                                        addWorkExperience(data.experience);
-                                        obj.setEditButtonEdit($('#work-experiences .list-group-item:last-child').find('.pr-edit-btn'))
-                                        swal({
-                                            title: 'All done!',
-                                            type:'success',
-                                            html:
-                                                '',
-                                            confirmButtonText: 'Ok'
-                                        })
-                                    }
-                                });
-                            }
-                        })
-                    }
-                });
-            },
+            //                 if (result.value) {
+            //                     var __data = {
+            //                         ex_company:result.value[0],
+            //                         ex_postion:result.value[1],
+            //                         ex_explanation:result.value[2],
+            //                         ex_from_month:result.value[3],
+            //                         ex_from_year:result.value[4],
+            //                         ex_to_month:result.value[5],
+            //                         ex_to_year:result.value[6],
+            //                         resume_id:{{$resume->id}},
+            //                         _method: "PATCH"
+            //                     };
+            //                     swal({
+            //                         title: 'Saving',
+            //                         text: 'Please wait...',
+            //                         onOpen: () => {
+            //                             swal.showLoading()
+            //                         },
+            //                         allowOutsideClick: () => !swal.isLoading()
+            //                     })
+            //                     $.ajax({
+            //                         url:"{{route('j_c_r_p_experience')}}",
+            //                         headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            //                         type: 'PATCH',
+            //                         data:__data,
+            //                         success:function(data){
+            //                             // 
+            //                             console.log(data)
+            //                             addWorkExperience(data.experience);
+            //                             obj.setEditButtonEdit($('#work-experiences .list-group-item:last-child').find('.pr-edit-btn'))
+            //                             swal({
+            //                                 title: 'All done!',
+            //                                 type:'success',
+            //                                 html:
+            //                                     '',
+            //                                 confirmButtonText: 'Ok'
+            //                             })
+            //                         }
+            //                     });
+            //                 }
+            //             })
+            //         }
+            //     });
+            // },
             'edit-experience':function(obj){
                 swal({
                     title: 'Action',
@@ -2641,18 +2784,6 @@ $(document).ready(function(){
             skills_container.find('.'+lang).closest('.job-card').remove();
         }
     }
-
-    function addWorkExperience(data){
-        
-        var html = '<li class="list-group-item">'
-                    +'    <span id="experience-'+data.id+'">'+data.ex_company+'</span>'
-                    +'    <div class="pull-right pr-edit-btn" id="edit-experience" data-id="'+data.id+'" style="cursor:pointer;">'
-                    +'        <i class="fa fa-edit"></i>'
-                    +'    </div>'
-                    +'</li>'
-        $('#work-experiences').append(html);
-    }
-
 });
 
 
