@@ -11,6 +11,8 @@ use App\Resume_skill;
 use App\Libs\Common;
 use App\Experience;
 use App\Education;
+use App\InternshipApplication;
+use App\TrainingBatch;
 use Validator;
 
 class UserController extends Controller
@@ -411,7 +413,7 @@ class UserController extends Controller
             return ['status'=>'failed', 'message'=>$validator->messages()];
         }
 
-        $experience = Experience::create([
+        $fields = [
             'ex_company'=>$request->ex_company,
             'ex_postion'=>$request->ex_postion,
             'ex_from_month'=>$request->ex_from_month,
@@ -420,7 +422,15 @@ class UserController extends Controller
             'ex_to_year'=>$request->ex_to_year,
             'ex_explanation'=>$request->ex_explanation,
             'resume_id'=>$request->resume_id
-        ]);
+        ];
+
+        if($request->id){
+            $experience = Experience::find($request->id)->update($fields);
+            $experience = $request;
+        }
+        else{
+            $experience = Experience::create($fields);
+        }
 
         return ['status'=>'success', 'experience'=>$experience];
     }
@@ -518,5 +528,26 @@ class UserController extends Controller
     public function uploadResumeFiles(Request $request){
         // 
         return \Auth::user()->saveResumeFile($request->file('resume_file'));
+    }
+
+    public function fetch_latest_notifications(Request $request){
+        $notifications = \Auth::user()->notifications()->latest()->limit(1)->get();
+        foreach($notifications as $key => $value){
+            $notifications[$key]->internshipApplication = InternshipApplication::find(json_decode($value->meta_data)->app_id)->load('trainingBatch');
+        }
+        return ['notifications'=>$notifications];
+    }
+
+    public function fetch_notifications(Request $request){
+        $notifications = \Auth::user()->notifications()->latest()->limit(5);
+        if($request->latest_id)
+        {
+            $notifications->where('notifications.id','>',$request->latest_id);
+        }
+        $notifications = $notifications->get();
+        foreach($notifications as $key => $value){
+            $notifications[$key]->internshipApplication = InternshipApplication::find(json_decode($value->meta_data)->app_id)->load('trainingBatch');
+        }
+        return ['notifications'=>$notifications];
     }
 }

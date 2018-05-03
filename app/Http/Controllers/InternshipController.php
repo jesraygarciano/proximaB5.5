@@ -118,6 +118,7 @@ class InternshipController extends Controller
             $application = InternshipApplication::create([
                 'user_id'=>\Auth::user()->id,
                 'objectives'=>$requests->objective,
+                'status'=>'application_submitted',
                 // 'school'=>$requests->school,
                 // 'course'=>$requests->course,
                 'training_batch_id'=>$requests->batch
