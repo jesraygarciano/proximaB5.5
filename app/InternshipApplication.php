@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use \App\Notification;
 
 class InternshipApplication extends Model
 {
@@ -19,5 +20,37 @@ class InternshipApplication extends Model
 
     public function trainingBatch(){
     	return $this->belongsTo(TrainingBatch::class);
+    }
+
+    public static function boot(){
+
+        parent::boot();
+
+        static::updating(function($model){
+            // detect if seen field has been updated
+            if($model->status != $model->getOriginal('status')){
+
+                $notification = Notification::create([
+                    'author_id'=>\Auth::user()->id,
+                    'recipient_id'=>$model->user_id,
+                    'status'=>'unseen',
+                    'explanation'=>$model->remark,
+                    'meta_data'=>json_encode(['type'=>'itp_app','app_id'=>$model->id])
+                ]);
+
+                $notification->internshipApplication = $model->load('trainingBatch');
+
+                event(new \App\Events\NotificationEvent(
+                    [
+                        'type'=>'internship_application_status',
+                        'event'=>$model->status,
+                        'notification'=>$notification,
+                        'user_id'=>$model->user_id
+                    ]
+                ));
+                
+            }
+        });
+
     }
 }

@@ -388,4 +388,15 @@ class User extends Authenticatable
 
         return ['status'=>'fail', 'message'=>'invalid_file'];
     }
+
+    public function notifications(){
+        return $this->hasMany('App\Notification','recipient_id');
+    }
+
+    // Email Verify
+    public function verifyUser()
+    {
+    return $this->hasOne('App\VerifyUser');
+    }
+        
 }
