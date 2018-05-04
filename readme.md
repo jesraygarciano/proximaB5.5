@@ -1,13 +1,20 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
-<p align="center"><img src="http://nexseed.net/images/logo.jpg"></p>
+<p align="center">
+    <img src="https://raw.githubusercontent.com/NexSeed/Beagle/j_0430_newbranch/5.5/public/img/laravel-logo.png?token=AQgTp7SvESPgI_83i4NbhjfGulAIMSw4ks5a77_3wA%3D%3D">
+    <img src="https://raw.githubusercontent.com/NexSeed/Beagle/j_0430_newbranch/5.5/public/img/nexseed.png?token=AQgTp8Y9l9jdYFlEhRHBFM9agRLMK2sKks5a77_gwA%3D%3D">
+
+</p>
+<p align="center">
+    <img src="https://raw.githubusercontent.com/NexSeed/Beagle/j_0430_newbranch/5.5/public/img/gs.png?token=AQgTp_p87qZ53eAewbVjLZyGJyhcAkQpks5a773BwA%3D%3D">
+</p>
 
 ## Table of Contents
 
 - [Internship Training Program](#internship-training-program)
-- [Features](#features)
-- [Feedback](#feedback)
-- [Contributors](#contributors)
-- [Build Process](#build-process)
+- [Project Beagle](#project-beagle)
+- [Getting Started](#getting-started)
+- [Prerequisites](#prerequisites)
+- [Installing](#iontributors)
+- [Running the tests](#running-the-tests)
 - [Backers](#backers-)
 - [Sponsors](#sponsors-)
 - [Acknowledgments](#acknowledgments)
@@ -16,89 +23,104 @@
 
 A training program for aspiring students, which aims to help students who are into software development to access high value jobs from the high-demand sector.
 
+# Project Beagle
+
+Project Beagle is committed to help companies of all sizes and job seekers with talent connects by keeping features super simple and improve lives through better careers.
+
+
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+The ITP and Beagle projects are using the same *Database*. Cloning both *5.1* and *new_environment* are necessary.
+
+#### Kindly see directory structure and their explanation below:
+- **5.1:** First beagle project built from scratch, made from Laravel 5.1
+- **5.5:** Contains the Internship Training Program (ITP) project
+- **new_environment:** Project beagle integrated to Laravel 5.5, currently used and updated
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+To clone and run these project, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
 ```
-Give examples
+NPM
+Git
+XAMPP
+Composer
+PHP version 7.0 or greater
+MySQL version 5.0 or greater
 ```
 
 ### Installing
 
-git clone https://github.com/NexSeed/Beagle.git
+```bash
+# Clone this repository
+$ git clone https://github.com/NexSeed/Beagle.git
 
-A step by step series of examples that tell you have to get a development env running
+# Go into the repository
+$ cd beagle
 
-Say what the step will be
+# Install dependencies
+$ composer install
+$ npm install
+
+# Modify your .env file
+Next you need to make a copy of the .env.example file and rename it to .env inside your project root.
+
+#Setup database config .env
+...
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=database
+DB_USERNAME=your-mysql-username
+DB_PASSWORD=your-mysql-password
+
+...
+
+# Apply commands below to each subdirectories - 5.5, new_environment - then the following commands using terminal
+
+# Generate Project key
+$ php artisan key:generate
+
+# Run migration
+$ php artisan migrate
+
+# Run seed with dummy data
+$ php artisan db:seed
+
+# And run web server
+$ php artisan Serve
 
 ```
-Give the example
-```
 
-And repeat
+## Bug / Feature Request
 
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+Please use create Zenhub issues to report any bugs or file feature requests.
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Laravel](http://www.laravel.com) - The web framework used
+* [Composer](https://getcomposer.org/) - Dependency Management
+* [NodeJS](https://nodejs.org/en/) - Used to generate RSS Feeds
+* [NPM](https://nodejs.org/en/) - Package Manager
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
+<!-- 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).  -->
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Beagle Team** - *Initial work* - <!-- [PurpleBooth](https://github.com/PurpleBooth) -->
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+* This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+* Copyright @ [Nexseed](http://www.nexseed.net)
 
 ## Acknowledgments
 
 * Hat tip to anyone who's code was used
-* Inspiration
-* etc
-
+* 2Quad/ FLB Building
