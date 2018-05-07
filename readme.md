@@ -13,10 +13,11 @@
 - [Project Beagle](#project-beagle)
 - [Getting Started](#getting-started)
 - [Prerequisites](#prerequisites)
-- [Installing](#iontributors)
-- [Running the tests](#running-the-tests)
-- [Backers](#backers-)
-- [Sponsors](#sponsors-)
+- [Installing](#installing)
+- [Bugs and Feature Request](#feature-request)
+- [Built With](#built-with)
+- [Authors](#authors)
+- [License](#license)
 - [Acknowledgments](#acknowledgments)
 
 # Internship Training Program
@@ -94,7 +95,7 @@ $ php artisan Serve
 
 ```
 
-## Bug / Feature Request
+## Feature Request
 
 Please use create Zenhub issues to report any bugs or file feature requests.
 

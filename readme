@@ -1,0 +1,186 @@
+[33mcommit d3b1fc2142c39226442d605bdbda4459b5f12a4d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Jesray Garciano <jesray.garciano@gmail.com>
+Date:   Fri May 4 17:06:26 2018 +0800
+
+    Documentation update
+
+[1mdiff --git a/readme.md b/readme.md[m
+[1mindex 85e2f06..88330e7 100644[m
+[1m--- a/readme.md[m
+[1m+++ b/readme.md[m
+[36m@@ -1,13 +1,20 @@[m
+[31m-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>[m
+[31m-<p align="center"><img src="http://nexseed.net/images/logo.jpg"></p>[m
+[32m+[m[32m<p align="center">[m
+[32m+[m[32m    <img src="https://raw.githubusercontent.com/NexSeed/Beagle/j_0430_newbranch/5.5/public/img/laravel-logo.png?token=AQgTp7SvESPgI_83i4NbhjfGulAIMSw4ks5a77_3wA%3D%3D">[m
+[32m+[m[32m    <img src="https://raw.githubusercontent.com/NexSeed/Beagle/j_0430_newbranch/5.5/public/img/nexseed.png?token=AQgTp8Y9l9jdYFlEhRHBFM9agRLMK2sKks5a77_gwA%3D%3D">[m
+[32m+[m
+[32m+[m[32m</p>[m
+[32m+[m[32m<p align="center">[m
+[32m+[m[32m    <img src="https://raw.githubusercontent.com/NexSeed/Beagle/j_0430_newbranch/5.5/public/img/gs.png?token=AQgTp_p87qZ53eAewbVjLZyGJyhcAkQpks5a773BwA%3D%3D">[m
+[32m+[m[32m</p>[m
+ [m
+ ## Table of Contents[m
+ [m
+ - [Internship Training Program](#internship-training-program)[m
+[31m-- [Features](#features)[m
+[31m-- [Feedback](#feedback)[m
+[31m-- [Contributors](#contributors)[m
+[31m-- [Build Process](#build-process)[m
+[32m+[m[32m- [Project Beagle](#project-beagle)[m
+[32m+[m[32m- [Getting Started](#getting-started)[m
+[32m+[m[32m- [Prerequisites](#prerequisites)[m
+[32m+[m[32m- [Installing](#iontributors)[m
+[32m+[m[32m- [Running the tests](#running-the-tests)[m
+ - [Backers](#backers-)[m
+ - [Sponsors](#sponsors-)[m
+ - [Acknowledgments](#acknowledgments)[m
+[36m@@ -16,89 +23,104 @@[m
+ [m
+ A training program for aspiring students, which aims to help students who are into software development to access high value jobs from the high-demand sector.[m
+ [m
+[32m+[m[32m# Project Beagle[m
+[32m+[m
+[32m+[m[32mProject Beagle is committed to help companies of all sizes and job seekers with talent connects by keeping features super simple and improve lives through better careers.[m
+[32m+[m
+[32m+[m
+ ## Getting Started[m
+ [m
+[31m-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.[m
+[32m+[m[32mThe ITP and Beagle projects are using the same *Database*. Cloning both *5.1* and *new_environment* are necessary.[m
+[32m+[m
+[32m+[m[32m#### Kindly see directory structure and their explanation below:[m
+[32m+[m[32m- **5.1:** First beagle project built from scratch, made from Laravel 5.1[m
+[32m+[m[32m- **5.5:** Contains the Internship Training Program (ITP) project[m
+[32m+[m[32m- **new_environment:** Project beagle integrated to Laravel 5.5, currently used and updated[m
+ [m
+ ### Prerequisites[m
+ [m
+[31m-What things you need to install the software and how to install them[m
+[32m+[m[32mTo clone and run these project, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:[m
+ [m
+ ```[m
+[31m-Give examples[m
+[32m+[m[32mNPM[m
+[32m+[m[32mGit[m
+[32m+[m[32mXAMPP[m
+[32m+[m[32mComposer[m
+[32m+[m[32mPHP version 7.0 or greater[m
+[32m+[m[32mMySQL version 5.0 or greater[m
+ ```[m
+ [m
+ ### Installing[m
+ [m
+[31m-git clone https://github.com/NexSeed/Beagle.git[m
+[32m+[m[32m```bash[m
+[32m+[m[32m# Clone this repository[m
+[32m+[m[32m$ git clone https://github.com/NexSeed/Beagle.git[m
+ [m
+[31m-A step by step series of examples that tell you have to get a development env running[m
+[32m+[m[32m# Go into the repository[m
+[32m+[m[32m$ cd beagle[m
+ [m
+[31m-Say what the step will be[m
+[32m+[m[32m# Install dependencies[m
+[32m+[m[32m$ composer install[m
+[32m+[m[32m$ npm install[m
+ [m
+[31m-```[m
+[31m-Give the example[m
+[31m-```[m
+[32m+[m[32m# Modify your .env file[m
+[32m+[m[32mNext you need to make a copy of the .env.example file and rename it to .env inside your project root.[m
+ [m
+[31m-And repeat[m
+[32m+[m[32m#Setup database config .env[m
+[32m+[m[32m...[m
+ [m
+[31m-```[m
+[31m-until finished[m
+[31m-```[m
+[32m+[m[32mDB_CONNECTION=mysql[m
+[32m+[m[32mDB_HOST=127.0.0.1[m
+[32m+[m[32mDB_PORT=3306[m
+[32m+[m[32mDB_DATABASE=database[m
+[32m+[m[32mDB_USERNAME=your-mysql-username[m
+[32m+[m[32mDB_PASSWORD=your-mysql-password[m
+ [m
+[31m-End with an example of getting some data out of the system or using it for a little demo[m
+[32m+[m[32m...[m
+ [m
+[31m-## Running the tests[m
+[32m+[m[32m# Apply commands below to each subdirectories - 5.5, new_environment - then the following commands using terminal[m
+ [m
+[31m-Explain how to run the automated tests for this system[m
+[32m+[m[32m# Generate Project key[m
+[32m+[m[32m$ php artisan key:generate[m
+ [m
+[31m-### Break down into end to end tests[m
+[32m+[m[32m# Run migration[m
+[32m+[m[32m$ php artisan migrate[m
+ [m
+[31m-Explain what these tests test and why[m
+[32m+[m[32m# Run seed with dummy data[m
+[32m+[m[32m$ php artisan db:seed[m
+ [m
+[31m-```[m
+[31m-Give an example[m
+[31m-```[m
+[31m-[m
+[31m-### And coding style tests[m
+[31m-[m
+[31m-Explain what these tests test and why[m
+[32m+[m[32m# And run web server[m
+[32m+[m[32m$ php artisan Serve[m
+ [m
+[31m-```[m
+[31m-Give an example[m
+ ```[m
+ [m
+[31m-## Deployment[m
+[32m+[m[32m## Bug / Feature Request[m
+ [m
+[31m-Add additional notes about how to deploy this on a live system[m
+[32m+[m[32mPlease use create Zenhub issues to report any bugs or file feature requests.[m
+ [m
+ ## Built With[m
+ [m
+[31m-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used[m
+[31m-* [Maven](https://maven.apache.org/) - Dependency Management[m
+[31m-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds[m
+[31m-[m
+[31m-## Contributing[m
+[31m-[m
+[31m-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.[m
+[32m+[m[32m* [Laravel](http://www.laravel.com) - The web framework used[m
+[32m+[m[32m* [Composer](https://getcomposer.org/) - Dependency Management[m
+[32m+[m[32m* [NodeJS](https://nodejs.org/en/) - Used to generate RSS Feeds[m
+[32m+[m[32m* [NPM](https://nodejs.org/en/) - Package Manager[m
+ [m
+[32m+[m[32m<!--[m[41m [m
+ ## Versioning[m
+ [m
+[31m-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). [m
+[32m+[m[32mWe use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).  -->[m
+ [m
+ ## Authors[m
+ [m
+[31m-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)[m
+[32m+[m[32m* **Beagle Team** - *Initial work* - <!-- [PurpleBooth](https://github.com/PurpleBooth) -->[m
+ [m
+[31m-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.[m
+ [m
+ ## License[m
+ [m
+[31m-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details[m
+[32m+[m[32m* This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.[m
+[32m+[m[32m* Copyright @ [Nexseed](http://www.nexseed.net)[m
+ [m
+ ## Acknowledgments[m
+ [m
+ * Hat tip to anyone who's code was used[m
+[31m-* Inspiration[m
+[31m-* etc[m
+[31m-[m
+[32m+[m[32m* 2Quad/ FLB Building[m
+\ No newline at end of file[m
