@@ -30,6 +30,7 @@
                         <th>Registration Deadline</th>
                         <th>Options</th>
                     </tr>
+                    <!--bacolod-->
                 </thead>
             </table>
         </div>
